@@ -45,30 +45,39 @@
     }
 
     .custom-cursor {
-      width: 20px;
-      height: 20px;
-      background: radial-gradient(circle, #00ffcc, #ff00ff);
-      border: 2px solid #ffcc00;
+      width: 18px;
+      height: 18px;
+      background: radial-gradient(circle, #ff00ff, #00ffcc, #ffcc00);
+      border: 2px solid #00ccff;
       border-radius: 50%;
       position: fixed;
       top: 0;
       left: 0;
       pointer-events: none;
       z-index: 10000;
-      box-shadow: 0 0 10px #00ffcc, 0 0 20px #ff00ff;
-      transform: translate(-50%, -50%);
+      box-shadow: 0 0 8px #ff00ff, 0 0 16px #00ffcc;
+      transform: translate(-50%, -50%) rotate(0deg);
       will-change: transform;
-      transition: transform 0.1s ease-out, scale 0.2s ease, box-shadow 0.3s ease;
+      transition: transform 0.1s ease-out, scale 0.2s ease, box-shadow 0.3s ease, background 0.5s ease;
+      animation: cursorSpin 4s linear infinite;
     }
     .custom-cursor.trail {
-      width: 12px;
-      height: 12px;
-      opacity: 0.7;
-      animation: fadePulse 0.5s infinite alternate;
+      width: 10px;
+      height: 10px;
+      background: radial-gradient(circle, #ffcc00, #00ffcc);
+      border: 1px solid #ff00ff;
+      opacity: 0.6;
+      animation: fadePulse 0.5s infinite alternate, trailFade 1s ease-out forwards;
       z-index: 9999;
     }
+    @keyframes cursorSpin {
+      100% { transform: translate(-50%, -50%) rotate(360deg); }
+    }
     @keyframes fadePulse {
-      to { opacity: 0.3; transform: scale(1.2); }
+      to { opacity: 0.2; transform: scale(1.3); }
+    }
+    @keyframes trailFade {
+      to { opacity: 0; }
     }
     .custom-cursor.interactive {
       transform: translate(-50%, -50%) scale(1.8);
@@ -564,7 +573,7 @@
     }
     .pricing-card:hover {
       transform: scale(1.05);
-      box-shadow: 0 0 30px #00ffcc, 0 0 15px #ffcc00 inset;
+      box-shadow: 0 0 30px #00ffcc, 0 0 15px #ccff00 inset;
     }
     .pricing-card::before {
       content: '';
@@ -576,6 +585,9 @@
       background: radial-gradient(circle, rgba(255, 204, 0, 0.1), transparent);
       animation: rotateGlow 10s linear infinite;
       z-index: 0;
+    }
+    @keyframes rotateGlow {
+      100% { transform: rotate(360deg); }
     }
     .pricing-card.popular::after {
       content: 'Most Popular';
@@ -620,16 +632,25 @@
       position: relative;
       z-index: 1;
       flex-grow: 1;
+      text-align: left;
     }
     .pricing-details li {
-      display: flex;
-      align-items: center;
-      gap: 10px;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      align-items: start;
+      gap: 12px;
       margin-bottom: 12px;
+      padding: 0 5px;
     }
-    .pricing-details li i {
+    .pricing-details li::before {
+      content: '✓';
       color: #ff00ff;
+      font-size: 16px;
       text-shadow: 0 0 5px #00ffcc;
+      grid-column: 1;
+      grid-row: 1;
+      line-height: 1;
+      margin-top: 2px;
     }
     .pricing-card button {
       padding: 12px 30px;
@@ -885,7 +906,7 @@
       .modal-content h3 { font-size: 26px; }
       .modal-content p { font-size: 16px; }
       .pricing-grid {
-        grid-template-columns: repeat(3, 360px);
+        grid-template-columns: repeat(3, minmax(0, 360px));
         justify-content: center;
         gap: 40px;
       }
@@ -897,6 +918,7 @@
       .pricing-title { font-size: 26px; }
       .pricing-price { font-size: 40px; }
       .pricing-details { font-size: 16px; }
+      .pricing-details li { margin-bottom: 12px; }
       .pricing-card button { padding: 15px 40px; font-size: 18px; }
       .faq-item { padding: 25px; max-width: 900px; margin: 0 auto 25px; }
       .faq-answer { font-size: 15px; }
@@ -956,6 +978,7 @@
       .pricing-title { font-size: 22px; }
       .pricing-price { font-size: 32px; }
       .pricing-details { font-size: 14px; }
+      .pricing-details li { margin-bottom: 12px; }
       .pricing-card button { padding: 10px 25px; font-size: 14px; }
       .faq-item { padding: 15px; }
       .faq-answer { font-size: 13px; }
@@ -1055,11 +1078,11 @@
         <h3 class="pricing-title">Basic Ecommerce</h3>
         <div class="pricing-price">₹7999</div>
         <ul class="pricing-details">
-          <li><i class="fas fa-check-circle"></i>Development Charges</li>
-          <li><i class="fas fa-check-circle"></i>10 Product Listings Free</li>
-          <li><i class="fas fa-check-circle"></i>SEO Friendly</li>
-          <li><i class="fas fa-check-circle"></i>Built on Shopify Basic Design</li>
-          <li><i class="fas fa-check-circle"></i>Shopify Monthly Rental Applies</li>
+          <li>Development Charges</li>
+          <li>10 Product Listings Free</li>
+          <li>SEO Friendly</li>
+          <li>Built on Shopify Basic Design</li>
+          <li>Shopify Monthly Rental Applies</li>
         </ul>
         <button class="pricing-button" 
                 data-package="Basic Ecommerce" 
@@ -1070,11 +1093,11 @@
         <h3 class="pricing-title">Custom Ecommerce</h3>
         <div class="pricing-price">₹9999</div>
         <ul class="pricing-details">
-          <li><i class="fas fa-check-circle"></i>Development Charges</li>
-          <li><i class="fas fa-check-circle"></i>30 Product Listings Free</li>
-          <li><i class="fas fa-check-circle"></i>SEO Friendly</li>
-          <li><i class="fas fa-check-circle"></i>Built on Shopify Customized Design</li>
-          <li><i class="fas fa-check-circle"></i>Shopify Monthly Rental Applies</li>
+          <li>Development Charges</li>
+          <li>30 Product Listings Free</li>
+          <li>SEO Friendly</li>
+          <li>Built on Shopify Customized Design</li>
+          <li>Shopify Monthly Rental Applies</li>
         </ul>
         <button class="pricing-button" 
                 data-package="Custom Ecommerce" 
@@ -1085,11 +1108,11 @@
         <h3 class="pricing-title">Premium Ecommerce</h3>
         <div class="pricing-price">₹24999</div>
         <ul class="pricing-details">
-          <li><i class="fas fa-check-circle"></i>Development Charges</li>
-          <li><i class="fas fa-check-circle"></i>50 Product Listings Free</li>
-          <li><i class="fas fa-check-circle"></i>SEO Friendly</li>
-          <li><i class="fas fa-check-circle"></i>Built on Shopify Premium Design</li>
-          <li><i class="fas fa-check-circle"></i>Shopify Monthly Rental Applies</li>
+          <li>Development Charges</li>
+          <li>50 Product Listings Free</li>
+          <li>SEO Friendly</li>
+          <li>Built on Shopify Premium Design</li>
+          <li>Shopify Monthly Rental Applies</li>
         </ul>
         <button class="pricing-button" 
                 data-package="Premium Ecommerce" 
@@ -1256,19 +1279,14 @@
             trail.style.top = `${mouseY}px`;
             document.body.appendChild(trail);
             trails.push(trail);
-            if (trails.length > 6) {
+            if (trails.length > 5) {
               const oldTrail = trails.shift();
               oldTrail.remove();
             }
-            setTimeout(() => {
-              trail.remove();
-              const index = trails.indexOf(trail);
-              if (index > -1) trails.splice(index, 1);
-            }, 500);
           });
 
           function animateCursor() {
-            cursor.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
+            cursor.style.transform = `translate(${mouseX}px, ${mouseY}px) rotate(${Date.now() / 10 % 360}deg)`;
             requestAnimationFrame(animateCursor);
           }
           animateCursor();
@@ -1304,22 +1322,14 @@
             e.stopPropagation();
             const targetId = link.getAttribute('href').substring(1);
             const targetSection = document.getElementById(targetId);
-            console.log(`Navigating to section: ${targetId}`);
             if (targetSection) {
               const headerHeight = document.querySelector('header').offsetHeight || 70;
-              console.log(`Header height: ${headerHeight}`);
-              const targetPosition = targetSection.getBoundingClientRect().top + window.pageYOffset;
-              console.log(`Target position for ${targetId}: ${targetPosition}`);
-              window.scrollTo({
-                top: targetPosition - headerHeight - 20,
-                behavior: 'smooth'
-              });
+              const targetPosition = targetSection.getBoundingClientRect().top + window.scrollY - headerHeight - 20;
+              window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+              console.log(`Navigating to section: ${targetId}, Target position: ${targetPosition}`);
               if (isMobile) {
                 const nav = document.getElementById('navbar');
-                if (nav) {
-                  nav.classList.remove('active');
-                  console.log('Mobile menu closed');
-                }
+                if (nav) nav.classList.remove('active');
               }
             } else {
               console.error(`Section with ID ${targetId} not found`);
