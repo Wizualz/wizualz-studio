@@ -529,6 +529,105 @@
       box-shadow: 0 0 20px #00ffcc;
     }
 
+    /* Pricing Section Styles */
+    #pricing {
+      padding: 60px 20px;
+      background: radial-gradient(circle, #1a0033, #0a0020) !important;
+      text-align: center;
+    }
+    .pricing-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      max-width: 1100px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    .pricing-card {
+      background: linear-gradient(135deg, #2a0050, #150030) !important;
+      border: 2px solid #ffcc00;
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 0 20px #00ffcc33, 0 0 10px #ff00ff inset;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .pricing-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 30px #00ffcc, 0 0 15px #ffcc00 inset;
+    }
+    .pricing-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255, 204, 0, 0.1), transparent);
+      animation: rotateGlow 10s linear infinite;
+      z-index: 0;
+    }
+    .pricing-title {
+      font-family: 'Neon', 'Orbitron', monospace;
+      font-size: 24px;
+      color: #00ffcc;
+      text-shadow: 0 0 5px #ff00ff;
+      margin-bottom: 15px;
+      position: relative;
+      z-index: 1;
+    }
+    .pricing-price {
+      font-family: 'Orbitron', monospace;
+      font-size: 36px;
+      color: #ffcc00;
+      text-shadow: 0 0 10px #00ffcc;
+      margin: 10px 0;
+      position: relative;
+      z-index: 1;
+    }
+    .pricing-details {
+      list-style: none;
+      padding: 0;
+      margin: 15px 0 20px;
+      color: #e0e0e0;
+      font-size: 15px;
+      line-height: 1.8;
+      position: relative;
+      z-index: 1;
+    }
+    .pricing-details li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .pricing-details li i {
+      color: #ff00ff;
+      text-shadow: 0 0 5px #00ffcc;
+    }
+    .pricing-card button {
+      padding: 12px 30px;
+      border: 2px solid #ffcc00;
+      background: linear-gradient(45deg, #ff00ff, #00ffcc);
+      color: #fff;
+      border-radius: 30px;
+      font-family: 'Orbitron', monospace;
+      font-weight: 700;
+      font-size: 16px;
+      transition: all 0.4s ease;
+      box-shadow: 0 0 10px #ffcc00;
+      cursor: pointer;
+      position: relative;
+      z-index: 1;
+      text-transform: uppercase;
+    }
+    .pricing-card button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 0 20px #00ffcc;
+    }
+
     footer {
       background: linear-gradient(135deg, #0a0020, #1a0033) !important;
       padding: 50px 20px 30px;
@@ -760,6 +859,15 @@
       .modal-content { padding: 30px; }
       .modal-content h3 { font-size: 26px; }
       .modal-content p { font-size: 16px; }
+      .pricing-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+      }
+      .pricing-title { font-size: 26px; }
+      .pricing-price { font-size: 40px; }
+      .pricing-details { font-size: 16px; }
+      .pricing-card button { padding: 15px 40px; font-size: 18px; }
       .faq-item { padding: 25px; max-width: 900px; margin: 0 auto 25px; }
       .faq-answer { font-size: 15px; }
       .footer-grid {
@@ -807,6 +915,10 @@
       .modal-content h3 { font-size: 20px; }
       .modal-content p { font-size: 14px; }
       .modal-content a { padding: 8px 20px; font-size: 14px; }
+      .pricing-title { font-size: 20px; }
+      .pricing-price { font-size: 30px; }
+      .pricing-details { font-size: 14px; }
+      .pricing-card button { padding: 10px 25px; font-size: 14px; }
       .faq-item { padding: 15px; }
       .faq-answer { font-size: 13px; }
       .footer-column img { max-width: 140px; }
@@ -828,6 +940,7 @@
     <nav id="navbar">
       <a href="#services">Services</a>
       <a href="#portfolio">Portfolio</a>
+      <a href="#pricing">Pricing</a>
       <a href="#faq">FAQs</a>
       <a href="#contact">Contact</a>
     </nav>
@@ -897,6 +1010,47 @@
       </div>
     </div>
   </section>
+  <section id="pricing">
+    <h2 class="section-title">Our Pricing Plans</h2>
+    <div class="pricing-grid reveal">
+      <div class="pricing-card">
+        <h3 class="pricing-title">Basic Ecommerce</h3>
+        <div class="pricing-price">₹7999</div>
+        <ul class="pricing-details">
+          <li><i class="fas fa-check-circle"></i>Development Charges</li>
+          <li><i class="fas fa-check-circle"></i>10 Product Listings Free</li>
+          <li><i class="fas fa-check-circle"></i>SEO Friendly</li>
+          <li><i class="fas fa-check-circle"></i>Built on Shopify Basic Design</li>
+          <li><i class="fas fa-check-circle"></i>Shopify Monthly Rental Applies</li>
+        </ul>
+        <button onclick="document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })">Get Started</button>
+      </div>
+      <div class="pricing-card">
+        <h3 class="pricing-title">Custom Ecommerce</h3>
+        <div class="pricing-price">₹9999</div>
+        <ul class="pricing-details">
+          <li><i class="fas fa-check-circle"></i>Development Charges</li>
+          <li><i class="fas fa-check-circle"></i>30 Product Listings Free</li>
+          <li><i class="fas fa-check-circle"></i>SEO Friendly</li>
+          <li><i class="fas fa-check-circle"></i>Built on Shopify Customized Design</li>
+          <li><i class="fas fa-check-circle"></i>Shopify Monthly Rental Applies</li>
+        </ul>
+        <button onclick="document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })">Get Started</button>
+      </div>
+      <div class="pricing-card">
+        <h3 class="pricing-title">Premium Ecommerce</h3>
+        <div class="pricing-price">₹24999</div>
+        <ul class="pricing-details">
+          <li><i class="fas fa-check-circle"></i>Development Charges</li>
+          <li><i class="fas fa-check-circle"></i>50 Product Listings Free</li>
+          <li><i class="fas fa-check-circle"></i>SEO Friendly</li>
+          <li><i class="fas fa-check-circle"></i>Built on Shopify Premium Design</li>
+          <li><i class="fas fa-check-circle"></i>Shopify Monthly Rental Applies</li>
+        </ul>
+        <button onclick="document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })">Get Started</button>
+      </div>
+    </div>
+  </section>
   <section id="faq">
     <h2 class="section-title">Mystic FAQs</h2>
     <div class="faq-item reveal">
@@ -940,6 +1094,7 @@
           <ul>
             <li><a href="#services">Services</a></li>
             <li><a href="#portfolio">Portfolio</a></li>
+            <li><a href="#pricing">Pricing</a></li>
             <li><a href="#faq">FAQs</a></li>
             <li><a href="#contact">Contact</a></li>
           </ul>
@@ -1006,7 +1161,7 @@
 
         // Tilt Effect
         if (typeof VanillaTilt === 'function') {
-          VanillaTilt.init(document.querySelectorAll('.service-card'), {
+          VanillaTilt.init(document.querySelectorAll('.service-card, .pricing-card'), {
             max: 15,
             speed: 400,
             glare: true,
@@ -1071,7 +1226,7 @@
           }
           animateCursor();
 
-          document.querySelectorAll('a, button, .service-card, .portfolio-item, .faq-item, .modal-close, .contact-link').forEach(el => {
+          document.querySelectorAll('a, button, .service-card, .portfolio-item, .faq-item, .modal-close, .contact-link, .pricing-card').forEach(el => {
             el.addEventListener('mouseenter', () => {
               cursor.classList.add('interactive');
             });
@@ -1092,21 +1247,28 @@
         }
         document.querySelector('.mobile-menu-icon').addEventListener('click', toggleMenu);
 
-        // Navigation link handler
+        // Navigation link handler with debug logging
         document.querySelectorAll('#navbar a').forEach(link => {
           link.addEventListener('click', (e) => {
             e.preventDefault();
             const targetId = link.getAttribute('href').substring(1);
             const targetSection = document.getElementById(targetId);
+            console.log(`Navigating to section: ${targetId}`);
             if (targetSection) {
               const headerHeight = document.querySelector('header').offsetHeight || 70;
+              console.log(`Header height: ${headerHeight}`);
               const targetPosition = targetSection.getBoundingClientRect().top + window.pageYOffset;
+              console.log(`Target position for ${targetId}: ${targetPosition}`);
               window.scrollTo({
                 top: targetPosition - headerHeight - 20,
                 behavior: 'smooth'
               });
               if (isMobile) {
-                document.getElementById('navbar').classList.remove('active');
+                const nav = document.getElementById('navbar');
+                if (nav) {
+                  nav.classList.remove('active');
+                  console.log('Mobile menu closed');
+                }
               }
             } else {
               console.error(`Section with ID ${targetId} not found`);
@@ -1114,7 +1276,39 @@
           });
         });
 
+        // Portfolio item handler to prevent interference with navigation
+        document.querySelectorAll('.portfolio-item').forEach(item => {
+          item.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const projectId = item.getAttribute('data-project');
+            if (projectId) {
+              console.log(`Opening modal for project: ${projectId}`);
+              openModal(projectId);
+            }
+          });
+        });
+
         document.querySelectorAll('.service-card').forEach(card => {
+          card.addEventListener('click', (e) => {
+            if (e.target.tagName === 'A') return;
+            const details = card.querySelector('.service-details');
+            const isActive = card.classList.contains('active');
+            document.querySelectorAll('.service-card').forEach(c => {
+              c.classList.remove('active');
+              c.querySelector('.service-details').style.maxHeight = '0';
+              c.querySelector('.service-details').style.opacity = '0';
+              c.querySelector('.service-details').style.paddingTop = '0';
+            });
+            if (!isActive) {
+              card.classList.add('active');
+              details.style.maxHeight = details.scrollHeight + 'px';
+              details.style.opacity = '1';
+              details.style.paddingTop = '15px';
+            }
+          });
+        });
+
+        document.querySelectorAll('.faq-item').forEach(item => {
           card.addEventListener('click', (e) => {
             if (e.target.tagName === 'A') return;
             const details = card.querySelector('.service-details');
@@ -1160,6 +1354,8 @@
               modal.querySelector('.modal-content').style.transform = 'scale(1)';
             }, 10);
             document.body.style.overflow = 'hidden';
+          } else {
+            console.error(`Modal for project ${projectId} not found`);
           }
         }
 
@@ -1172,15 +1368,10 @@
               modal.classList.remove('active');
               document.body.style.overflow = '';
             }, 400);
+          } else {
+            console.error(`Modal for project ${projectId} not found`);
           }
         }
-
-        document.querySelectorAll('.portfolio-item').forEach(item => {
-          item.addEventListener('click', () => {
-            const projectId = item.getAttribute('data-project');
-            if (projectId) openModal(projectId);
-          });
-        });
 
         document.querySelectorAll('.modal-close').forEach(closeBtn => {
           closeBtn.addEventListener('click', (e) => {
