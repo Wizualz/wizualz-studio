@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" media="all" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Orbitron:wght@400;700&display=swap" media="all">
   <style>
-    /* CSS Reset to prevent inherited white backgrounds */
+    /* CSS Reset */
     * {
       margin: 0;
       padding: 0;
@@ -258,7 +258,7 @@
 
     .section-title {
       font-size: 36px;
-      margin-bottom: 30px;
+      margin-bottom: 40px;
       font-family: 'Neon', 'Orbitron', monospace;
       color: #ffcc00;
       text-shadow: 0 0 10px #ffcc00, 0 0 20px #ff00ff;
@@ -536,12 +536,14 @@
       text-align: center;
     }
     .pricing-grid {
-      display: flex;
-      flex-direction: column;
+      display: grid;
+      grid-template-columns: 1fr;
       gap: 30px;
-      max-width: 1100px;
+      max-width: 1200px;
       margin: 0 auto;
       width: 100%;
+      justify-content: center;
+      align-items: stretch;
     }
     .pricing-card {
       background: linear-gradient(135deg, #2a0050, #150030) !important;
@@ -552,7 +554,13 @@
       transition: all 0.4s ease;
       position: relative;
       overflow: hidden;
-      cursor: pointer;
+      min-height: 420px;
+      width: 100%;
+      max-width: 360px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
     .pricing-card:hover {
       transform: scale(1.05);
@@ -569,6 +577,21 @@
       animation: rotateGlow 10s linear infinite;
       z-index: 0;
     }
+    .pricing-card.popular::after {
+      content: 'Most Popular';
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: #ff00ff;
+      color: #fff;
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-family: 'Orbitron', monospace;
+      font-size: 12px;
+      text-transform: uppercase;
+      text-shadow: 0 0 5px #00ffcc;
+      z-index: 1;
+    }
     .pricing-title {
       font-family: 'Neon', 'Orbitron', monospace;
       font-size: 24px;
@@ -583,25 +606,26 @@
       font-size: 36px;
       color: #ffcc00;
       text-shadow: 0 0 10px #00ffcc;
-      margin: 10px 0;
+      margin: 10px 0 20px;
       position: relative;
       z-index: 1;
     }
     .pricing-details {
       list-style: none;
       padding: 0;
-      margin: 15px 0 20px;
+      margin: 0 0 20px;
       color: #e0e0e0;
       font-size: 15px;
       line-height: 1.8;
       position: relative;
       z-index: 1;
+      flex-grow: 1;
     }
     .pricing-details li {
       display: flex;
       align-items: center;
       gap: 10px;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
     }
     .pricing-details li i {
       color: #ff00ff;
@@ -622,6 +646,7 @@
       position: relative;
       z-index: 1;
       text-transform: uppercase;
+      margin-top: auto;
     }
     .pricing-card button:hover {
       transform: translateY(-3px);
@@ -860,9 +885,14 @@
       .modal-content h3 { font-size: 26px; }
       .modal-content p { font-size: 16px; }
       .pricing-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 30px;
+        grid-template-columns: repeat(3, 360px);
+        justify-content: center;
+        gap: 40px;
+      }
+      .pricing-card {
+        max-width: 360px;
+        padding: 35px;
+        min-height: 450px;
       }
       .pricing-title { font-size: 26px; }
       .pricing-price { font-size: 40px; }
@@ -906,7 +936,7 @@
       .hero lottie-player { width: 250px; height: 250px; }
       .hero img.hero-image { width: 180px; }
       .hero button { padding: 10px 25px; font-size: 14px; }
-      .section-title { font-size: 28px; margin-bottom: 25px; }
+      .section-title { font-size: 28px; margin-bottom: 30px; }
       .service-title { font-size: 18px; }
       .service-details { font-size: 14px; }
       .portfolio-overlay { font-size: 16px; }
@@ -915,8 +945,16 @@
       .modal-content h3 { font-size: 20px; }
       .modal-content p { font-size: 14px; }
       .modal-content a { padding: 8px 20px; font-size: 14px; }
-      .pricing-title { font-size: 20px; }
-      .pricing-price { font-size: 30px; }
+      .pricing-grid {
+        gap: 20px;
+      }
+      .pricing-card {
+        max-width: 340px;
+        padding: 25px;
+        min-height: 400px;
+      }
+      .pricing-title { font-size: 22px; }
+      .pricing-price { font-size: 32px; }
       .pricing-details { font-size: 14px; }
       .pricing-card button { padding: 10px 25px; font-size: 14px; }
       .faq-item { padding: 15px; }
@@ -1023,9 +1061,12 @@
           <li><i class="fas fa-check-circle"></i>Built on Shopify Basic Design</li>
           <li><i class="fas fa-check-circle"></i>Shopify Monthly Rental Applies</li>
         </ul>
-        <button onclick="document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })">Get Started</button>
+        <button class="pricing-button" 
+                data-package="Basic Ecommerce" 
+                data-price="₹7999" 
+                data-details="Development Charges, 10 Product Listings Free, SEO Friendly, Built on Shopify Basic Design, Shopify Monthly Rental Applies">Get Started</button>
       </div>
-      <div class="pricing-card">
+      <div class="pricing-card popular">
         <h3 class="pricing-title">Custom Ecommerce</h3>
         <div class="pricing-price">₹9999</div>
         <ul class="pricing-details">
@@ -1035,7 +1076,10 @@
           <li><i class="fas fa-check-circle"></i>Built on Shopify Customized Design</li>
           <li><i class="fas fa-check-circle"></i>Shopify Monthly Rental Applies</li>
         </ul>
-        <button onclick="document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })">Get Started</button>
+        <button class="pricing-button" 
+                data-package="Custom Ecommerce" 
+                data-price="₹9999" 
+                data-details="Development Charges, 30 Product Listings Free, SEO Friendly, Built on Shopify Customized Design, Shopify Monthly Rental Applies">Get Started</button>
       </div>
       <div class="pricing-card">
         <h3 class="pricing-title">Premium Ecommerce</h3>
@@ -1047,7 +1091,10 @@
           <li><i class="fas fa-check-circle"></i>Built on Shopify Premium Design</li>
           <li><i class="fas fa-check-circle"></i>Shopify Monthly Rental Applies</li>
         </ul>
-        <button onclick="document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })">Get Started</button>
+        <button class="pricing-button" 
+                data-package="Premium Ecommerce" 
+                data-price="₹24999" 
+                data-details="Development Charges, 50 Product Listings Free, SEO Friendly, Built on Shopify Premium Design, Shopify Monthly Rental Applies">Get Started</button>
       </div>
     </div>
   </section>
@@ -1226,7 +1273,7 @@
           }
           animateCursor();
 
-          document.querySelectorAll('a, button, .service-card, .portfolio-item, .faq-item, .modal-close, .contact-link, .pricing-card').forEach(el => {
+          document.querySelectorAll('a, button, .service-card, .portfolio-item, .faq-item, .modal-close, .contact-link, .pricing-card, .pricing-button').forEach(el => {
             el.addEventListener('mouseenter', () => {
               cursor.classList.add('interactive');
             });
@@ -1245,12 +1292,16 @@
             console.error('Navigation element not found');
           }
         }
-        document.querySelector('.mobile-menu-icon').addEventListener('click', toggleMenu);
+        document.querySelector('.mobile-menu-icon').addEventListener('click', (e) => {
+          e.stopPropagation();
+          toggleMenu();
+        });
 
-        // Navigation link handler with debug logging
+        // Navigation link handler
         document.querySelectorAll('#navbar a').forEach(link => {
           link.addEventListener('click', (e) => {
             e.preventDefault();
+            e.stopPropagation();
             const targetId = link.getAttribute('href').substring(1);
             const targetSection = document.getElementById(targetId);
             console.log(`Navigating to section: ${targetId}`);
@@ -1276,7 +1327,24 @@
           });
         });
 
-        // Portfolio item handler to prevent interference with navigation
+        // Pricing button handler for WhatsApp redirect
+        document.querySelectorAll('.pricing-button').forEach(button => {
+          button.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const packageName = button.getAttribute('data-package');
+            const price = button.getAttribute('data-price');
+            const details = button.getAttribute('data-details');
+            console.log(`Pricing button clicked for: ${packageName}`);
+            const whatsappMessage = encodeURIComponent(
+              `Hello Team Wizualz,\nI'm interested in the ${packageName} package.\nPrice: ${price}\nDetails: ${details}\nSent at: ${new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })}`
+            );
+            const whatsappUrl = `https://wa.me/919321234524?text=${whatsappMessage}`;
+            window.location.href = whatsappUrl;
+          });
+        });
+
+        // Portfolio item handler
         document.querySelectorAll('.portfolio-item').forEach(item => {
           item.addEventListener('click', (e) => {
             e.stopPropagation();
@@ -1291,6 +1359,7 @@
         document.querySelectorAll('.service-card').forEach(card => {
           card.addEventListener('click', (e) => {
             if (e.target.tagName === 'A') return;
+            e.stopPropagation();
             const details = card.querySelector('.service-details');
             const isActive = card.classList.contains('active');
             document.querySelectorAll('.service-card').forEach(c => {
@@ -1309,27 +1378,8 @@
         });
 
         document.querySelectorAll('.faq-item').forEach(item => {
-          card.addEventListener('click', (e) => {
-            if (e.target.tagName === 'A') return;
-            const details = card.querySelector('.service-details');
-            const isActive = card.classList.contains('active');
-            document.querySelectorAll('.service-card').forEach(c => {
-              c.classList.remove('active');
-              c.querySelector('.service-details').style.maxHeight = '0';
-              c.querySelector('.service-details').style.opacity = '0';
-              c.querySelector('.service-details').style.paddingTop = '0';
-            });
-            if (!isActive) {
-              card.classList.add('active');
-              details.style.maxHeight = details.scrollHeight + 'px';
-              details.style.opacity = '1';
-              details.style.paddingTop = '15px';
-            }
-          });
-        });
-
-        document.querySelectorAll('.faq-item').forEach(item => {
-          item.addEventListener('click', () => {
+          item.addEventListener('click', (e) => {
+            e.stopPropagation();
             const isActive = item.classList.contains('active');
             document.querySelectorAll('.faq-item').forEach(i => {
               i.classList.remove('active');
@@ -1376,6 +1426,7 @@
         document.querySelectorAll('.modal-close').forEach(closeBtn => {
           closeBtn.addEventListener('click', (e) => {
             e.preventDefault();
+            e.stopPropagation();
             const match = closeBtn.getAttribute('onclick').match(/closeModal\('([^']+)'\)/);
             if (match) {
               const projectId = match[1];
@@ -1384,10 +1435,12 @@
           });
         });
 
-        // Enhanced Contact Form Handler
+        // Contact Form Handler
         const sendButton = document.getElementById('sendToWizualzBtn');
         if (sendButton) {
-          sendButton.addEventListener('click', () => {
+          sendButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
             const name = document.querySelector('.contact-form input[placeholder="Your Name"]').value.trim();
             const number = document.querySelector('.contact-form input[placeholder="Your Number"]').value.trim();
             const query = document.querySelector('.contact-form textarea[placeholder="Your Query"]').value.trim();
