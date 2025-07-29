@@ -783,9 +783,16 @@
         flex-direction: column;
         z-index: 1001;
       }
-      nav.active { display: flex; }
-      nav a { margin: 10px 0; font-size: 15px; }
-      .mobile-menu-icon { display: block; }
+      nav.active {
+        display: flex !important;
+      }
+      nav a {
+        margin: 10px 0;
+        font-size: 15px;
+      }
+      .mobile-menu-icon {
+        display: block;
+      }
       .hero h1 { font-size: 48px; }
       .hero p { font-size: 16px; max-width: 90%; }
       .hero lottie-player { width: 250px; height: 250px; }
@@ -972,227 +979,241 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const isMobile = window.matchMedia('(max-width: 767px)').matches;
-      const isCoarse = window.matchMedia('(pointer: coarse)').matches;
-      const headerHeight = document.querySelector('header')?.offsetHeight || 70;
+      try {
+        const isMobile = window.matchMedia('(max-width: 767px)').matches;
+        const isCoarse = window.matchMedia('(pointer: coarse)').matches;
 
-      // Particles Animation
-      if (typeof particlesJS === 'function') {
-        particlesJS('hero-particles', {
-          particles: {
-            number: { value: 50, density: { enable: true, value_area: 800 } },
-            color: { value: ['#00ffcc', '#ff00ff', '#ffcc00'] },
-            shape: { type: 'circle' },
-            opacity: { value: 0.5, random: true },
-            size: { value: 4, random: true },
-            line_linked: { enable: true, distance: 150, color: '#00ffcc', opacity: 0.4, width: 1 },
-            move: { enable: true, speed: 2, direction: 'none', random: true, out_mode: 'out', attract: { enable: true, rotateX: 600, rotateY: 1200 } }
-          },
-          interactivity: {
-            detect_on: 'canvas',
-            events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' } },
-            modes: { repulse: { distance: 150 }, push: { particles_nb: 4 } }
-          },
-          retina_detect: true
-        });
-      }
-
-      // Tilt Effect
-      if (typeof VanillaTilt === 'function') {
-        VanillaTilt.init(document.querySelectorAll('.service-card'), {
-          max: 15,
-          speed: 400,
-          glare: true,
-          'max-glare': 0.4
-        });
-      }
-
-      const lottiePlayer = document.querySelector('lottie-player');
-      if (isMobile) {
-        lottiePlayer.addEventListener('error', () => {
-          document.querySelector('.hero img.hero-image').style.display = 'block';
-          lottiePlayer.style.display = 'none';
-        });
-      }
-
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.style.opacity = 1;
-            entry.target.style.transform = 'translateY(0)';
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.1 });
-
-      document.querySelectorAll('.reveal').forEach(el => {
-        el.style.opacity = 0;
-        el.style.transform = 'translateY(50px)';
-        el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-        observer.observe(el);
-      });
-
-      const cursor = document.querySelector('.custom-cursor');
-      let mouseX = 0, mouseY = 0;
-      const trails = [];
-
-      if (!isCoarse) {
-        document.addEventListener('mousemove', (e) => {
-          mouseX = e.clientX;
-          mouseY = e.clientY;
-          cursor.style.display = 'block';
-          const trail = document.createElement('div');
-          trail.className = 'custom-cursor trail';
-          trail.style.left = `${mouseX}px`;
-          trail.style.top = `${mouseY}px`;
-          document.body.appendChild(trail);
-          trails.push(trail);
-          if (trails.length > 6) {
-            const oldTrail = trails.shift();
-            oldTrail.remove();
-          }
-          setTimeout(() => {
-            trail.remove();
-            const index = trails.indexOf(trail);
-            if (index > -1) trails.splice(index, 1);
-          }, 500);
-        });
-
-        function animateCursor() {
-          cursor.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
-          requestAnimationFrame(animateCursor);
+        // Particles Animation
+        if (typeof particlesJS === 'function') {
+          particlesJS('hero-particles', {
+            particles: {
+              number: { value: 50, density: { enable: true, value_area: 800 } },
+              color: { value: ['#00ffcc', '#ff00ff', '#ffcc00'] },
+              shape: { type: 'circle' },
+              opacity: { value: 0.5, random: true },
+              size: { value: 4, random: true },
+              line_linked: { enable: true, distance: 150, color: '#00ffcc', opacity: 0.4, width: 1 },
+              move: { enable: true, speed: 2, direction: 'none', random: true, out_mode: 'out', attract: { enable: true, rotateX: 600, rotateY: 1200 } }
+            },
+            interactivity: {
+              detect_on: 'canvas',
+              events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' } },
+              modes: { repulse: { distance: 150 }, push: { particles_nb: 4 } }
+            },
+            retina_detect: true
+          });
         }
-        animateCursor();
 
-        document.querySelectorAll('a, button, .service-card, .portfolio-item, .faq-item, .modal-close, .contact-link').forEach(el => {
-          el.addEventListener('mouseenter', () => {
-            cursor.classList.add('interactive');
+        // Tilt Effect
+        if (typeof VanillaTilt === 'function') {
+          VanillaTilt.init(document.querySelectorAll('.service-card'), {
+            max: 15,
+            speed: 400,
+            glare: true,
+            'max-glare': 0.4
           });
-          el.addEventListener('mouseleave', () => {
-            cursor.classList.remove('interactive');
-          });
-        });
-      }
-
-      function toggleMenu() {
-        const nav = document.getElementById('navbar');
-        nav.classList.toggle('active');
-      }
-      document.querySelector('.mobile-menu-icon').addEventListener('click', toggleMenu);
-
-      document.querySelectorAll('#navbar a').forEach(link => {
-        link.addEventListener('click', (e) => {
-          e.preventDefault();
-          if (isMobile) {
-            document.getElementById('navbar').classList.remove('active');
-          }
-          const targetId = link.getAttribute('href').substring(1);
-          const targetSection = document.getElementById(targetId);
-          if (targetSection) {
-            targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            window.scrollBy(0, -headerHeight - 20); // Adjusted offset to show title
-          }
-        });
-      });
-
-      document.querySelectorAll('.service-card').forEach(card => {
-        card.addEventListener('click', (e) => {
-          if (e.target.tagName === 'A') return;
-          const details = card.querySelector('.service-details');
-          const isActive = card.classList.contains('active');
-          document.querySelectorAll('.service-card').forEach(c => {
-            c.classList.remove('active');
-            c.querySelector('.service-details').style.maxHeight = '0';
-            c.querySelector('.service-details').style.opacity = '0';
-            c.querySelector('.service-details').style.paddingTop = '0';
-          });
-          if (!isActive) {
-            card.classList.add('active');
-            details.style.maxHeight = details.scrollHeight + 'px';
-            details.style.opacity = '1';
-            details.style.paddingTop = '15px';
-          }
-        });
-      });
-
-      document.querySelectorAll('.faq-item').forEach(item => {
-        item.addEventListener('click', () => {
-          const isActive = item.classList.contains('active');
-          document.querySelectorAll('.faq-item').forEach(i => {
-            i.classList.remove('active');
-            i.querySelector('.faq-answer').style.display = 'none';
-          });
-          if (!isActive) {
-            item.classList.add('active');
-            item.querySelector('.faq-answer').style.display = 'block';
-          }
-        });
-      });
-
-      function openModal(projectId) {
-        const modal = document.getElementById(`project-${projectId}`);
-        if (modal) {
-          modal.classList.add('active');
-          modal.querySelector('.modal-content').style.opacity = 0;
-          modal.querySelector('.modal-content').style.transform = 'scale(0.8)';
-          setTimeout(() => {
-            modal.querySelector('.modal-content').style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-            modal.querySelector('.modal-content').style.opacity = 1;
-            modal.querySelector('.modal-content').style.transform = 'scale(1)';
-          }, 10);
-          document.body.style.overflow = 'hidden';
         }
-      }
 
-      function closeModal(projectId) {
-        const modal = document.getElementById(`project-${projectId}`);
-        if (modal) {
-          modal.querySelector('.modal-content').style.opacity = 0;
-          modal.querySelector('.modal-content').style.transform = 'scale(0.8)';
-          setTimeout(() => {
-            modal.classList.remove('active');
-            document.body.style.overflow = '';
-          }, 400);
+        const lottiePlayer = document.querySelector('lottie-player');
+        if (isMobile) {
+          lottiePlayer.addEventListener('error', () => {
+            document.querySelector('.hero img.hero-image').style.display = 'block';
+            lottiePlayer.style.display = 'none';
+          });
         }
-      }
 
-      document.querySelectorAll('.portfolio-item').forEach(item => {
-        item.addEventListener('click', () => {
-          const projectId = item.getAttribute('data-project');
-          if (projectId) openModal(projectId);
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.style.opacity = 1;
+              entry.target.style.transform = 'translateY(0)';
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach(el => {
+          el.style.opacity = 0;
+          el.style.transform = 'translateY(50px)';
+          el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+          observer.observe(el);
         });
-      });
 
-      document.querySelectorAll('.modal-close').forEach(closeBtn => {
-        closeBtn.addEventListener('click', (e) => {
-          e.preventDefault();
-          const match = closeBtn.getAttribute('onclick').match(/closeModal\('([^']+)'\)/);
-          if (match) {
-            const projectId = match[1];
-            closeModal(projectId);
+        const cursor = document.querySelector('.custom-cursor');
+        let mouseX = 0, mouseY = 0;
+        const trails = [];
+
+        if (!isCoarse) {
+          document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            cursor.style.display = 'block';
+            const trail = document.createElement('div');
+            trail.className = 'custom-cursor trail';
+            trail.style.left = `${mouseX}px`;
+            trail.style.top = `${mouseY}px`;
+            document.body.appendChild(trail);
+            trails.push(trail);
+            if (trails.length > 6) {
+              const oldTrail = trails.shift();
+              oldTrail.remove();
+            }
+            setTimeout(() => {
+              trail.remove();
+              const index = trails.indexOf(trail);
+              if (index > -1) trails.splice(index, 1);
+            }, 500);
+          });
+
+          function animateCursor() {
+            cursor.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
+            requestAnimationFrame(animateCursor);
           }
-        });
-      });
+          animateCursor();
 
-      // Enhanced Contact Form Handler
-      const sendButton = document.getElementById('sendToWizualzBtn');
-      if (sendButton) {
-        sendButton.addEventListener('click', () => {
-          const name = document.querySelector('.contact-form input[placeholder="Your Name"]').value.trim();
-          const number = document.querySelector('.contact-form input[placeholder="Your Number"]').value.trim();
-          const query = document.querySelector('.contact-form textarea[placeholder="Your Query"]').value.trim();
+          document.querySelectorAll('a, button, .service-card, .portfolio-item, .faq-item, .modal-close, .contact-link').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+              cursor.classList.add('interactive');
+            });
+            el.addEventListener('mouseleave', () => {
+              cursor.classList.remove('interactive');
+            });
+          });
+        }
 
-          if (name && number && query) {
-            const whatsappMessage = encodeURIComponent(`Hello Team Wizualz,\nName: ${name}\nNumber: ${number}\nQuery: ${query}\nSent at: ${new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })}`);
-            const whatsappUrl = `https://wa.me/919321234524?text=${whatsappMessage}`;
-            console.log('Attempting redirect to:', whatsappUrl); // Debug log
-            window.location.href = whatsappUrl;
+        // Mobile menu toggle
+        function toggleMenu() {
+          const nav = document.getElementById('navbar');
+          if (nav) {
+            nav.classList.toggle('active');
           } else {
-            alert('Please fill in all fields before submitting.');
+            console.error('Navigation element not found');
           }
+        }
+        document.querySelector('.mobile-menu-icon').addEventListener('click', toggleMenu);
+
+        // Navigation link handler
+        document.querySelectorAll('#navbar a').forEach(link => {
+          link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = link.getAttribute('href').substring(1);
+            const targetSection = document.getElementById(targetId);
+            if (targetSection) {
+              const headerHeight = document.querySelector('header').offsetHeight || 70;
+              const targetPosition = targetSection.getBoundingClientRect().top + window.pageYOffset;
+              window.scrollTo({
+                top: targetPosition - headerHeight - 20,
+                behavior: 'smooth'
+              });
+              if (isMobile) {
+                document.getElementById('navbar').classList.remove('active');
+              }
+            } else {
+              console.error(`Section with ID ${targetId} not found`);
+            }
+          });
         });
-      } else {
-        console.error('Send button not found!');
+
+        document.querySelectorAll('.service-card').forEach(card => {
+          card.addEventListener('click', (e) => {
+            if (e.target.tagName === 'A') return;
+            const details = card.querySelector('.service-details');
+            const isActive = card.classList.contains('active');
+            document.querySelectorAll('.service-card').forEach(c => {
+              c.classList.remove('active');
+              c.querySelector('.service-details').style.maxHeight = '0';
+              c.querySelector('.service-details').style.opacity = '0';
+              c.querySelector('.service-details').style.paddingTop = '0';
+            });
+            if (!isActive) {
+              card.classList.add('active');
+              details.style.maxHeight = details.scrollHeight + 'px';
+              details.style.opacity = '1';
+              details.style.paddingTop = '15px';
+            }
+          });
+        });
+
+        document.querySelectorAll('.faq-item').forEach(item => {
+          item.addEventListener('click', () => {
+            const isActive = item.classList.contains('active');
+            document.querySelectorAll('.faq-item').forEach(i => {
+              i.classList.remove('active');
+              i.querySelector('.faq-answer').style.display = 'none';
+            });
+            if (!isActive) {
+              item.classList.add('active');
+              item.querySelector('.faq-answer').style.display = 'block';
+            }
+          });
+        });
+
+        function openModal(projectId) {
+          const modal = document.getElementById(`project-${projectId}`);
+          if (modal) {
+            modal.classList.add('active');
+            modal.querySelector('.modal-content').style.opacity = 0;
+            modal.querySelector('.modal-content').style.transform = 'scale(0.8)';
+            setTimeout(() => {
+              modal.querySelector('.modal-content').style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+              modal.querySelector('.modal-content').style.opacity = 1;
+              modal.querySelector('.modal-content').style.transform = 'scale(1)';
+            }, 10);
+            document.body.style.overflow = 'hidden';
+          }
+        }
+
+        function closeModal(projectId) {
+          const modal = document.getElementById(`project-${projectId}`);
+          if (modal) {
+            modal.querySelector('.modal-content').style.opacity = 0;
+            modal.querySelector('.modal-content').style.transform = 'scale(0.8)';
+            setTimeout(() => {
+              modal.classList.remove('active');
+              document.body.style.overflow = '';
+            }, 400);
+          }
+        }
+
+        document.querySelectorAll('.portfolio-item').forEach(item => {
+          item.addEventListener('click', () => {
+            const projectId = item.getAttribute('data-project');
+            if (projectId) openModal(projectId);
+          });
+        });
+
+        document.querySelectorAll('.modal-close').forEach(closeBtn => {
+          closeBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const match = closeBtn.getAttribute('onclick').match(/closeModal\('([^']+)'\)/);
+            if (match) {
+              const projectId = match[1];
+              closeModal(projectId);
+            }
+          });
+        });
+
+        // Enhanced Contact Form Handler
+        const sendButton = document.getElementById('sendToWizualzBtn');
+        if (sendButton) {
+          sendButton.addEventListener('click', () => {
+            const name = document.querySelector('.contact-form input[placeholder="Your Name"]').value.trim();
+            const number = document.querySelector('.contact-form input[placeholder="Your Number"]').value.trim();
+            const query = document.querySelector('.contact-form textarea[placeholder="Your Query"]').value.trim();
+
+            if (name && number && query) {
+              const whatsappMessage = encodeURIComponent(`Hello Team Wizualz,\nName: ${name}\nNumber: ${number}\nQuery: ${query}\nSent at: ${new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })}`);
+              const whatsappUrl = `https://wa.me/919321234524?text=${whatsappMessage}`;
+              window.location.href = whatsappUrl;
+            } else {
+              alert('Please fill in all fields before submitting.');
+            }
+          });
+        } else {
+          console.error('Send button not found!');
+        }
+      } catch (error) {
+        console.error('Error in script execution:', error);
       }
     });
   </script>
