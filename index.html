@@ -1,1475 +1,444 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>Wizualz Studio</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" media="all" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Orbitron:wght@400;700&display=swap" media="all">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Drwup Homepage</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- GSAP CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
   <style>
-    /* CSS Reset */
-    * {
+    body {
       margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      background: none !important;
-    }
-
-    @font-face {
-      font-family: 'LED Dot-Matrix';
-      src: url('https://cdn.shopify.com/s/files/1/0675/9720/5546/files/NothingDot-Regular.ttf?v=1753448201') format('truetype');
-      font-display: swap;
-    }
-
-    @font-face {
-      font-family: 'Neon';
-      src: url('https://fonts.cdnfonts.com/s/288970/Neon.ttf') format('truetype');
-      font-display: swap;
-    }
-
-    html, body {
-      margin: 0;
-      padding: 0;
       font-family: 'Poppins', sans-serif;
+      background: #0a0a0a;
       color: #fff;
       overflow-x: hidden;
-      height: 100%;
-      background: linear-gradient(135deg, #1a0033, #0a0020, #000) !important;
-      width: 100%;
-      box-sizing: border-box;
+      cursor: none;
     }
 
-    @media (pointer: coarse) {
-      html, body { cursor: auto; }
-      .custom-cursor, .custom-cursor.trail { display: none !important; }
-    }
+    a { color: #fff; text-decoration: none; }
 
-    .custom-cursor {
-      width: 18px;
-      height: 18px;
-      background: radial-gradient(circle, #ff00ff, #00ffcc, #ffcc00);
-      border: 2px solid #00ccff;
-      border-radius: 50%;
+    .banner-overlay {
       position: fixed;
       top: 0;
       left: 0;
-      pointer-events: none;
-      z-index: 10000;
-      box-shadow: 0 0 8px #ff00ff, 0 0 16px #00ffcc;
-      transform: translate(-50%, -50%) rotate(0deg);
-      will-change: transform;
-      transition: transform 0.1s ease-out, scale 0.2s ease, box-shadow 0.3s ease, background 0.5s ease;
-      animation: cursorSpin 4s linear infinite;
-    }
-    .custom-cursor.trail {
-      width: 10px;
-      height: 10px;
-      background: radial-gradient(circle, #ffcc00, #00ffcc);
-      border: 1px solid #ff00ff;
-      opacity: 0.6;
-      animation: fadePulse 0.5s infinite alternate, trailFade 1s ease-out forwards;
-      z-index: 9999;
-    }
-    @keyframes cursorSpin {
-      100% { transform: translate(-50%, -50%) rotate(360deg); }
-    }
-    @keyframes fadePulse {
-      to { opacity: 0.2; transform: scale(1.3); }
-    }
-    @keyframes trailFade {
-      to { opacity: 0; }
-    }
-    .custom-cursor.interactive {
-      transform: translate(-50%, -50%) scale(1.8);
-      box-shadow: 0 0 15px #ffcc00, 0 0 30px #00ffcc;
-    }
-
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 998;
-      background: linear-gradient(90deg, rgba(26, 0, 51, 0.9), rgba(10, 0, 32, 0.9)) !important;
+      width: calc(100% - 100px);
+      padding: 16px 50px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 15px 40px;
-      box-shadow: 0 0 15px #00ffcc66;
-      backdrop-filter: blur(10px);
-      border-bottom: 2px solid #ff00ff;
-      width: 100%;
-      box-sizing: border-box;
-      height: 70px;
-      animation: headerGlow 4s infinite alternate;
-    }
-    @keyframes headerGlow {
-      to { box-shadow: 0 0 20px #ffcc00; }
-    }
-    header a.logo-link img {
-      width: 150px;
-      height: auto;
-      transition: transform 0.3s ease, filter 0.3s ease;
-      filter: drop-shadow(0 0 5px #00ffcc);
-    }
-    header a.logo-link img:hover {
-      transform: rotate(10deg) scale(1.15);
-      filter: drop-shadow(0 0 10px #ff00ff);
-    }
-    .mobile-menu-icon {
-      display: none;
-      color: #00ffcc;
-      font-size: 28px;
-      cursor: pointer;
-      text-shadow: 0 0 5px #ff00ff;
-      transition: transform 0.3s ease;
-    }
-    .mobile-menu-icon:hover {
-      transform: scale(1.2);
-    }
-    nav {
-      display: flex;
-      align-items: center;
-    }
-    nav a {
-      color: #00ffcc;
-      margin: 0 20px;
-      text-decoration: none;
-      font-family: 'Orbitron', monospace;
-      font-weight: 600;
-      position: relative;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      font-size: 16px;
-      text-shadow: 0 0 3px #ff00ff;
-      cursor: pointer;
-    }
-    nav a::after {
-      content: '';
-      display: block;
-      height: 2px;
-      background: linear-gradient(90deg, #ff00ff, #00ffcc);
-      width: 0;
-      transition: width 0.4s ease;
-      position: absolute;
-      bottom: -5px;
-      left: 0;
-    }
-    nav a:hover::after {
-      width: 100%;
+      z-index: 1001;
+      background: rgba(0, 0, 0, 0);
     }
 
-    section {
-      padding: 40px 20px;
-      position: relative;
-      width: 100%;
-      box-sizing: border-box;
-      background: linear-gradient(135deg, #1a0033, #0a0020) !important;
-      animation: fadeInUp 1s ease-out;
+    .banner-overlay img {
+      height: 40px;
     }
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+
+    nav {
+      display: flex;
+      gap: 32px;
+      overflow: visible;
     }
-    .hero {
-      text-align: center;
-      padding-top: 60px;
-      position: relative;
-      overflow: hidden;
-      width: 100%;
-      min-height: 100vh;
-      background: radial-gradient(circle, #1a0033, #000) !important;
+
+    nav a:hover {
+      color: #ccc;
+      text-shadow: 0 0 10px #fff;
     }
-    #hero-particles {
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+    }
+
+    .hamburger span {
+      width: 26px;
+      height: 3px;
+      background: #fff;
+      border-radius: 2px;
+      box-shadow: 0 0 5px #fff;
+      transition: all 0.3s ease;
+    }
+
+    #menu {
+      display: none;
+      flex-direction: column;
       position: absolute;
-      top: 0;
-      left: 0;
+      top: 70px;
+      right: 50px;
+      background: rgba(0, 0, 0, 0.95);
+      padding: 20px 28px;
+      border-radius: 12px;
+      border: 1px solid #333;
+      box-shadow: 0 0 20px #ffffff15;
+      gap: 12px;
+      z-index: 1002;
+      min-width: 180px;
+      max-width: 250px;
+    }
+
+    #banner {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+    }
+
+    #banner video {
       width: 100%;
       height: 100%;
-      z-index: 0;
+      object-fit: cover; /* Maintain aspect ratio and crop */
+      display: block;
     }
-    .hero h1 {
-      font-family: 'Neon', 'LED Dot-Matrix', sans-serif;
-      font-size: 72px;
-      color: #00ffcc;
-      text-shadow: 0 0 15px #00ffcc, 0 0 30px #ff00ff, 0 0 5px #ffcc00;
-      margin: 0;
-      position: relative;
-      z-index: 2;
-      animation: neonBlink 2s infinite alternate;
-    }
-    @keyframes neonBlink {
-      50% { text-shadow: 0 0 10px #00ffcc, 0 0 20px #ff00ff; }
-    }
-    .hero p {
-      font-size: 18px;
-      color: #e0e0e0;
-      max-width: 600px;
-      margin: 20px auto;
-      font-family: 'Poppins', sans-serif;
-      position: relative;
-      z-index: 2;
-      text-shadow: 0 0 2px #fff;
-    }
-    .hero button {
-      margin-top: 20px;
-      padding: 12px 30px;
-      border: 2px solid #ffcc00;
-      background: linear-gradient(45deg, #ff00ff, #00ffcc);
-      color: #fff;
-      border-radius: 30px;
-      font-family: 'Orbitron', monospace;
-      font-weight: 700;
-      font-size: 16px;
-      transition: all 0.4s ease;
-      box-shadow: 0 0 10px #ffcc00, 0 0 20px #00ffcc inset;
-      text-transform: uppercase;
-      cursor: pointer;
-      z-index: 2;
-      position: relative;
-      overflow: hidden;
-    }
-    .hero button:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 0 20px #ffcc00, 0 0 30px #00ffcc;
-    }
-    .hero button::after {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 0;
-      height: 0;
-      background: rgba(255, 255, 255, 0.2);
-      border-radius: 50%;
-      transform: translate(-50%, -50%);
-      transition: width 0.6s ease, height 0.6s ease;
-    }
-    .hero button:hover::after {
-      width: 300px;
-      height: 300px;
-    }
-    .hero img.hero-image {
-      width: 250px;
-      height: auto;
-      margin: 0 auto;
-      display: none;
-      z-index: 1;
-      position: relative;
-      filter: drop-shadow(0 0 10px #00ffcc);
-    }
-    .hero lottie-player {
-      width: 400px;
-      height: 400px;
-      margin: 0 auto;
-      z-index: 1;
-      position: relative;
-      filter: drop-shadow(0 0 15px #ff00ff);
+
+    .section {
+      padding: 80px 32px;
     }
 
     .section-title {
-      font-size: 36px;
-      margin-bottom: 40px;
-      font-family: 'Neon', 'Orbitron', monospace;
-      color: #ffcc00;
-      text-shadow: 0 0 10px #ffcc00, 0 0 20px #ff00ff;
-      letter-spacing: 3px;
-      text-transform: uppercase;
       text-align: center;
-      opacity: 1;
-      transform: translateY(0);
-      animation: titlePulse 3s infinite alternate;
-    }
-    @keyframes titlePulse {
-      to { text-shadow: 0 0 15px #ffcc00, 0 0 25px #00ffcc; }
+      font-size: 36px;
+      font-weight: 600;
+      margin-bottom: 60px;
     }
 
-    .services-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 25px;
-      max-width: 1100px;
-      margin: 0 auto;
-      width: 100%;
-      overflow: visible;
+    .services-table {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 32px;
+      padding: 0 20px;
+      min-height: 200px;
     }
-    .service-card {
-      border: 2px solid #00ffcc;
-      padding: 20px;
-      border-radius: 15px;
-      background: linear-gradient(135deg, #1a0033, #0a0020) !important;
-      box-shadow: 0 0 20px #00ffcc33, 0 0 10px #ff00ff inset;
-      transition: all 0.4s ease;
-      cursor: pointer;
-      width: 100%;
-      box-sizing: border-box;
-      position: relative;
-      overflow: hidden;
-    }
-    .service-card::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle, rgba(255, 204, 0, 0.1), transparent);
-      animation: rotateGlow 10s linear infinite;
-      z-index: 0;
-    }
-    @keyframes rotateGlow {
-      100% { transform: rotate(360deg); }
-    }
-    .service-card:hover {
-      transform: scale(1.05) rotate(2deg);
-      box-shadow: 0 0 30px #00ffcc, 0 0 15px #ff00ff inset;
-    }
-    .service-card i {
-      font-size: 28px;
-      color: #ffcc00;
-      margin-bottom: 15px;
-      text-shadow: 0 0 5px #ff00ff;
-    }
-    .service-title {
-      font-size: 20px;
-      margin: 0 0 15px;
-      color: #00ffcc;
-      font-family: 'Orbitron', monospace;
-      text-shadow: 0 0 3px #fff;
-    }
-    .service-details {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.5s ease, opacity 0.3s ease, padding-top 0.3s ease;
+
+    .table-card {
+      background: #151515;
+      border: 1px solid #2a2a2a;
+      border-radius: 12px;
+      padding: 40px 20px;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
       opacity: 0;
-      color: #e0e0e0;
-      font-size: 15px;
-      line-height: 1.6;
-      position: relative;
-      z-index: 1;
-    }
-    .service-card.active .service-details {
-      max-height: 250px;
-      opacity: 1;
-      padding-top: 15px;
     }
 
-    .faq-item {
-      background: linear-gradient(135deg, #1a0033, #0a0020) !important;
-      border-left: 3px solid #ffcc00;
-      padding: 20px;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: all 0.4s ease;
-      margin-bottom: 20px;
-      width: 100%;
-      box-sizing: border-box;
-      box-shadow: 0 0 10px #00ffcc33;
-    }
-    .faq-item:hover, .faq-item.active {
-      background: linear-gradient(135deg, #2a0050, #150030) !important;
-      box-shadow: 0 0 20px #ffcc00;
-      transform: translateY(-5px);
-    }
-    .faq-answer {
-      display: none;
-      color: #e0e0e0;
-      font-size: 14px;
-      padding-top: 15px;
-      text-shadow: 0 0 1px #fff;
-    }
-    .faq-item.active .faq-answer {
-      display: block;
+    .table-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 0 20px #00f0ff;
     }
 
-    .portfolio-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 25px;
-      padding: 20px 0;
-      max-width: 1100px;
-      margin: 0 auto;
-      width: 100%;
-    }
-    .portfolio-item {
-      position: relative;
-      overflow: hidden;
-      border-radius: 15px;
-      width: 100%;
-      box-sizing: border-box;
-      transition: transform 0.4s ease;
-      cursor: pointer;
-    }
-    .portfolio-item:hover {
-      transform: scale(1.03) rotate(1deg);
-    }
-    .portfolio-item img {
-      width: 100%;
-      height: auto;
-      display: block;
-      border-radius: 10px;
-      box-shadow: 0 0 15px #00ffcc33;
-      transition: transform 0.4s ease, filter 0.4s ease;
-      object-fit: contain;
-      max-width: 100%;
-      background: #000;
-      filter: brightness(1.1);
-    }
-    .portfolio-item:hover img {
-      transform: scale(1.1);
-      filter: brightness(1.3);
-    }
-    .portfolio-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(135deg, rgba(0, 255, 204, 0.8), rgba(255, 0, 255, 0.6));
-      opacity: 0;
-      display: flex;
-      align-items: center;
-      justify-content: left;
-      color: #fff;
-      font-family: 'Neon', 'Orbitron', monospace;
-      font-size: 18px;
-      text-shadow: 0 0 10px #ffcc00, 0 0 5px #000;
-      transition: opacity 0.4s ease;
-      border-radius: 10px;
-      cursor: pointer;
-      padding-left: 15px;
-    }
-    .portfolio-item:hover .portfolio-overlay {
-      opacity: 1;
-    }
-    .portfolio-modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: radial-gradient(circle, rgba(0, 0, 0, 0.9), rgba(26, 0, 51, 0.95)) !important;
-      z-index: 1002;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-      box-sizing: border-box;
-      overflow-y: auto;
-      animation: modalFadeIn 0.5s ease-out;
-    }
-    @keyframes modalFadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-    .portfolio-modal.active {
-      display: flex;
-    }
-    .modal-content {
-      background: linear-gradient(135deg, #1a0033, #0a0020) !important;
-      border: 3px solid #ffcc00;
-      border-radius: 15px;
-      padding: 25px;
-      max-width: 800px;
-      width: 100%;
-      max-height: 90vh;
-      overflow-y: auto;
-      position: relative;
-      box-shadow: 0 0 20px #00ffcc, 0 0 10px #ff00ff inset;
-      animation: contentPop 0.5s ease-out;
-    }
-    @keyframes contentPop {
-      from { transform: scale(0.9); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
-    }
-    .modal-close {
-      position: absolute;
-      top: 15px;
-      right: 20px;
-      color: #ff00ff;
-      font-size: 28px;
-      cursor: pointer;
-      transition: transform 0.4s ease, color 0.4s ease;
-      text-shadow: 0 0 10px #ffcc00;
-    }
-    .modal-close:hover {
-      transform: rotate(180deg);
-      color: #00ffcc;
-    }
-    .modal-content img {
-      width: 100%;
-      height: auto;
-      border-radius: 10px;
+    .table-card span {
+      font-size: 48px;
       margin-bottom: 20px;
-      object-fit: contain;
-      max-width: 100%;
-      background: #000;
-      border: 2px solid #ffcc00;
-      box-shadow: 0 0 15px #00ffcc;
-    }
-    .modal-content h3 {
-      font-family: 'Neon', 'Orbitron', monospace;
-      color: #ffcc00;
-      font-size: 24px;
-      margin-bottom: 15px;
-      text-shadow: 0 0 10px #ff00ff;
-    }
-    .modal-content p {
-      color: #e0e0e0;
-      font-size: 15px;
-      line-height: 1.7;
-      text-shadow: 0 0 1px #fff;
-    }
-    .modal-content a {
       display: inline-block;
-      margin-top: 15px;
-      padding: 10px 25px;
-      border: 2px solid #ff00ff;
-      background: linear-gradient(45deg, #00ffcc, #ffcc00);
-      color: #fff;
-      text-decoration: none;
-      border-radius: 30px;
-      font-family: 'Orbitron', monospace;
-      font-size: 16px;
-      transition: all 0.4s ease;
-      box-shadow: 0 0 10px #ffcc00;
-      cursor: pointer;
-    }
-    .modal-content a:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 0 20px #00ffcc;
     }
 
-    /* Pricing Section Styles */
-    #pricing {
-      padding: 60px 20px;
-      background: radial-gradient(circle, #1a0033, #0a0020) !important;
-      text-align: center;
-    }
-    .pricing-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 30px;
-      max-width: 1200px;
-      margin: 0 auto;
-      width: 100%;
-      justify-content: center;
-      align-items: stretch;
-    }
-    .pricing-card {
-      background: linear-gradient(135deg, #2a0050, #150030) !important;
-      border: 2px solid #ffcc00;
-      border-radius: 15px;
-      padding: 30px;
-      box-shadow: 0 0 20px #00ffcc33, 0 0 10px #ff00ff inset;
-      transition: all 0.4s ease;
-      position: relative;
-      overflow: hidden;
-      min-height: 420px;
-      width: 100%;
-      max-width: 360px;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-    .pricing-card:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 30px #00ffcc, 0 0 15px #ccff00 inset;
-    }
-    .pricing-card::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle, rgba(255, 204, 0, 0.1), transparent);
-      animation: rotateGlow 10s linear infinite;
-      z-index: 0;
-    }
-    @keyframes rotateGlow {
-      100% { transform: rotate(360deg); }
-    }
-    .pricing-card.popular::after {
-      content: 'Most Popular';
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background: #ff00ff;
-      color: #fff;
-      padding: 5px 10px;
-      border-radius: 5px;
-      font-family: 'Orbitron', monospace;
-      font-size: 12px;
-      text-transform: uppercase;
-      text-shadow: 0 0 5px #00ffcc;
-      z-index: 1;
-    }
-    .pricing-title {
-      font-family: 'Neon', 'Orbitron', monospace;
+    .table-card h3 {
       font-size: 24px;
-      color: #00ffcc;
-      text-shadow: 0 0 5px #ff00ff;
-      margin-bottom: 15px;
-      position: relative;
-      z-index: 1;
+      font-weight: 600;
+      margin: 0 0 12px;
     }
-    .pricing-price {
-      font-family: 'Orbitron', monospace;
-      font-size: 36px;
-      color: #ffcc00;
-      text-shadow: 0 0 10px #00ffcc;
-      margin: 10px 0 20px;
-      position: relative;
-      z-index: 1;
+
+    .table-card p {
+      font-size: 16px;
+      color: #cccccc;
+      margin: 0;
     }
-    .pricing-details {
-      list-style: none;
-      padding: 0;
-      margin: 0 0 20px;
-      color: #e0e0e0;
-      font-size: 15px;
-      line-height: 1.8;
-      position: relative;
-      z-index: 1;
-      flex-grow: 1;
-      text-align: left;
-    }
-    .pricing-details li {
+
+    .logos-grid {
       display: grid;
-      grid-template-columns: auto 1fr;
-      align-items: start;
-      gap: 12px;
-      margin-bottom: 12px;
-      padding: 0 5px;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 24px;
+      padding-top: 20px;
     }
-    .pricing-details li::before {
-      content: '✓';
-      color: #ff00ff;
-      font-size: 16px;
-      text-shadow: 0 0 5px #00ffcc;
-      grid-column: 1;
-      grid-row: 1;
-      line-height: 1;
-      margin-top: 2px;
+
+    .logos-grid img {
+      width: 100%;
+      border-radius: 12px;
+      transition: 0.3s;
     }
-    .pricing-card button {
-      padding: 12px 30px;
-      border: 2px solid #ffcc00;
-      background: linear-gradient(45deg, #ff00ff, #00ffcc);
+
+    .logos-grid img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 10px #fff;
+    }
+
+    #lets-talk {
+      width: 100%;
+      padding: 100px 0; /* Increased padding to cover more area */
+      background: rgba(0, 0, 0, 0.8);
+      text-align: center;
       color: #fff;
-      border-radius: 30px;
-      font-family: 'Orbitron', monospace;
-      font-weight: 700;
-      font-size: 16px;
-      transition: all 0.4s ease;
-      box-shadow: 0 0 10px #ffcc00;
+      font-size: 200px; /* Increased font size */
+      font-weight: 600;
       cursor: pointer;
-      position: relative;
-      z-index: 1;
-      text-transform: uppercase;
-      margin-top: auto;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
-    .pricing-card button:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 0 20px #00ffcc;
+
+    #lets-talk.visible {
+      opacity: 1;
     }
 
     footer {
-      background: linear-gradient(135deg, #0a0020, #1a0033) !important;
-      padding: 50px 20px 30px;
-      position: relative;
-      width: 100%;
-      box-sizing: border-box;
-      overflow: hidden;
-    }
-    .footer-wave {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 200%;
-      height: 60px;
-      background: url('data:image/svg+xml,%3Csvg viewBox="0 0 1440 320" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath d="M0,96L48,112C96,128,192,160,288,176C384,192,480,192,576,186.7C672,181,768,171,864,176C960,181,1056,203,1152,213.3C1248,224,1344,224,1392,224L1440,224V320H1392H1344H1248H1152H1056H960H864H768H672H576H480H384H288H192H96H48H0V96Z" fill="%23ff00ff33"%3E%3C/path%3E%3C/svg%3E');
-      background-size: cover;
-      animation: waveMove 8s infinite linear;
-    }
-    @keyframes waveMove {
-      100% { transform: translateX(-50%); }
-    }
-    .footer-grid {
+      padding: 40px 32px;
+      background: #1a1a1a;
       display: flex;
-      flex-direction: column;
-      gap: 25px;
-      max-width: 1100px;
-      margin: 0 auto;
-      width: 100%;
-      position: relative;
-      z-index: 1;
-    }
-    .footer-column {
-      padding: 15px 0;
-      text-align: left;
-    }
-    .footer-column img {
-      max-width: 180px;
-      height: auto;
-      margin-bottom: 20px;
-      display: block;
-      filter: drop-shadow(0 0 10px #00ffcc);
-      transition: transform 0.3s ease;
-    }
-    .footer-column img:hover {
-      transform: scale(1.15) rotate(5deg);
-    }
-    .footer-column p {
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
       font-size: 14px;
-      line-height: 1.7;
-      color: #e0e0e0;
-      margin: 0;
-      text-shadow: 0 0 1px #fff;
     }
-    .footer-title {
-      font-size: 18px;
-      color: #ffcc00;
-      font-family: 'Neon', 'Orbitron', monospace;
-      margin-bottom: 15px;
-      border-bottom: 2px solid #ff00ff33;
-      padding-bottom: 5px;
-      text-shadow: 0 0 5px #00ccff;
-    }
-    .footer-links ul {
+
+    footer ul {
       list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
       padding: 0;
-      margin: 0;
     }
-    .footer-links ul li {
-      margin-bottom: 10px;
-    }
-    .footer-links ul li a, .contact-link {
-      color: #00ffcc;
-      font-size: 14px;
-      text-decoration: none;
-      transition: color 0.3s ease, text-shadow 0.3s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 10px;
-      min-height: 48px;
-      min-width: 48px;
-      border-radius: 5px;
-      text-shadow: 0 0 2px #ff00ff;
-      cursor: pointer;
-    }
-    .footer-links ul li a:hover, .contact-link:hover {
-      color: #ffcc00;
-      text-shadow: 0 0 10px #ffcc00;
-    }
-    .contact-item {
-      display: flex;
-      align-items: center;
-      justify-content: left;
-      gap: 12px;
-      margin-bottom: 12px;
-    }
-    .contact-item i {
-      font-size: 16px;
-      color: #ff00ff;
-      text-shadow: 0 0 5px #00ffcc;
-    }
-    .social-icons {
-      display: flex;
-      gap: 15px;
-      justify-content: left;
-      margin-top: 15px;
-    }
-    .social-icons a {
-      color: #ffcc00;
-      font-size: 20px;
-      transition: all 0.3s ease;
-      padding: 10px;
-      min-height: 48px;
-      min-width: 48px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      border: 1px solid #00ffcc;
+
+    /* Custom Cursor */
+    .custom-cursor {
+      width: 50px;
+      height: 50px;
+      background: rgba(255, 255, 255, 0.2);
       border-radius: 50%;
-      box-shadow: 0 0 5px #ff00ff;
-      cursor: pointer;
-    }
-    .social-icons a:hover {
-      color: #00ffcc;
-      transform: rotate(360deg);
-      box-shadow: 0 0 15px #ffcc00;
-    }
-    .footer-bottom {
-      text-align: center;
-      margin-top: 25px;
-      padding-top: 15px;
-      border-top: 1px solid #ff00ff22;
-      color: #999;
-      font-size: 13px;
-      text-shadow: 0 0 1px #fff;
-    }
-    .footer-bottom a {
-      color: #ffcc00;
-      text-decoration: none;
-      margin: 0 8px;
-      transition: color 0.3s ease, text-shadow 0.3s ease;
-      cursor: pointer;
-    }
-    .footer-bottom a:hover {
-      color: #00ffcc;
-      text-shadow: 0 0 10px #ff00ff;
+      position: fixed;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: 9999;
+      transition: transform 0.2s ease;
+      mix-blend-mode: difference;
     }
 
-    /* Contact Form Styles */
-    .contact-section {
-      padding: 40px 20px;
-      background: linear-gradient(135deg, #1a0033, #0a0020) !important;
-      text-align: center;
-    }
-    .contact-form {
-      max-width: 600px;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-    }
-    .contact-form input,
-    .contact-form textarea {
-      width: 100%;
-      padding: 12px 15px;
-      border: none;
-      border-bottom: 2px solid #00ffcc;
-      background: rgba(26, 0, 51, 0.8);
-      color: #fff;
-      font-family: 'Orbitron', monospace;
-      font-size: 16px;
-      transition: border-color 0.3s ease, box-shadow 0.3s ease;
-      border-radius: 0;
-      outline: none;
-    }
-    .contact-form textarea {
-      min-height: 80px;
-      resize: vertical;
-    }
-    .contact-form input:focus,
-    .contact-form textarea:focus {
-      border-bottom-color: #ffcc00;
-      box-shadow: 0 2px 10px #00ffcc;
-    }
-    .contact-form button {
-      width: 100%;
-      padding: 12px;
-      margin-top: 15px;
-      border: 2px solid #ffcc00;
-      background: linear-gradient(45deg, #ff00ff, #00ffcc);
-      color: #fff;
-      border-radius: 30px;
-      font-family: 'Orbitron', monospace;
-      font-weight: 700;
-      font-size: 16px;
-      transition: all 0.4s ease;
-      box-shadow: 0 0 10px #ffcc00;
-      cursor: pointer;
-    }
-    .contact-form button:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 0 20px #00ffcc;
+    @media (pointer: coarse) {
+      body { cursor: auto; }
+      .custom-cursor { display: none; }
     }
 
-    @media (min-width: 768px) {
-      header { padding: 20px 60px; }
-      header a.logo-link img { width: 180px; }
-      nav a { margin: 0 25px; font-size: 18px; }
-      .hero h1 { font-size: 88px; }
-      .hero p { font-size: 20px; max-width: 700px; }
-      .hero lottie-player { width: 450px; height: 450px; }
-      .hero button { padding: 15px 40px; font-size: 18px; }
-      .section-title { font-size: 42px; }
-      .services-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 30px;
+    @media(max-width: 768px) {
+      .banner-overlay {
+        padding: 10px 20px;
+        width: calc(100% - 40px);
       }
-      .service-card { padding: 25px; }
-      .service-title { font-size: 22px; }
-      .service-details { font-size: 16px; }
-      .service-card.active .service-details { max-height: 220px; }
-      .portfolio-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 30px;
-      }
-      .portfolio-overlay { font-size: 20px; }
-      .modal-content { padding: 30px; }
-      .modal-content h3 { font-size: 26px; }
-      .modal-content p { font-size: 16px; }
-      .pricing-grid {
-        grid-template-columns: repeat(3, minmax(0, 360px));
-        justify-content: center;
-        gap: 40px;
-      }
-      .pricing-card {
-        max-width: 360px;
-        padding: 35px;
-        min-height: 450px;
-      }
-      .pricing-title { font-size: 26px; }
-      .pricing-price { font-size: 40px; }
-      .pricing-details { font-size: 16px; }
-      .pricing-details li { margin-bottom: 12px; }
-      .pricing-card button { padding: 15px 40px; font-size: 18px; }
-      .faq-item { padding: 25px; max-width: 900px; margin: 0 auto 25px; }
-      .faq-answer { font-size: 15px; }
-      .footer-grid {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 30px;
-      }
-    }
-
-    @media (max-width: 767px) {
-      nav {
+      nav { display: none; }
+      .hamburger { display: flex; }
+      #menu { 
         display: none;
-        position: absolute;
-        top: 70px;
         right: 20px;
-        background: linear-gradient(135deg, rgba(26, 0, 51, 0.95), rgba(10, 0, 32, 0.95)) !important;
-        border: 2px solid #ff00ff;
-        padding: 15px;
-        border-radius: 10px;
-        box-shadow: 0 0 10px #00ffcc66;
-        flex-direction: column;
-        z-index: 1001;
+        top: 60px;
+        min-width: 120px;
+        max-width: 180px;
+        padding: 15px 20px;
       }
-      nav.active {
-        display: flex !important;
+      #banner {
+        height: 60vh; /* Increased height to reduce cropping */
       }
-      nav a {
-        margin: 10px 0;
-        font-size: 15px;
+      #banner video {
+        object-fit: cover; /* Maintain aspect ratio and crop less */
       }
-      .mobile-menu-icon {
-        display: block;
+      .services-table {
+        grid-template-columns: 1fr;
       }
-      .hero h1 { font-size: 48px; }
-      .hero p { font-size: 16px; max-width: 90%; }
-      .hero lottie-player { width: 250px; height: 250px; }
-      .hero img.hero-image { width: 180px; }
-      .hero button { padding: 10px 25px; font-size: 14px; }
-      .section-title { font-size: 28px; margin-bottom: 30px; }
-      .service-title { font-size: 18px; }
-      .service-details { font-size: 14px; }
-      .portfolio-overlay { font-size: 16px; }
-      .modal-content { padding: 20px; max-height: 85vh; }
-      .modal-content img { margin-bottom: 15px; }
-      .modal-content h3 { font-size: 20px; }
-      .modal-content p { font-size: 14px; }
-      .modal-content a { padding: 8px 20px; font-size: 14px; }
-      .pricing-grid {
-        gap: 20px;
+      #lets-talk {
+        font-size: 80px; /* Adjusted for mobile */
+        padding: 50px 0; /* Adjusted padding */
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
-      .pricing-card {
-        max-width: 340px;
-        padding: 25px;
-        min-height: 400px;
-      }
-      .pricing-title { font-size: 22px; }
-      .pricing-price { font-size: 32px; }
-      .pricing-details { font-size: 14px; }
-      .pricing-details li { margin-bottom: 12px; }
-      .pricing-card button { padding: 10px 25px; font-size: 14px; }
-      .faq-item { padding: 15px; }
-      .faq-answer { font-size: 13px; }
-      .footer-column img { max-width: 140px; }
-      .footer-title { font-size: 16px; }
-      .footer-column p, .footer-links ul li a, .contact-link { font-size: 13px; }
-      .contact-item i { font-size: 15px; }
-      .social-icons { justify-content: center; }
-      .social-icons a { font-size: 18px; }
+    }
+
+    /* Screen reader only */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      border: 0;
     }
   </style>
 </head>
 <body>
-  <div class="custom-cursor"></div>
-  <header>
-    <a href="#" class="logo-link">
-      <img src="https://cdn.shopify.com/s/files/1/0675/9720/5546/files/wizualz_logoTT.png?v=1753530834" alt="Wizualz Logo" loading="lazy" style="width: 150px; height: auto;">
-    </a>
-    <i class="fas fa-bars mobile-menu-icon"></i>
-    <nav id="navbar">
-      <a href="#services">Services</a>
-      <a href="#portfolio">Portfolio</a>
-      <a href="#pricing">Pricing</a>
-      <a href="#faq">FAQs</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </header>
-  <section class="hero">
-    <div id="hero-particles"></div>
-    <lottie-player src="https://assets5.lottiefiles.com/packages/lf20_qp1q7mct.json" background="transparent" speed="1" loop autoplay loading="lazy"></lottie-player>
-    <img class="hero-image" src="https://cdn.shopify.com/s/files/1/0675/9720/5546/files/hero-static.webp" alt="Wizualz Hero" loading="lazy">
-    <h1 class="reveal">WE HAVE DIGITAL MAGIC</h1>
-    <p class="reveal">Wizualz transforms visions into stunning digital experiences with bold design and innovative tech.</p>
-    <button onclick="document.getElementById('portfolio').scrollIntoView({ behavior: 'smooth' })">Dive Into Our World</button>
-  </section>
-  <section id="services">
-    <h2 class="section-title">Our Creative Services</h2>
-    <div class="services-grid reveal">
-      <div class="service-card">
-        <i class="fas fa-globe"></i>
-        <h3 class="service-title">Ecommerce Website Design</h3>
-        <div class="service-details">
-          We craft captivating e-commerce websites tailored to your brand, featuring seamless design and integration with platforms like Shopify and WooCommerce for a magical online shopping experience.
+  <div data-section-type="drwup-home">
+    <div class="custom-cursor"></div>
+
+    <div class="banner-overlay">
+      <a href="#banner" aria-label="Drwup Home">
+        <img src="https://cdn.shopify.com/s/files/1/0675/9720/5546/files/white.png?v=1753857144" alt="Drwup Logo" loading="lazy">
+      </a>
+      <nav class="desktop-menu" aria-label="Main navigation">
+        <a href="#services">Our Services</a>
+        <a href="#logos">Logo Designs</a>
+      </nav>
+      <div class="hamburger" role="button" aria-label="Toggle menu" aria-expanded="false" aria-controls="menu" tabindex="0" onclick="toggleMenu()" onkeydown="handleKeydown(event)">
+        <span></span><span></span><span></span>
+      </div>
+      <div id="menu" aria-label="Mobile navigation" role="navigation">
+        <a href="#services" onclick="toggleMenu()">Our Services</a>
+        <a href="#logos" onclick="toggleMenu()">Logo Designs</a>
+      </div>
+    </div>
+
+    <section id="banner" aria-label="Hero video">
+      <video src="https://cdn.shopify.com/videos/c/o/v/c0d11f7f1f3b42b091f1438082fc4aec.mp4" autoplay muted loop playsinline preload="metadata" aria-describedby="banner-desc"></video>
+      <p id="banner-desc" class="sr-only">Promotional video showcasing Drwup's design services.</p>
+    </section>
+
+    <section id="services" class="section">
+      <h2 class="section-title">What I Bring to the Table</h2>
+      <div class="services-table">
+        <div class="table-card">
+          <span>🎨</span>
+          <h3>Graphic Design</h3>
+          <p>Compelling visuals for brands across digital & print.</p>
+        </div>
+        <div class="table-card">
+          <span>🖨️</span>
+          <h3>Print Collateral</h3>
+          <p>Designs for brochures, flyers, packaging & more.</p>
+        </div>
+        <div class="table-card">
+          <span>🎞️</span>
+          <h3>Motion Graphics</h3>
+          <p>Eye-catching animations & explainer videos.</p>
+        </div>
+        <div class="table-card">
+          <span>🌀</span>
+          <h3>3D Videos</h3>
+          <p>Product renders, modeling, and full 3D animations.</p>
+        </div>
+        <div class="table-card">
+          <span>🔥</span>
+          <h3>CGI Ads</h3>
+          <p>Hyper-real visuals for maximum ad impact.</p>
+        </div>
+        <div class="table-card">
+          <span>💻</span>
+          <h3>Website Design</h3>
+          <p>Creative, responsive websites that convert.</p>
         </div>
       </div>
-      <div class="service-card">
-        <i class="fas fa-camera"></i>
-        <h3 class="service-title">Product Photoshoot & Edit and All Type of Graphic Design</h3>
-        <div class="service-details">
-          Our expert team delivers stunning product photoshoots, professional editing, and a wide range of graphic design services to create visually striking content for your digital and marketing needs.
-        </div>
+    </section>
+
+    <section id="logos" class="section">
+      <h2 class="section-title">Logo Designs</h2>
+      <div class="logos-grid">
+        <img src="https://cdn.shopify.com/s/files/1/0675/9720/5546/files/Untitled-1.jpg?v=1753858565" alt="Logo design 1" loading="lazy">
+        <img src="https://cdn.shopify.com/s/files/1/0675/9720/5546/files/tezz_bite_Logo_Logo_mockup.png?v=1753858460" alt="Logo design 2" loading="lazy">
+        <img src="https://cdn.shopify.com/s/files/1/0675/9720/5546/files/Bird_Creator_Logo_concept-01.jpg?v=1753858456" alt="Logo design 3" loading="lazy">
       </div>
-      <div class="service-card">
-        <i class="fas fa-pen-nib"></i>
-        <h3 class="service-title">Website Listing & Content Writing</h3>
-        <div class="service-details">
-          We provide expertly crafted website listings and SEO-optimized content writing to enhance your online presence, engaging visitors with compelling narratives and effective calls-to-action.
-        </div>
+    </section>
+
+    <div id="lets-talk" onclick="redirectToWhatsApp()">Let's Talk</div>
+    <footer>
+      <img src="https://cdn.shopify.com/s/files/1/0675/9720/5546/files/white.png?v=1753857144" alt="Drwup Logo" style="height: 32px;" loading="lazy">
+      <ul>
+        <li><a href="#services">Our Services</a></li>
+        <li><a href="#logos">Our Logos</a></li>
+      </ul>
+      <div>
+        <p>All rights reserved. Drwup &copy; 2025</p>
+        <p>Proudly Made in India 🇮🇳</p>
       </div>
-    </div>
-  </section>
-  <section id="portfolio">
-    <h2 class="section-title">Our Masterpieces</h2>
-    <div class="portfolio-grid reveal">
-      <div class="portfolio-item" data-project="beingmuslims">
-        <img src="https://cdn.shopify.com/s/files/1/0675/9720/5546/files/Screenshot_2025-07-26_190511.png?v=1753536939" alt="BeingMuslims.com Website" loading="lazy">
-        <div class="portfolio-overlay">Explore BeingMuslims.com</div>
-      </div>
-      <div class="portfolio-item" data-project="premium-single-page">
-        <img src="https://cdn.shopify.com/s/files/1/0675/9720/5546/files/Screenshot_2025-07-26_191220.png?v=1753537359" alt="Premium Single-Page Website" loading="lazy">
-        <div class="portfolio-overlay">Unveil Premium Single-Page</div>
-      </div>
-    </div>
-    <div class="portfolio-modal" id="project-beingmuslims">
-      <div class="modal-content">
-        <i class="fas fa-times modal-close" onclick="closeModal('beingmuslims')"></i>
-        <img src="https://cdn.shopify.com/s/files/1/0675/9720/5546/files/Screenshot_2025-07-26_190511.png?v=1753536939" alt="BeingMuslims.com Website" loading="lazy">
-        <h3>BeingMuslims.com</h3>
-        <p>A vibrant, culturally rich e-commerce realm crafted for BeingMuslims.com, featuring responsive magic, seamless navigation, and dazzling visuals. Our wizards conjured a unique digital experience with custom animations, optimized listings, and a user-centric interface to elevate the brand's online presence.</p>
-        <a href="https://beingmuslims.com" target="_blank">Enter the Portal</a>
-      </div>
-    </div>
-    <div class="portfolio-modal" id="project-premium-single-page">
-      <div class="modal-content">
-        <i class="fas fa-times modal-close" onclick="closeModal('premium-single-page')"></i>
-        <img src="https://cdn.shopify.com/s/files/1/0675/9720/5546/files/Screenshot_2025-07-26_191220.png?v=1753537359" alt="Premium Single-Page Website" loading="lazy">
-        <h3>Premium Single-Page Realm</h3>
-        <p>A sleek, high-impact single-page universe designed to mesmerize and convert. With bold visuals, fluid animations, and a streamlined experience, this premium creation showcases the pinnacle of modern web sorcery, optimized for all devices.</p>
-        <a href="#" target="_blank">Enter the Realm</a>
-      </div>
-    </div>
-  </section>
-  <section id="pricing">
-    <h2 class="section-title">Our Pricing Plans</h2>
-    <div class="pricing-grid reveal">
-      <div class="pricing-card">
-        <h3 class="pricing-title">Basic Ecommerce</h3>
-        <div class="pricing-price">₹7999</div>
-        <ul class="pricing-details">
-          <li>Development Charges</li>
-          <li>10 Product Listings Free</li>
-          <li>SEO Friendly</li>
-          <li>Built on Shopify Basic Design</li>
-          <li>Shopify Monthly Rental Applies</li>
-        </ul>
-        <button class="pricing-button" 
-                data-package="Basic Ecommerce" 
-                data-price="₹7999" 
-                data-details="Development Charges, 10 Product Listings Free, SEO Friendly, Built on Shopify Basic Design, Shopify Monthly Rental Applies">Get Started</button>
-      </div>
-      <div class="pricing-card popular">
-        <h3 class="pricing-title">Custom Ecommerce</h3>
-        <div class="pricing-price">₹9999</div>
-        <ul class="pricing-details">
-          <li>Development Charges</li>
-          <li>30 Product Listings Free</li>
-          <li>SEO Friendly</li>
-          <li>Built on Shopify Customized Design</li>
-          <li>Shopify Monthly Rental Applies</li>
-        </ul>
-        <button class="pricing-button" 
-                data-package="Custom Ecommerce" 
-                data-price="₹9999" 
-                data-details="Development Charges, 30 Product Listings Free, SEO Friendly, Built on Shopify Customized Design, Shopify Monthly Rental Applies">Get Started</button>
-      </div>
-      <div class="pricing-card">
-        <h3 class="pricing-title">Premium Ecommerce</h3>
-        <div class="pricing-price">₹24999</div>
-        <ul class="pricing-details">
-          <li>Development Charges</li>
-          <li>50 Product Listings Free</li>
-          <li>SEO Friendly</li>
-          <li>Built on Shopify Premium Design</li>
-          <li>Shopify Monthly Rental Applies</li>
-        </ul>
-        <button class="pricing-button" 
-                data-package="Premium Ecommerce" 
-                data-price="₹24999" 
-                data-details="Development Charges, 50 Product Listings Free, SEO Friendly, Built on Shopify Premium Design, Shopify Monthly Rental Applies">Get Started</button>
-      </div>
-    </div>
-  </section>
-  <section id="faq">
-    <h2 class="section-title">Mystic FAQs</h2>
-    <div class="faq-item reveal">
-      <strong>How long does a project take?</strong>
-      <div class="faq-answer">Typically 3–10 days, depending on the spell's complexity.</div>
-    </div>
-    <div class="faq-item reveal">
-      <strong>What platforms do you work on?</strong>
-      <div class="faq-answer">Shopify, WordPress, and bespoke digital realms.</div>
-    </div>
-    <div class="faq-item reveal">
-      <strong>Do you offer content writing services?</strong>
-      <div class="faq-answer">Yes! We wield the pen for listings and enchanting content.</div>
-    </div>
-  </section>
-  <section id="contact" class="contact-section">
-    <h2 class="section-title">Get in Touch</h2>
-    <div class="contact-form">
-      <input type="text" placeholder="Your Name" required>
-      <input type="tel" placeholder="Your Number" required>
-      <textarea placeholder="Your Query" rows="4" required></textarea>
-      <button id="sendToWizualzBtn">Send to Team Wizualz</button>
-    </div>
-  </section>
-  <footer>
-    <div class="footer-wave"></div>
-    <div class="footer-grid">
-      <div class="footer-column">
-        <a href="#">
-          <img src="https://cdn.shopify.com/s/files/1/0675/9720/5546/files/wizualz_logoTT.png?v=1753530834" alt="Wizualz Logo" loading="lazy">
-        </a>
-        <p>Wizualz is a mystical studio weaving impactful designs, clean code, and bold narratives into digital magic.</p>
-      </div>
-      <div class="footer-column">
-        <h3 class="footer-title">About Our Craft</h3>
-        <p>We are a coven of creators dedicated to conjuring digital experiences that elevate brands with innovation and artistry.</p>
-      </div>
-      <div class="footer-column">
-        <h3 class="footer-title">Quick Portals</h3>
-        <div class="footer-links">
-          <ul>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#portfolio">Portfolio</a></li>
-            <li><a href="#pricing">Pricing</a></li>
-            <li><a href="#faq">FAQs</a></li>
-            <li><a href="#contact">Contact</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-column">
-        <h3 class="footer-title">Contact Us</h3>
-        <div class="contact-item">
-          <i class="fas fa-phone"></i>
-          <a href="tel:+919321234524" class="contact-link">+91 932 12345 24</a>
-        </div>
-        <div class="contact-item">
-          <i class="fas fa-envelope"></i>
-          <a href="mailto:enquiry@wizualz.com" class="contact-link">enquiry@wizualz.com</a>
-        </div>
-        <div class="contact-item">
-          <i class="fas fa-map-marker-alt"></i>
-          <a href="https://maps.google.com/?q=Chembur+Vashinaka,+Mahada+Colony" target="_blank" class="contact-link">Chembur Vashinaka, Mahada Colony</a>
-        </div>
-      </div>
-      <div class="footer-column">
-        <h3 class="footer-title">Follow Our Magic</h3>
-        <div class="social-icons">
-          <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
-          <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
-          <a href="#" target="_blank"><i class="fab fa-x-twitter"></i></a>
-          <a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-        </div>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      © 2025 Wizualz. All rights reserved. | <a href="#">Privacy Scroll</a> | <a href="#">Terms of Magic</a> | Website design by Team Wizualz (Shehbaz)
-    </div>
-  </footer>
-  <script defer src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
+    </footer>
+  </div>
+
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      try {
-        const isMobile = window.matchMedia('(max-width: 767px)').matches;
-        const isCoarse = window.matchMedia('(pointer: coarse)').matches;
+    function toggleMenu() {
+      const menu = document.getElementById('menu');
+      const hamburger = document.querySelector('.hamburger');
+      const isExpanded = menu.style.display === 'flex';
+      menu.style.display = isExpanded ? 'none' : 'flex';
+      hamburger.setAttribute('aria-expanded', !isExpanded);
+    }
 
-        // Particles Animation
-        if (typeof particlesJS === 'function') {
-          particlesJS('hero-particles', {
-            particles: {
-              number: { value: 50, density: { enable: true, value_area: 800 } },
-              color: { value: ['#00ffcc', '#ff00ff', '#ffcc00'] },
-              shape: { type: 'circle' },
-              opacity: { value: 0.5, random: true },
-              size: { value: 4, random: true },
-              line_linked: { enable: true, distance: 150, color: '#00ffcc', opacity: 0.4, width: 1 },
-              move: { enable: true, speed: 2, direction: 'none', random: true, out_mode: 'out', attract: { enable: true, rotateX: 600, rotateY: 1200 } }
-            },
-            interactivity: {
-              detect_on: 'canvas',
-              events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' } },
-              modes: { repulse: { distance: 150 }, push: { particles_nb: 4 } }
-            },
-            retina_detect: true
-          });
-        }
-
-        // Tilt Effect
-        if (typeof VanillaTilt === 'function') {
-          VanillaTilt.init(document.querySelectorAll('.service-card, .pricing-card'), {
-            max: 15,
-            speed: 400,
-            glare: true,
-            'max-glare': 0.4
-          });
-        }
-
-        const lottiePlayer = document.querySelector('lottie-player');
-        if (isMobile) {
-          lottiePlayer.addEventListener('error', () => {
-            document.querySelector('.hero img.hero-image').style.display = 'block';
-            lottiePlayer.style.display = 'none';
-          });
-        }
-
-        const observer = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              entry.target.style.opacity = 1;
-              entry.target.style.transform = 'translateY(0)';
-              observer.unobserve(entry.target);
-            }
-          });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('.reveal').forEach(el => {
-          el.style.opacity = 0;
-          el.style.transform = 'translateY(50px)';
-          el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-          observer.observe(el);
-        });
-
-        const cursor = document.querySelector('.custom-cursor');
-        let mouseX = 0, mouseY = 0;
-        const trails = [];
-
-        if (!isCoarse) {
-          document.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-            cursor.style.display = 'block';
-            const trail = document.createElement('div');
-            trail.className = 'custom-cursor trail';
-            trail.style.left = `${mouseX}px`;
-            trail.style.top = `${mouseY}px`;
-            document.body.appendChild(trail);
-            trails.push(trail);
-            if (trails.length > 5) {
-              const oldTrail = trails.shift();
-              oldTrail.remove();
-            }
-          });
-
-          function animateCursor() {
-            cursor.style.transform = `translate(${mouseX}px, ${mouseY}px) rotate(${Date.now() / 10 % 360}deg)`;
-            requestAnimationFrame(animateCursor);
-          }
-          animateCursor();
-
-          document.querySelectorAll('a, button, .service-card, .portfolio-item, .faq-item, .modal-close, .contact-link, .pricing-card, .pricing-button').forEach(el => {
-            el.addEventListener('mouseenter', () => {
-              cursor.classList.add('interactive');
-            });
-            el.addEventListener('mouseleave', () => {
-              cursor.classList.remove('interactive');
-            });
-          });
-        }
-
-        // Mobile menu toggle
-        function toggleMenu() {
-          const nav = document.getElementById('navbar');
-          if (nav) {
-            nav.classList.toggle('active');
-          } else {
-            console.error('Navigation element not found');
-          }
-        }
-        document.querySelector('.mobile-menu-icon').addEventListener('click', (e) => {
-          e.stopPropagation();
-          toggleMenu();
-        });
-
-        // Navigation link handler
-        document.querySelectorAll('#navbar a').forEach(link => {
-          link.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            const targetId = link.getAttribute('href').substring(1);
-            const targetSection = document.getElementById(targetId);
-            if (targetSection) {
-              const headerHeight = document.querySelector('header').offsetHeight || 70;
-              const targetPosition = targetSection.getBoundingClientRect().top + window.scrollY - headerHeight - 20;
-              window.scrollTo({ top: targetPosition, behavior: 'smooth' });
-              console.log(`Navigating to section: ${targetId}, Target position: ${targetPosition}`);
-              if (isMobile) {
-                const nav = document.getElementById('navbar');
-                if (nav) nav.classList.remove('active');
-              }
-            } else {
-              console.error(`Section with ID ${targetId} not found`);
-            }
-          });
-        });
-
-        // Pricing button handler for WhatsApp redirect
-        document.querySelectorAll('.pricing-button').forEach(button => {
-          button.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            const packageName = button.getAttribute('data-package');
-            const price = button.getAttribute('data-price');
-            const details = button.getAttribute('data-details');
-            console.log(`Pricing button clicked for: ${packageName}`);
-            const whatsappMessage = encodeURIComponent(
-              `Hello Team Wizualz,\nI'm interested in the ${packageName} package.\nPrice: ${price}\nDetails: ${details}\nSent at: ${new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })}`
-            );
-            const whatsappUrl = `https://wa.me/919321234524?text=${whatsappMessage}`;
-            window.location.href = whatsappUrl;
-          });
-        });
-
-        // Portfolio item handler
-        document.querySelectorAll('.portfolio-item').forEach(item => {
-          item.addEventListener('click', (e) => {
-            e.stopPropagation();
-            const projectId = item.getAttribute('data-project');
-            if (projectId) {
-              console.log(`Opening modal for project: ${projectId}`);
-              openModal(projectId);
-            }
-          });
-        });
-
-        document.querySelectorAll('.service-card').forEach(card => {
-          card.addEventListener('click', (e) => {
-            if (e.target.tagName === 'A') return;
-            e.stopPropagation();
-            const details = card.querySelector('.service-details');
-            const isActive = card.classList.contains('active');
-            document.querySelectorAll('.service-card').forEach(c => {
-              c.classList.remove('active');
-              c.querySelector('.service-details').style.maxHeight = '0';
-              c.querySelector('.service-details').style.opacity = '0';
-              c.querySelector('.service-details').style.paddingTop = '0';
-            });
-            if (!isActive) {
-              card.classList.add('active');
-              details.style.maxHeight = details.scrollHeight + 'px';
-              details.style.opacity = '1';
-              details.style.paddingTop = '15px';
-            }
-          });
-        });
-
-        document.querySelectorAll('.faq-item').forEach(item => {
-          item.addEventListener('click', (e) => {
-            e.stopPropagation();
-            const isActive = item.classList.contains('active');
-            document.querySelectorAll('.faq-item').forEach(i => {
-              i.classList.remove('active');
-              i.querySelector('.faq-answer').style.display = 'none';
-            });
-            if (!isActive) {
-              item.classList.add('active');
-              item.querySelector('.faq-answer').style.display = 'block';
-            }
-          });
-        });
-
-        function openModal(projectId) {
-          const modal = document.getElementById(`project-${projectId}`);
-          if (modal) {
-            modal.classList.add('active');
-            modal.querySelector('.modal-content').style.opacity = 0;
-            modal.querySelector('.modal-content').style.transform = 'scale(0.8)';
-            setTimeout(() => {
-              modal.querySelector('.modal-content').style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-              modal.querySelector('.modal-content').style.opacity = 1;
-              modal.querySelector('.modal-content').style.transform = 'scale(1)';
-            }, 10);
-            document.body.style.overflow = 'hidden';
-          } else {
-            console.error(`Modal for project ${projectId} not found`);
-          }
-        }
-
-        function closeModal(projectId) {
-          const modal = document.getElementById(`project-${projectId}`);
-          if (modal) {
-            modal.querySelector('.modal-content').style.opacity = 0;
-            modal.querySelector('.modal-content').style.transform = 'scale(0.8)';
-            setTimeout(() => {
-              modal.classList.remove('active');
-              document.body.style.overflow = '';
-            }, 400);
-          } else {
-            console.error(`Modal for project ${projectId} not found`);
-          }
-        }
-
-        document.querySelectorAll('.modal-close').forEach(closeBtn => {
-          closeBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            const match = closeBtn.getAttribute('onclick').match(/closeModal\('([^']+)'\)/);
-            if (match) {
-              const projectId = match[1];
-              closeModal(projectId);
-            }
-          });
-        });
-
-        // Contact Form Handler
-        const sendButton = document.getElementById('sendToWizualzBtn');
-        if (sendButton) {
-          sendButton.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            const name = document.querySelector('.contact-form input[placeholder="Your Name"]').value.trim();
-            const number = document.querySelector('.contact-form input[placeholder="Your Number"]').value.trim();
-            const query = document.querySelector('.contact-form textarea[placeholder="Your Query"]').value.trim();
-
-            if (name && number && query) {
-              const whatsappMessage = encodeURIComponent(`Hello Team Wizualz,\nName: ${name}\nNumber: ${number}\nQuery: ${query}\nSent at: ${new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })}`);
-              const whatsappUrl = `https://wa.me/919321234524?text=${whatsappMessage}`;
-              window.location.href = whatsappUrl;
-            } else {
-              alert('Please fill in all fields before submitting.');
-            }
-          });
-        } else {
-          console.error('Send button not found!');
-        }
-      } catch (error) {
-        console.error('Error in script execution:', error);
+    function handleKeydown(event) {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        toggleMenu();
       }
+    }
+
+    function redirectToWhatsApp() {
+      try {
+        window.open('https://wa.me/919987876738', '_blank');
+      } catch (error) {
+        console.error('Error redirecting to WhatsApp:', error);
+        alert('An error occurred. Please try again.');
+      }
+    }
+
+    // Custom cursor
+    const cursor = document.querySelector('.custom-cursor');
+    document.addEventListener('mousemove', (e) => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
     });
+
+    const hoverables = document.querySelectorAll('a, button, .table-card, #lets-talk');
+    hoverables.forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        cursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
+      });
+      el.addEventListener('mouseleave', () => {
+        cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+      });
+    });
+
+    // Enhanced GSAP Services Animation
+    gsap.registerPlugin(ScrollTrigger);
+    gsap.utils.toArray('.table-card').forEach((card, i) => {
+      gsap.fromTo(card, {
+        opacity: 0,
+        y: 50,
+        scale: 0.9,
+        rotation: -5
+      }, {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        rotation: 0,
+        duration: 0.8,
+        delay: i * 0.2,
+        ease: "back.out(1.7)",
+        scrollTrigger: {
+          trigger: card,
+          start: "top 90%",
+          toggleActions: "play none none none",
+          markers: false
+        }
+      });
+    });
+
+    // Fallback to show cards if GSAP fails
+    document.addEventListener('DOMContentLoaded', () => {
+      gsap.utils.toArray('.table-card').forEach(card => {
+        if (card.style.opacity === '0') {
+          card.style.opacity = '1';
+          card.style.transform = 'translateY(0) scale(1) rotate(0)';
+        }
+      });
+    });
+
+    // Show "Let's Talk" after 5 seconds
+    setTimeout(() => {
+      const letsTalk = document.getElementById('lets-talk');
+      if (letsTalk) letsTalk.classList.add('visible');
+    }, 5000);
   </script>
 </body>
 </html>
