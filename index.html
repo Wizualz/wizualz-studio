@@ -99,17 +99,6 @@
       transform: rotate(10deg) scale(1.15);
       filter: drop-shadow(0 0 10px #ff00ff);
     }
-    .mobile-menu-icon {
-      display: none;
-      color: #00ffcc;
-      font-size: 24px;
-      cursor: pointer;
-      text-shadow: 0 0 5px #ff00ff;
-      transition: transform 0.3s ease;
-    }
-    .mobile-menu-icon:hover {
-      transform: scale(1.2);
-    }
     nav {
       display: flex;
       align-items: center;
@@ -140,6 +129,17 @@
     }
     nav a:hover::after {
       width: 100%;
+    }
+    .mobile-menu-icon {
+      display: none;
+      color: #00ffcc;
+      font-size: 24px;
+      cursor: pointer;
+      text-shadow: 0 0 5px #ff00ff;
+      transition: transform 0.3s ease;
+    }
+    .mobile-menu-icon:hover {
+      transform: scale(1.2);
     }
     section {
       padding: 30px 15px;
@@ -362,7 +362,7 @@
     }
     .portfolio-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 400px));
+      grid-template-columns: repeat(auto-fit, minmax(200px, 350px));
       gap: 25px;
       padding: 20px 0;
       max-width: 1100px;
@@ -737,10 +737,6 @@
       .service-title { font-size: 20px; }
       .service-details { font-size: 15px; }
       .service-card.active .service-details { max-height: 220px; }
-      .portfolio-grid {
-        grid-template-columns: repeat(auto-fit, minmax(280px, 500px));
-        gap: 30px;
-      }
       .portfolio-overlay { font-size: 18px; }
       .modal-content { padding: 25px; max-width: 800px; }
       .modal-content h3 { font-size: 24px; }
@@ -779,8 +775,8 @@
       .service-title { font-size: 16px; }
       .service-details { font-size: 13px; }
       .portfolio-grid {
-        grid-template-columns: repeat(auto-fit, minmax(150px, 300px));
-        gap: 20px;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
       }
       .portfolio-overlay { font-size: 14px; }
       .modal-content { padding: 15px; max-height: 85vh; }
