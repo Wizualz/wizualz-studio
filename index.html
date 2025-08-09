@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Wizualz Studio</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" media="all" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" media="all">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Orbitron:wght@400;700&display=swap" media="all">
   <style>
     /* CSS Reset to prevent inherited white backgrounds */
@@ -14,19 +14,16 @@
       box-sizing: border-box;
       background: none !important;
     }
-
     @font-face {
       font-family: 'LED Dot-Matrix';
       src: url('https://cdn.shopify.com/s/files/1/0675/9720/5546/files/NothingDot-Regular.ttf?v=1753448201') format('truetype');
       font-display: swap;
     }
-
     @font-face {
       font-family: 'Neon';
       src: url('https://fonts.cdnfonts.com/s/288970/Neon.ttf') format('truetype');
       font-display: swap;
     }
-
     html, body {
       margin: 0;
       padding: 0;
@@ -38,12 +35,10 @@
       width: 100%;
       box-sizing: border-box;
     }
-
     @media (pointer: coarse) {
       html, body { cursor: auto; }
       .custom-cursor, .custom-cursor.trail { display: none !important; }
     }
-
     .custom-cursor {
       width: 20px;
       height: 20px;
@@ -74,7 +69,6 @@
       transform: translate(-50%, -50%) scale(1.8);
       box-shadow: 0 0 15px #ffcc00, 0 0 30px #00ffcc;
     }
-
     header {
       position: sticky;
       top: 0;
@@ -83,20 +77,20 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 15px 40px;
+      padding: 10px 30px;
       box-shadow: 0 0 15px #00ffcc66;
       backdrop-filter: blur(10px);
       border-bottom: 2px solid #ff00ff;
       width: 100%;
       box-sizing: border-box;
-      height: 70px;
+      height: 60px;
       animation: headerGlow 4s infinite alternate;
     }
     @keyframes headerGlow {
       to { box-shadow: 0 0 20px #ffcc00; }
     }
     header a.logo-link img {
-      width: 150px;
+      width: 120px;
       height: auto;
       transition: transform 0.3s ease, filter 0.3s ease;
       filter: drop-shadow(0 0 5px #00ffcc);
@@ -108,7 +102,7 @@
     .mobile-menu-icon {
       display: none;
       color: #00ffcc;
-      font-size: 28px;
+      font-size: 24px;
       cursor: pointer;
       text-shadow: 0 0 5px #ff00ff;
       transition: transform 0.3s ease;
@@ -122,14 +116,14 @@
     }
     nav a {
       color: #00ffcc;
-      margin: 0 20px;
+      margin: 0 15px;
       text-decoration: none;
       font-family: 'Orbitron', monospace;
       font-weight: 600;
       position: relative;
       text-transform: uppercase;
-      letter-spacing: 2px;
-      font-size: 16px;
+      letter-spacing: 1px;
+      font-size: 14px;
       text-shadow: 0 0 3px #ff00ff;
       cursor: pointer;
     }
@@ -147,9 +141,8 @@
     nav a:hover::after {
       width: 100%;
     }
-
     section {
-      padding: 40px 20px;
+      padding: 30px 15px;
       position: relative;
       width: 100%;
       box-sizing: border-box;
@@ -162,7 +155,7 @@
     }
     .hero {
       text-align: center;
-      padding-top: 60px;
+      padding-top: 50px;
       position: relative;
       overflow: hidden;
       width: 100%;
@@ -179,7 +172,7 @@
     }
     .hero h1 {
       font-family: 'Neon', 'LED Dot-Matrix', sans-serif;
-      font-size: 72px;
+      font-size: 60px;
       color: #00ffcc;
       text-shadow: 0 0 15px #00ffcc, 0 0 30px #ff00ff, 0 0 5px #ffcc00;
       margin: 0;
@@ -191,7 +184,7 @@
       50% { text-shadow: 0 0 10px #00ffcc, 0 0 20px #ff00ff; }
     }
     .hero p {
-      font-size: 18px;
+      font-size: 16px;
       color: #e0e0e0;
       max-width: 600px;
       margin: 20px auto;
@@ -202,14 +195,14 @@
     }
     .hero button {
       margin-top: 20px;
-      padding: 12px 30px;
+      padding: 10px 25px;
       border: 2px solid #ffcc00;
       background: linear-gradient(45deg, #ff00ff, #00ffcc);
       color: #fff;
       border-radius: 30px;
       font-family: 'Orbitron', monospace;
       font-weight: 700;
-      font-size: 16px;
+      font-size: 14px;
       transition: all 0.4s ease;
       box-shadow: 0 0 10px #ffcc00, 0 0 20px #00ffcc inset;
       text-transform: uppercase;
@@ -239,7 +232,7 @@
       height: 300px;
     }
     .hero img.hero-image {
-      width: 250px;
+      width: 200px;
       height: auto;
       margin: 0 auto;
       display: none;
@@ -248,17 +241,16 @@
       filter: drop-shadow(0 0 10px #00ffcc);
     }
     .hero lottie-player {
-      width: 400px;
-      height: 400px;
+      width: 300px;
+      height: 300px;
       margin: 0 auto;
       z-index: 1;
       position: relative;
       filter: drop-shadow(0 0 15px #ff00ff);
     }
-
     .section-title {
-      font-size: 36px;
-      margin-bottom: 30px;
+      font-size: 32px;
+      margin-bottom: 25px;
       font-family: 'Neon', 'Orbitron', monospace;
       color: #ffcc00;
       text-shadow: 0 0 10px #ffcc00, 0 0 20px #ff00ff;
@@ -272,11 +264,10 @@
     @keyframes titlePulse {
       to { text-shadow: 0 0 15px #ffcc00, 0 0 25px #00ffcc; }
     }
-
     .services-grid {
       display: flex;
       flex-direction: column;
-      gap: 25px;
+      gap: 20px;
       max-width: 1100px;
       margin: 0 auto;
       width: 100%;
@@ -284,7 +275,7 @@
     }
     .service-card {
       border: 2px solid #00ffcc;
-      padding: 20px;
+      padding: 15px;
       border-radius: 15px;
       background: linear-gradient(135deg, #1a0033, #0a0020) !important;
       box-shadow: 0 0 20px #00ffcc33, 0 0 10px #ff00ff inset;
@@ -314,14 +305,14 @@
       box-shadow: 0 0 30px #00ffcc, 0 0 15px #ff00ff inset;
     }
     .service-card i {
-      font-size: 28px;
+      font-size: 24px;
       color: #ffcc00;
-      margin-bottom: 15px;
+      margin-bottom: 10px;
       text-shadow: 0 0 5px #ff00ff;
     }
     .service-title {
-      font-size: 20px;
-      margin: 0 0 15px;
+      font-size: 18px;
+      margin: 0 0 10px;
       color: #00ffcc;
       font-family: 'Orbitron', monospace;
       text-shadow: 0 0 3px #fff;
@@ -332,7 +323,7 @@
       transition: max-height 0.5s ease, opacity 0.3s ease, padding-top 0.3s ease;
       opacity: 0;
       color: #e0e0e0;
-      font-size: 15px;
+      font-size: 14px;
       line-height: 1.6;
       position: relative;
       z-index: 1;
@@ -340,17 +331,16 @@
     .service-card.active .service-details {
       max-height: 250px;
       opacity: 1;
-      padding-top: 15px;
+      padding-top: 10px;
     }
-
     .faq-item {
       background: linear-gradient(135deg, #1a0033, #0a0020) !important;
       border-left: 3px solid #ffcc00;
-      padding: 20px;
+      padding: 15px;
       border-radius: 10px;
       cursor: pointer;
       transition: all 0.4s ease;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
       width: 100%;
       box-sizing: border-box;
       box-shadow: 0 0 10px #00ffcc33;
@@ -363,22 +353,22 @@
     .faq-answer {
       display: none;
       color: #e0e0e0;
-      font-size: 14px;
-      padding-top: 15px;
+      font-size: 13px;
+      padding-top: 10px;
       text-shadow: 0 0 1px #fff;
     }
     .faq-item.active .faq-answer {
       display: block;
     }
-
     .portfolio-grid {
-      display: flex;
-      flex-direction: column;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 400px));
       gap: 25px;
       padding: 20px 0;
       max-width: 1100px;
       margin: 0 auto;
       width: 100%;
+      justify-content: center;
     }
     .portfolio-item {
       position: relative;
@@ -421,7 +411,7 @@
       justify-content: left;
       color: #fff;
       font-family: 'Neon', 'Orbitron', monospace;
-      font-size: 18px;
+      font-size: 16px;
       text-shadow: 0 0 10px #ffcc00, 0 0 5px #000;
       transition: opacity 0.4s ease;
       border-radius: 10px;
@@ -442,7 +432,7 @@
       z-index: 1002;
       justify-content: center;
       align-items: center;
-      padding: 20px;
+      padding: 15px;
       box-sizing: border-box;
       overflow-y: auto;
       animation: modalFadeIn 0.5s ease-out;
@@ -458,8 +448,8 @@
       background: linear-gradient(135deg, #1a0033, #0a0020) !important;
       border: 3px solid #ffcc00;
       border-radius: 15px;
-      padding: 25px;
-      max-width: 800px;
+      padding: 20px;
+      max-width: 700px;
       width: 100%;
       max-height: 90vh;
       overflow-y: auto;
@@ -473,10 +463,10 @@
     }
     .modal-close {
       position: absolute;
-      top: 15px;
-      right: 20px;
+      top: 10px;
+      right: 15px;
       color: #ff00ff;
-      font-size: 28px;
+      font-size: 24px;
       cursor: pointer;
       transition: transform 0.4s ease, color 0.4s ease;
       text-shadow: 0 0 10px #ffcc00;
@@ -489,7 +479,7 @@
       width: 100%;
       height: auto;
       border-radius: 10px;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
       object-fit: contain;
       max-width: 100%;
       background: #000;
@@ -499,27 +489,27 @@
     .modal-content h3 {
       font-family: 'Neon', 'Orbitron', monospace;
       color: #ffcc00;
-      font-size: 24px;
-      margin-bottom: 15px;
+      font-size: 22px;
+      margin-bottom: 10px;
       text-shadow: 0 0 10px #ff00ff;
     }
     .modal-content p {
       color: #e0e0e0;
-      font-size: 15px;
+      font-size: 14px;
       line-height: 1.7;
       text-shadow: 0 0 1px #fff;
     }
     .modal-content a {
       display: inline-block;
-      margin-top: 15px;
-      padding: 10px 25px;
+      margin-top: 10px;
+      padding: 8px 20px;
       border: 2px solid #ff00ff;
       background: linear-gradient(45deg, #00ffcc, #ffcc00);
       color: #fff;
       text-decoration: none;
       border-radius: 30px;
       font-family: 'Orbitron', monospace;
-      font-size: 16px;
+      font-size: 14px;
       transition: all 0.4s ease;
       box-shadow: 0 0 10px #ffcc00;
       cursor: pointer;
@@ -528,10 +518,9 @@
       transform: translateY(-3px);
       box-shadow: 0 0 20px #00ffcc;
     }
-
     footer {
       background: linear-gradient(135deg, #0a0020, #1a0033) !important;
-      padding: 50px 20px 30px;
+      padding: 40px 15px 25px;
       position: relative;
       width: 100%;
       box-sizing: border-box;
@@ -542,7 +531,7 @@
       top: 0;
       left: 0;
       width: 200%;
-      height: 60px;
+      height: 50px;
       background: url('data:image/svg+xml,%3Csvg viewBox="0 0 1440 320" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath d="M0,96L48,112C96,128,192,160,288,176C384,192,480,192,576,186.7C672,181,768,171,864,176C960,181,1056,203,1152,213.3C1248,224,1344,224,1392,224L1440,224V320H1392H1344H1248H1152H1056H960H864H768H672H576H480H384H288H192H96H48H0V96Z" fill="%23ff00ff33"%3E%3C/path%3E%3C/svg%3E');
       background-size: cover;
       animation: waveMove 8s infinite linear;
@@ -553,7 +542,7 @@
     .footer-grid {
       display: flex;
       flex-direction: column;
-      gap: 25px;
+      gap: 20px;
       max-width: 1100px;
       margin: 0 auto;
       width: 100%;
@@ -561,13 +550,13 @@
       z-index: 1;
     }
     .footer-column {
-      padding: 15px 0;
+      padding: 10px 0;
       text-align: left;
     }
     .footer-column img {
-      max-width: 180px;
+      max-width: 150px;
       height: auto;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
       display: block;
       filter: drop-shadow(0 0 10px #00ffcc);
       transition: transform 0.3s ease;
@@ -576,17 +565,17 @@
       transform: scale(1.15) rotate(5deg);
     }
     .footer-column p {
-      font-size: 14px;
+      font-size: 13px;
       line-height: 1.7;
       color: #e0e0e0;
       margin: 0;
       text-shadow: 0 0 1px #fff;
     }
     .footer-title {
-      font-size: 18px;
+      font-size: 16px;
       color: #ffcc00;
       font-family: 'Neon', 'Orbitron', monospace;
-      margin-bottom: 15px;
+      margin-bottom: 10px;
       border-bottom: 2px solid #ff00ff33;
       padding-bottom: 5px;
       text-shadow: 0 0 5px #00ccff;
@@ -597,19 +586,19 @@
       margin: 0;
     }
     .footer-links ul li {
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
     .footer-links ul li a, .contact-link {
       color: #00ffcc;
-      font-size: 14px;
+      font-size: 13px;
       text-decoration: none;
       transition: color 0.3s ease, text-shadow 0.3s ease;
       display: inline-flex;
       align-items: center;
-      gap: 10px;
-      padding: 10px;
-      min-height: 48px;
-      min-width: 48px;
+      gap: 8px;
+      padding: 8px;
+      min-height: 40px;
+      min-width: 40px;
       border-radius: 5px;
       text-shadow: 0 0 2px #ff00ff;
       cursor: pointer;
@@ -622,27 +611,27 @@
       display: flex;
       align-items: center;
       justify-content: left;
-      gap: 12px;
-      margin-bottom: 12px;
+      gap: 10px;
+      margin-bottom: 10px;
     }
     .contact-item i {
-      font-size: 16px;
+      font-size: 14px;
       color: #ff00ff;
       text-shadow: 0 0 5px #00ffcc;
     }
     .social-icons {
       display: flex;
-      gap: 15px;
+      gap: 12px;
       justify-content: left;
-      margin-top: 15px;
+      margin-top: 12px;
     }
     .social-icons a {
       color: #ffcc00;
-      font-size: 20px;
+      font-size: 18px;
       transition: all 0.3s ease;
-      padding: 10px;
-      min-height: 48px;
-      min-width: 48px;
+      padding: 8px;
+      min-height: 40px;
+      min-width: 40px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -658,17 +647,17 @@
     }
     .footer-bottom {
       text-align: center;
-      margin-top: 25px;
-      padding-top: 15px;
+      margin-top: 20px;
+      padding-top: 10px;
       border-top: 1px solid #ff00ff22;
       color: #999;
-      font-size: 13px;
+      font-size: 12px;
       text-shadow: 0 0 1px #fff;
     }
     .footer-bottom a {
       color: #ffcc00;
       text-decoration: none;
-      margin: 0 8px;
+      margin: 0 6px;
       transition: color 0.3s ease, text-shadow 0.3s ease;
       cursor: pointer;
     }
@@ -676,36 +665,34 @@
       color: #00ffcc;
       text-shadow: 0 0 10px #ff00ff;
     }
-
-    /* Contact Form Styles */
     .contact-section {
-      padding: 40px 20px;
+      padding: 30px 15px;
       background: linear-gradient(135deg, #1a0033, #0a0020) !important;
       text-align: center;
     }
     .contact-form {
-      max-width: 600px;
+      max-width: 500px;
       margin: 0 auto;
       display: flex;
       flex-direction: column;
-      gap: 15px;
+      gap: 12px;
     }
     .contact-form input,
     .contact-form textarea {
       width: 100%;
-      padding: 12px 15px;
+      padding: 10px 12px;
       border: none;
       border-bottom: 2px solid #00ffcc;
       background: rgba(26, 0, 51, 0.8);
       color: #fff;
       font-family: 'Orbitron', monospace;
-      font-size: 16px;
+      font-size: 14px;
       transition: border-color 0.3s ease, box-shadow 0.3s ease;
       border-radius: 0;
       outline: none;
     }
     .contact-form textarea {
-      min-height: 80px;
+      min-height: 70px;
       resize: vertical;
     }
     .contact-form input:focus,
@@ -715,15 +702,15 @@
     }
     .contact-form button {
       width: 100%;
-      padding: 12px;
-      margin-top: 15px;
+      padding: 10px;
+      margin-top: 12px;
       border: 2px solid #ffcc00;
       background: linear-gradient(45deg, #ff00ff, #00ffcc);
       color: #fff;
       border-radius: 30px;
       font-family: 'Orbitron', monospace;
       font-weight: 700;
-      font-size: 16px;
+      font-size: 14px;
       transition: all 0.4s ease;
       box-shadow: 0 0 10px #ffcc00;
       cursor: pointer;
@@ -732,112 +719,114 @@
       transform: translateY(-3px);
       box-shadow: 0 0 20px #00ffcc;
     }
-
     @media (min-width: 768px) {
-      header { padding: 20px 60px; }
-      header a.logo-link img { width: 180px; }
-      nav a { margin: 0 25px; font-size: 18px; }
-      .hero h1 { font-size: 88px; }
-      .hero p { font-size: 20px; max-width: 700px; }
-      .hero lottie-player { width: 450px; height: 450px; }
-      .hero button { padding: 15px 40px; font-size: 18px; }
-      .section-title { font-size: 42px; }
+      header { padding: 15px 50px; }
+      header a.logo-link img { width: 150px; }
+      nav a { margin: 0 20px; font-size: 16px; }
+      .hero h1 { font-size: 70px; }
+      .hero p { font-size: 18px; max-width: 700px; }
+      .hero lottie-player { width: 400px; height: 400px; }
+      .hero button { padding: 12px 30px; font-size: 16px; }
+      .section-title { font-size: 36px; }
       .services-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 30px;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 25px;
       }
-      .service-card { padding: 25px; }
-      .service-title { font-size: 22px; }
-      .service-details { font-size: 16px; }
+      .service-card { padding: 20px; }
+      .service-title { font-size: 20px; }
+      .service-details { font-size: 15px; }
       .service-card.active .service-details { max-height: 220px; }
       .portfolio-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(280px, 500px));
         gap: 30px;
       }
-      .portfolio-overlay { font-size: 20px; }
-      .modal-content { padding: 30px; }
-      .modal-content h3 { font-size: 26px; }
-      .modal-content p { font-size: 16px; }
-      .faq-item { padding: 25px; max-width: 900px; margin: 0 auto 25px; }
-      .faq-answer { font-size: 15px; }
+      .portfolio-overlay { font-size: 18px; }
+      .modal-content { padding: 25px; max-width: 800px; }
+      .modal-content h3 { font-size: 24px; }
+      .modal-content p { font-size: 15px; }
+      .faq-item { padding: 20px; max-width: 800px; margin: 0 auto 20px; }
+      .faq-answer { font-size: 14px; }
       .footer-grid {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
-        gap: 30px;
+        gap: 25px;
       }
     }
-
     @media (max-width: 767px) {
       nav {
         display: none;
         position: absolute;
-        top: 70px;
-        right: 20px;
+        top: 60px;
+        right: 15px;
         background: linear-gradient(135deg, rgba(26, 0, 51, 0.95), rgba(10, 0, 32, 0.95)) !important;
         border: 2px solid #ff00ff;
-        padding: 15px;
+        padding: 10px;
         border-radius: 10px;
         box-shadow: 0 0 10px #00ffcc66;
         flex-direction: column;
         z-index: 1001;
       }
       nav.active { display: flex; }
-      nav a { margin: 10px 0; font-size: 15px; }
+      nav a { margin: 8px 0; font-size: 13px; }
       .mobile-menu-icon { display: block; }
-      .hero h1 { font-size: 48px; }
-      .hero p { font-size: 16px; max-width: 90%; }
-      .hero lottie-player { width: 250px; height: 250px; }
-      .hero img.hero-image { width: 180px; }
-      .hero button { padding: 10px 25px; font-size: 14px; }
-      .section-title { font-size: 28px; margin-bottom: 25px; }
-      .service-title { font-size: 18px; }
-      .service-details { font-size: 14px; }
-      .portfolio-overlay { font-size: 16px; }
-      .modal-content { padding: 20px; max-height: 85vh; }
-      .modal-content img { margin-bottom: 15px; }
-      .modal-content h3 { font-size: 20px; }
-      .modal-content p { font-size: 14px; }
-      .modal-content a { padding: 8px 20px; font-size: 14px; }
-      .faq-item { padding: 15px; }
-      .faq-answer { font-size: 13px; }
-      .footer-column img { max-width: 140px; }
-      .footer-title { font-size: 16px; }
-      .footer-column p, .footer-links ul li a, .contact-link { font-size: 13px; }
-      .contact-item i { font-size: 15px; }
+      .hero h1 { font-size: 40px; }
+      .hero p { font-size: 14px; max-width: 90%; }
+      .hero lottie-player { width: 200px; height: 200px; }
+      .hero img.hero-image { width: 150px; }
+      .hero button { padding: 8px 20px; font-size: 12px; }
+      .section-title { font-size: 24px; margin-bottom: 20px; }
+      .service-title { font-size: 16px; }
+      .service-details { font-size: 13px; }
+      .portfolio-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 300px));
+        gap: 20px;
+      }
+      .portfolio-overlay { font-size: 14px; }
+      .modal-content { padding: 15px; max-height: 85vh; }
+      .modal-content img { margin-bottom: 10px; }
+      .modal-content h3 { font-size: 18px; }
+      .modal-content p { font-size: 13px; }
+      .modal-content a { padding: 6px 15px; font-size: 12px; }
+      .faq-item { padding: 12px; }
+      .faq-answer { font-size: 12px; }
+      .footer-column img { max-width: 120px; }
+      .footer-title { font-size: 14px; }
+      .footer-column p, .footer-links ul li a, .contact-link { font-size: 12px; }
+      .contact-item i { font-size: 13px; }
       .social-icons { justify-content: center; }
-      .social-icons a { font-size: 18px; }
+      .social-icons a { font-size: 16px; }
     }
   </style>
 </head>
 <body>
   <div class="custom-cursor"></div>
   <header>
-    <a href="#" class="logo-link">
-      <img src="https://cdn.shopify.com/s/files/1/0675/9720/5546/files/wizualz_logoTT.png?v=1753530834" alt="Wizualz Logo" loading="lazy" style="width: 150px; height: auto;">
+    <a href="#hero" class="logo-link">
+      <img src="https://cdn.shopify.com/s/files/1/0675/9720/5546/files/wizualz_logoTT.png?v=1753530834" alt="Wizualz Logo" loading="lazy" style="width: 120px; height: auto;">
     </a>
     <i class="fas fa-bars mobile-menu-icon"></i>
     <nav id="navbar">
       <a href="#services">Services</a>
       <a href="#portfolio">Portfolio</a>
-      <a href="#faq">FAQs</a>
+      <a href="#posters">Poster Designs</a>
+      <a href="#faqs">FAQs</a>
       <a href="#contact">Contact</a>
     </nav>
   </header>
-  <section class="hero">
+  <section id="hero" class="hero reveal">
     <div id="hero-particles"></div>
     <lottie-player src="https://assets5.lottiefiles.com/packages/lf20_qp1q7mct.json" background="transparent" speed="1" loop autoplay loading="lazy"></lottie-player>
     <img class="hero-image" src="https://cdn.shopify.com/s/files/1/0675/9720/5546/files/hero-static.webp" alt="Wizualz Hero" loading="lazy">
-    <h1 class="reveal">WE HAVE DIGITAL MAGIC</h1>
-    <p class="reveal">Wizualz transforms visions into stunning digital experiences with bold design and innovative tech.</p>
+    <h1>WE HAVE DIGITAL MAGIC</h1>
+    <p>Wizualz transforms visions into stunning digital experiences with bold design and innovative tech.</p>
     <button onclick="document.getElementById('portfolio').scrollIntoView({ behavior: 'smooth' })">Dive Into Our World</button>
   </section>
-  <section id="services">
+  <section id="services" class="reveal">
     <h2 class="section-title">Our Creative Services</h2>
-    <div class="services-grid reveal">
+    <div class="services-grid">
       <div class="service-card">
-        <i class="fas fa-globe"></i>
+        <i class="fas fa-shopping-cart"></i>
         <h3 class="service-title">Ecommerce Website Design</h3>
         <div class="service-details">
           We craft captivating e-commerce websites tailored to your brand, featuring seamless design and integration with platforms like Shopify and WooCommerce for a magical online shopping experience.
@@ -851,7 +840,7 @@
         </div>
       </div>
       <div class="service-card">
-        <i class="fas fa-pen-nib"></i>
+        <i class="fas fa-pen-fancy"></i>
         <h3 class="service-title">Website Listing & Content Writing</h3>
         <div class="service-details">
           We provide expertly crafted website listings and SEO-optimized content writing to enhance your online presence, engaging visitors with compelling narratives and effective calls-to-action.
@@ -859,30 +848,30 @@
       </div>
     </div>
   </section>
-  <section id="portfolio">
+  <section id="portfolio" class="reveal">
     <h2 class="section-title">Our Masterpieces</h2>
-    <div class="portfolio-grid reveal">
+    <div class="portfolio-grid">
       <div class="portfolio-item" data-project="beingmuslims">
         <img src="https://cdn.shopify.com/s/files/1/0675/9720/5546/files/Screenshot_2025-07-26_190511.png?v=1753536939" alt="BeingMuslims.com Website" loading="lazy">
         <div class="portfolio-overlay">Explore BeingMuslims.com</div>
       </div>
-      <div class="portfolio-item" data-project="premium-single-page">
+      <div class="portfolio-item" data-project="singlepage">
         <img src="https://cdn.shopify.com/s/files/1/0675/9720/5546/files/Screenshot_2025-07-26_191220.png?v=1753537359" alt="Premium Single-Page Website" loading="lazy">
         <div class="portfolio-overlay">Unveil Premium Single-Page</div>
       </div>
     </div>
-    <div class="portfolio-modal" id="project-beingmuslims">
+    <div id="project-beingmuslims" class="portfolio-modal">
       <div class="modal-content">
-        <i class="fas fa-times modal-close" onclick="closeModal('beingmuslims')"></i>
+        <span class="modal-close" onclick="closeModal('beingmuslims')">&times;</span>
         <img src="https://cdn.shopify.com/s/files/1/0675/9720/5546/files/Screenshot_2025-07-26_190511.png?v=1753536939" alt="BeingMuslims.com Website" loading="lazy">
         <h3>BeingMuslims.com</h3>
         <p>A vibrant, culturally rich e-commerce realm crafted for BeingMuslims.com, featuring responsive magic, seamless navigation, and dazzling visuals. Our wizards conjured a unique digital experience with custom animations, optimized listings, and a user-centric interface to elevate the brand's online presence.</p>
         <a href="https://beingmuslims.com" target="_blank">Enter the Portal</a>
       </div>
     </div>
-    <div class="portfolio-modal" id="project-premium-single-page">
+    <div id="project-singlepage" class="portfolio-modal">
       <div class="modal-content">
-        <i class="fas fa-times modal-close" onclick="closeModal('premium-single-page')"></i>
+        <span class="modal-close" onclick="closeModal('singlepage')">&times;</span>
         <img src="https://cdn.shopify.com/s/files/1/0675/9720/5546/files/Screenshot_2025-07-26_191220.png?v=1753537359" alt="Premium Single-Page Website" loading="lazy">
         <h3>Premium Single-Page Realm</h3>
         <p>A sleek, high-impact single-page universe designed to mesmerize and convert. With bold visuals, fluid animations, and a streamlined experience, this premium creation showcases the pinnacle of modern web sorcery, optimized for all devices.</p>
@@ -890,22 +879,51 @@
       </div>
     </div>
   </section>
-  <section id="faq">
+  <section id="posters" class="reveal">
+    <h2 class="section-title">Poster Designs</h2>
+    <div class="portfolio-grid">
+      <div class="portfolio-item" data-project="poster1">
+        <img src="https://cdn.shopify.com/s/files/1/0675/9720/5546/files/Untitled-155.jpg?v=1754728066" alt="Poster 1" loading="lazy">
+        <div class="portfolio-overlay">View Poster 1</div>
+      </div>
+      <div class="portfolio-item" data-project="poster2">
+        <img src="https://cdn.shopify.com/s/files/1/0675/9720/5546/files/88888.jpg?v=1754728220" alt="Poster 2" loading="lazy">
+        <div class="portfolio-overlay">View Poster 2</div>
+      </div>
+    </div>
+    <div id="project-poster1" class="portfolio-modal">
+      <div class="modal-content">
+        <span class="modal-close" onclick="closeModal('poster1')">&times;</span>
+        <img src="https://cdn.shopify.com/s/files/1/0675/9720/5546/files/Untitled-155.jpg?v=1754728066" alt="Poster 1" loading="lazy">
+        <h3>Poster Design 1</h3>
+        <p>A vibrant poster design crafted with bold colors and dynamic visuals, perfect for capturing attention in marketing campaigns.</p>
+      </div>
+    </div>
+    <div id="project-poster2" class="portfolio-modal">
+      <div class="modal-content">
+        <span class="modal-close" onclick="closeModal('poster2')">&times;</span>
+        <img src="https://cdn.shopify.com/s/files/1/0675/9720/5546/files/88888.jpg?v=1754728220" alt="Poster 2" loading="lazy">
+        <h3>Poster Design 2</h3>
+        <p>An eye-catching poster with a modern aesthetic, designed to elevate brand visibility through striking typography and imagery.</p>
+      </div>
+    </div>
+  </section>
+  <section id="faqs" class="reveal">
     <h2 class="section-title">Mystic FAQs</h2>
-    <div class="faq-item reveal">
-      <strong>How long does a project take?</strong>
+    <div class="faq-item">
+      <h3>How long does a project take?</h3>
       <div class="faq-answer">Typically 3–10 days, depending on the spell's complexity.</div>
     </div>
-    <div class="faq-item reveal">
-      <strong>What platforms do you work on?</strong>
+    <div class="faq-item">
+      <h3>What platforms do you work on?</h3>
       <div class="faq-answer">Shopify, WordPress, and bespoke digital realms.</div>
     </div>
-    <div class="faq-item reveal">
-      <strong>Do you offer content writing services?</strong>
+    <div class="faq-item">
+      <h3>Do you offer content writing services?</h3>
       <div class="faq-answer">Yes! We wield the pen for listings and enchanting content.</div>
     </div>
   </section>
-  <section id="contact" class="contact-section">
+  <section id="contact" class="contact-section reveal">
     <h2 class="section-title">Get in Touch</h2>
     <div class="contact-form">
       <input type="text" placeholder="Your Name" required>
@@ -918,25 +936,22 @@
     <div class="footer-wave"></div>
     <div class="footer-grid">
       <div class="footer-column">
-        <a href="#">
-          <img src="https://cdn.shopify.com/s/files/1/0675/9720/5546/files/wizualz_logoTT.png?v=1753530834" alt="Wizualz Logo" loading="lazy">
-        </a>
+        <img src="https://cdn.shopify.com/s/files/1/0675/9720/5546/files/wizualz_logoTT.png?v=1753530834" alt="Wizualz Logo" loading="lazy">
         <p>Wizualz is a mystical studio weaving impactful designs, clean code, and bold narratives into digital magic.</p>
       </div>
       <div class="footer-column">
         <h3 class="footer-title">About Our Craft</h3>
         <p>We are a coven of creators dedicated to conjuring digital experiences that elevate brands with innovation and artistry.</p>
       </div>
-      <div class="footer-column">
+      <div class="footer-column footer-links">
         <h3 class="footer-title">Quick Portals</h3>
-        <div class="footer-links">
-          <ul>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#portfolio">Portfolio</a></li>
-            <li><a href="#faq">FAQs</a></li>
-            <li><a href="#contact">Contact</a></li>
-          </ul>
-        </div>
+        <ul>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#portfolio">Portfolio</a></li>
+          <li><a href="#posters">Poster Designs</a></li>
+          <li><a href="#faqs">FAQs</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
       </div>
       <div class="footer-column">
         <h3 class="footer-title">Contact Us</h3>
@@ -950,21 +965,19 @@
         </div>
         <div class="contact-item">
           <i class="fas fa-map-marker-alt"></i>
-          <a href="https://maps.google.com/?q=Chembur+Vashinaka,+Mahada+Colony" target="_blank" class="contact-link">Chembur Vashinaka, Mahada Colony</a>
+          <span class="contact-link">Chembur Vashinaka, Mahada Colony</span>
         </div>
-      </div>
-      <div class="footer-column">
         <h3 class="footer-title">Follow Our Magic</h3>
         <div class="social-icons">
           <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
           <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
-          <a href="#" target="_blank"><i class="fab fa-x-twitter"></i></a>
           <a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
         </div>
       </div>
     </div>
     <div class="footer-bottom">
-      © 2025 Wizualz. All rights reserved. | <a href="#">Privacy Scroll</a> | <a href="#">Terms of Magic</a> | Website design by Team Wizualz (Shehbaz)
+      <p>© 2025 Wizualz. All rights reserved. | <a href="#">Privacy Scroll</a> | <a href="#">Terms of Magic</a> | Website design by Team Wizualz (Shehbaz)</p>
     </div>
   </footer>
   <script defer src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
@@ -974,9 +987,7 @@
     document.addEventListener('DOMContentLoaded', () => {
       const isMobile = window.matchMedia('(max-width: 767px)').matches;
       const isCoarse = window.matchMedia('(pointer: coarse)').matches;
-      const headerHeight = document.querySelector('header')?.offsetHeight || 70;
-
-      // Particles Animation
+      const headerHeight = document.querySelector('header')?.offsetHeight || 60;
       if (typeof particlesJS === 'function') {
         particlesJS('hero-particles', {
           particles: {
@@ -996,8 +1007,6 @@
           retina_detect: true
         });
       }
-
-      // Tilt Effect
       if (typeof VanillaTilt === 'function') {
         VanillaTilt.init(document.querySelectorAll('.service-card'), {
           max: 15,
@@ -1006,7 +1015,6 @@
           'max-glare': 0.4
         });
       }
-
       const lottiePlayer = document.querySelector('lottie-player');
       if (isMobile) {
         lottiePlayer.addEventListener('error', () => {
@@ -1014,7 +1022,6 @@
           lottiePlayer.style.display = 'none';
         });
       }
-
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
@@ -1024,18 +1031,15 @@
           }
         });
       }, { threshold: 0.1 });
-
       document.querySelectorAll('.reveal').forEach(el => {
         el.style.opacity = 0;
         el.style.transform = 'translateY(50px)';
         el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
         observer.observe(el);
       });
-
       const cursor = document.querySelector('.custom-cursor');
       let mouseX = 0, mouseY = 0;
       const trails = [];
-
       if (!isCoarse) {
         document.addEventListener('mousemove', (e) => {
           mouseX = e.clientX;
@@ -1057,13 +1061,11 @@
             if (index > -1) trails.splice(index, 1);
           }, 500);
         });
-
         function animateCursor() {
           cursor.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
           requestAnimationFrame(animateCursor);
         }
         animateCursor();
-
         document.querySelectorAll('a, button, .service-card, .portfolio-item, .faq-item, .modal-close, .contact-link').forEach(el => {
           el.addEventListener('mouseenter', () => {
             cursor.classList.add('interactive');
@@ -1073,13 +1075,11 @@
           });
         });
       }
-
       function toggleMenu() {
         const nav = document.getElementById('navbar');
         nav.classList.toggle('active');
       }
       document.querySelector('.mobile-menu-icon').addEventListener('click', toggleMenu);
-
       document.querySelectorAll('#navbar a').forEach(link => {
         link.addEventListener('click', (e) => {
           e.preventDefault();
@@ -1090,11 +1090,10 @@
           const targetSection = document.getElementById(targetId);
           if (targetSection) {
             targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            window.scrollBy(0, -headerHeight - 20); // Adjusted offset to show title
+            window.scrollBy(0, -headerHeight - 20);
           }
         });
       });
-
       document.querySelectorAll('.service-card').forEach(card => {
         card.addEventListener('click', (e) => {
           if (e.target.tagName === 'A') return;
@@ -1110,11 +1109,10 @@
             card.classList.add('active');
             details.style.maxHeight = details.scrollHeight + 'px';
             details.style.opacity = '1';
-            details.style.paddingTop = '15px';
+            details.style.paddingTop = '10px';
           }
         });
       });
-
       document.querySelectorAll('.faq-item').forEach(item => {
         item.addEventListener('click', () => {
           const isActive = item.classList.contains('active');
@@ -1128,7 +1126,6 @@
           }
         });
       });
-
       function openModal(projectId) {
         const modal = document.getElementById(`project-${projectId}`);
         if (modal) {
@@ -1143,7 +1140,6 @@
           document.body.style.overflow = 'hidden';
         }
       }
-
       function closeModal(projectId) {
         const modal = document.getElementById(`project-${projectId}`);
         if (modal) {
@@ -1155,14 +1151,12 @@
           }, 400);
         }
       }
-
-      document.querySelectorAll('.portfolio-item').forEach(item => {
+      document.querySelectorAll('.portfolio-item[data-project]').forEach(item => {
         item.addEventListener('click', () => {
           const projectId = item.getAttribute('data-project');
           if (projectId) openModal(projectId);
         });
       });
-
       document.querySelectorAll('.modal-close').forEach(closeBtn => {
         closeBtn.addEventListener('click', (e) => {
           e.preventDefault();
@@ -1173,19 +1167,16 @@
           }
         });
       });
-
-      // Enhanced Contact Form Handler
       const sendButton = document.getElementById('sendToWizualzBtn');
       if (sendButton) {
         sendButton.addEventListener('click', () => {
           const name = document.querySelector('.contact-form input[placeholder="Your Name"]').value.trim();
           const number = document.querySelector('.contact-form input[placeholder="Your Number"]').value.trim();
           const query = document.querySelector('.contact-form textarea[placeholder="Your Query"]').value.trim();
-
           if (name && number && query) {
             const whatsappMessage = encodeURIComponent(`Hello Team Wizualz,\nName: ${name}\nNumber: ${number}\nQuery: ${query}\nSent at: ${new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })}`);
             const whatsappUrl = `https://wa.me/919321234524?text=${whatsappMessage}`;
-            console.log('Attempting redirect to:', whatsappUrl); // Debug log
+            console.log('Attempting redirect to:', whatsappUrl);
             window.location.href = whatsappUrl;
           } else {
             alert('Please fill in all fields before submitting.');
@@ -1196,4 +1187,6 @@
       }
     });
   </script>
+</body>
+</html>
 
