@@ -134,8 +134,11 @@
             .section-title { font-size: 24px; margin-bottom: 20px; }
             .service-title { font-size: 16px; }
             .service-details { font-size: 13px; }
-            .portfolio-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
-            .portfolio-overlay { font-size: 14px; }
+            .portfolio-grid { display: flex; flex-direction: column; gap: 15px; padding: 20px 15px; }
+            .portfolio-grid.posters { display: flex; flex-direction: row; overflow-x: auto; gap: 15px; padding: 20px 15px; scroll-snap-type: x mandatory; }
+            .portfolio-item { width: 100%; max-width: 350px; margin: 0 auto; }
+            .portfolio-grid.posters .portfolio-item { flex: 0 0 auto; width: 200px; scroll-snap-align: start; }
+            .portfolio-overlay { font-size: 14px; padding-left: 10px; }
             .modal-content { padding: 15px; max-height: 85vh; }
             .modal-content img { margin-bottom: 10px; }
             .modal-content h3 { font-size: 18px; }
@@ -223,23 +226,23 @@
     <section id="portfolio" class="reveal">
         <h2 class="section-title">Our Masterpieces</h2>
         <div class="portfolio-grid">
-            <div class="portfolio-item">
+            <a href="https://www.beingmuslims.com" target="_blank" class="portfolio-item">
                 <img src="https://cdn.shopify.com/s/files/1/0675/9720/5546/files/Screenshot_2025-07-26_190511.png?v=1753536939" alt="BeingMuslims.com Website" loading="lazy">
-                <div class="portfolio-overlay">Explore BeingMuslims.com</div>
-            </div>
-            <div class="portfolio-item">
-                <img src="https://cdn.shopify.com/s/files/1/0675/9720/5546/files/Screenshot_2025-07-26_191220.png?v=1753537359" alt="Premium Single-Page Website" loading="lazy">
-                <div class="portfolio-overlay">Unveil Premium Single-Page</div>
-            </div>
-            <div class="portfolio-item">
-                <img src="https://cdn.shopify.com/s/files/1/0675/9720/5546/files/Screenshot_2025-08-15_192822.png?v=1755266520" alt="Website 3" loading="lazy">
-                <div class="portfolio-overlay">Discover Website 3</div>
-            </div>
+                <div class="portfolio-overlay">Visit BeingMuslims.com</div>
+            </a>
+            <a href="https://www.wizualz.com" target="_blank" class="portfolio-item">
+                <img src="https://cdn.shopify.com/s/files/1/0675/9720/5546/files/Screenshot_2025-07-26_191220.png?v=1753537359" alt="Wizualz.com Website" loading="lazy">
+                <div class="portfolio-overlay">Visit Wizualz.com</div>
+            </a>
+            <a href="https://www.drwup.com" target="_blank" class="portfolio-item">
+                <img src="https://cdn.shopify.com/s/files/1/0675/9720/5546/files/Screenshot_2025-08-15_192822.png?v=1755266520" alt="DrWup.com Website" loading="lazy">
+                <div class="portfolio-overlay">Visit DrWup.com</div>
+            </a>
         </div>
     </section>
     <section id="posters" class="reveal">
         <h2 class="section-title">Poster Designs</h2>
-        <div class="portfolio-grid">
+        <div class="portfolio-grid posters">
             <div class="portfolio-item">
                 <img src="https://cdn.shopify.com/s/files/1/0675/9720/5546/files/Untitled-155.jpg?v=1754728066" alt="Poster 1" loading="lazy">
                 <div class="portfolio-overlay">View Poster 1</div>
@@ -319,7 +322,7 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>© 2025 Wizualz. All rights reserved. | <a href="#">Privacy Scroll</a> | <a href="#">Terms of Magic</a> | Website design by Team Wizualz (Shehbaz)</p>
+            <p>© 2025 Wizualz. All rights reserved. | <a href="#">Privacy Scroll</a> | <a href="#">Terms of Magic</a> | Website design by Team Wizualz - <a href="https://www.wizualz.com">WWW.WIZUALZ.COM</a></p>
         </div>
     </footer>
     <script defer src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
