@@ -56,19 +56,16 @@
         .faq-answer { display: none; color: #e0e0e0; font-size: 13px; padding-top: 10px; text-shadow: 0 0 1px #fff; }
         .faq-item.active .faq-answer { display: block; }
         .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 350px)); gap: 25px; padding: 20px 0; max-width: 1100px; margin: 0 auto; width: 100%; justify-content: center; }
-        .portfolio-item { position: relative; overflow: hidden; border-radius: 15px; width: 100%; box-sizing: border-box; transition: transform 0.4s ease; cursor: pointer; }
-        .portfolio-item:hover { transform: scale(1.03) rotate(1deg); }
+        .portfolio-item { position: relative; overflow: hidden; border-radius: 15px; width: 100%; box-sizing: border-box; transition: transform 0.4s ease; }
         .portfolio-item img { width: 100%; height: auto; display: block; border-radius: 10px; box-shadow: 0 0 15px #00ffcc33; transition: transform 0.4s ease, filter 0.4s ease; object-fit: contain; max-width: 100%; background: #000; filter: brightness(1.1); }
         .portfolio-item:hover img { transform: scale(1.1); filter: brightness(1.3); }
-        .portfolio-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, rgba(0, 255, 204, 0.8), rgba(255, 0, 255, 0.6)); opacity: 0; display: flex; align-items: center; justify-content: left; color: #fff; font-family: 'Neon', 'Orbitron', monospace; font-size: 16px; text-shadow: 0 0 10px #ffcc00, 0 0 5px #000; transition: opacity 0.4s ease; border-radius: 10px; cursor: pointer; padding-left: 15px; }
+        .portfolio-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, rgba(0, 255, 204, 0.8), rgba(255, 0, 255, 0.6)); opacity: 0; display: flex; align-items: center; justify-content: left; color: #fff; font-family: 'Neon', 'Orbitron', monospace; font-size: 16px; text-shadow: 0 0 10px #ffcc00, 0 0 5px #000; transition: opacity 0.4s ease; border-radius: 10px; padding-left: 15px; }
         .portfolio-item:hover .portfolio-overlay { opacity: 1; }
         .portfolio-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle, rgba(0, 0, 0, 0.9), rgba(26, 0, 51, 0.95)) !important; z-index: 1002; justify-content: center; align-items: center; padding: 15px; box-sizing: border-box; overflow-y: auto; animation: modalFadeIn 0.5s ease-out; }
         @keyframes modalFadeIn { from { opacity: 0; } to { opacity: 1; } }
         .portfolio-modal.active { display: flex; }
         .modal-content { background: linear-gradient(135deg, #1a0033, #0a0020) !important; border: 3px solid #ffcc00; border-radius: 15px; padding: 20px; max-width: 700px; width: 100%; max-height: 90vh; overflow-y: auto; position: relative; box-shadow: 0 0 20px #00ffcc, 0 0 10px #ff00ff inset; animation: contentPop 0.5s ease-out; }
         @keyframes contentPop { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-        .modal-close { position: absolute; top: 10px; right: 15px; color: #ff00ff; font-size: 24px; cursor: pointer; transition: transform 0.4s ease, color 0.4s ease; text-shadow: 0 0 10px #ffcc00; }
-        .modal-close:hover { transform: rotate(180deg); color: #00ffcc; }
         .modal-content img { width: 100%; height: auto; border-radius: 10px; margin-bottom: 15px; object-fit: contain; max-width: 100%; background: #000; border: 2px solid #ffcc00; box-shadow: 0 0 15px #00ffcc; }
         .modal-content h3 { font-family: 'Neon', 'Orbitron', monospace; color: #ffcc00; font-size: 22px; margin-bottom: 10px; text-shadow: 0 0 10px #ff00ff; }
         .modal-content p { color: #e0e0e0; font-size: 14px; line-height: 1.7; text-shadow: 0 0 1px #fff; }
@@ -182,92 +179,74 @@
         <h2 class="section-title">Our Creative Services</h2>
         <div class="services-grid">
             <div class="service-card">
-                <i class="fas fa-shopping-cart"></i>
-                <h3 class="service-title">Ecommerce Website Design</h3>
-                <div class="service-details">We craft captivating e-commerce websites tailored to your brand, featuring seamless design and integration with platforms like Shopify and WooCommerce for a magical online shopping experience.</div>
+                <i class="fas fa-desktop"></i>
+                <h3 class="service-title">Website Design</h3>
+                <div class="service-details">We conjure stunning, responsive websites tailored to your brand, blending innovative design with seamless functionality to create magical digital experiences.</div>
             </div>
             <div class="service-card">
                 <i class="fas fa-camera"></i>
-                <h3 class="service-title">Product Photoshoot & Edit and All Type of Graphic Design</h3>
-                <div class="service-details">Our expert team delivers stunning product photoshoots, professional editing, and a wide range of graphic design services to create visually striking content for your digital and marketing needs.</div>
+                <h3 class="service-title">Product Photography & Editing</h3>
+                <div class="service-details">Our team captures high-quality product images and enhances them with professional editing, ensuring your products shine across all platforms.</div>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-paint-brush"></i>
+                <h3 class="service-title">All Types of Graphic Design</h3>
+                <div class="service-details">From logos to marketing collateral, we craft visually striking graphics that elevate your brand’s identity with creativity and precision.</div>
             </div>
             <div class="service-card">
                 <i class="fas fa-pen-fancy"></i>
-                <h3 class="service-title">Website Listing & Content Writing</h3>
-                <div class="service-details">We provide expertly crafted website listings and SEO-optimized content writing to enhance your online presence, engaging visitors with compelling narratives and effective calls-to-action.</div>
+                <h3 class="service-title">Content Writing</h3>
+                <div class="service-details">We weave compelling narratives and SEO-optimized content to engage your audience and boost your brand’s online presence.</div>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-list-alt"></i>
+                <h3 class="service-title">Product Listing</h3>
+                <div class="service-details">Our expertly crafted product listings optimize visibility and conversions, tailored for platforms like Shopify, Amazon, and more.</div>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-ad"></i>
+                <h3 class="service-title">Meta Marketing</h3>
+                <div class="service-details">We harness the power of Meta platforms to create targeted ad campaigns that drive engagement and maximize your brand’s reach.</div>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-chart-line"></i>
+                <h3 class="service-title">Performance Marketing</h3>
+                <div class="service-details">Our data-driven strategies optimize ad spend, delivering measurable results through PPC, retargeting, and performance-focused campaigns.</div>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-users"></i>
+                <h3 class="service-title">Social Media Management</h3>
+                <div class="service-details">We create and manage vibrant social media presences, crafting content that resonates and builds communities around your brand.</div>
             </div>
         </div>
     </section>
     <section id="portfolio" class="reveal">
         <h2 class="section-title">Our Masterpieces</h2>
         <div class="portfolio-grid">
-            <div class="portfolio-item" data-project="beingmuslims">
+            <div class="portfolio-item">
                 <img src="https://cdn.shopify.com/s/files/1/0675/9720/5546/files/Screenshot_2025-07-26_190511.png?v=1753536939" alt="BeingMuslims.com Website" loading="lazy">
                 <div class="portfolio-overlay">Explore BeingMuslims.com</div>
             </div>
-            <div class="portfolio-item" data-project="singlepage">
+            <div class="portfolio-item">
                 <img src="https://cdn.shopify.com/s/files/1/0675/9720/5546/files/Screenshot_2025-07-26_191220.png?v=1753537359" alt="Premium Single-Page Website" loading="lazy">
                 <div class="portfolio-overlay">Unveil Premium Single-Page</div>
             </div>
-            <div class="portfolio-item" data-project="website3">
+            <div class="portfolio-item">
                 <img src="https://cdn.shopify.com/s/files/1/0675/9720/5546/files/Screenshot_2025-08-15_192822.png?v=1755266520" alt="Website 3" loading="lazy">
                 <div class="portfolio-overlay">Discover Website 3</div>
-            </div>
-        </div>
-        <div id="project-beingmuslims" class="portfolio-modal">
-            <div class="modal-content">
-                <span class="modal-close" onclick="closeModal('beingmuslims')">&times;</span>
-                <img src="https://cdn.shopify.com/s/files/1/0675/9720/5546/files/Screenshot_2025-07-26_190511.png?v=1753536939" alt="BeingMuslims.com Website" loading="lazy">
-                <h3>BeingMuslims.com</h3>
-                <p>A vibrant, culturally rich e-commerce realm crafted for BeingMuslims.com, featuring responsive magic, seamless navigation, and dazzling visuals. Our wizards conjured a unique digital experience with custom animations, optimized listings, and a user-centric interface to elevate the brand's online presence.</p>
-                <a href="https://beingmuslims.com" target="_blank">Enter the Portal</a>
-            </div>
-        </div>
-        <div id="project-singlepage" class="portfolio-modal">
-            <div class="modal-content">
-                <span class="modal-close" onclick="closeModal('singlepage')">&times;</span>
-                <img src="https://cdn.shopify.com/s/files/1/0675/9720/5546/files/Screenshot_2025-07-26_191220.png?v=1753537359" alt="Premium Single-Page Website" loading="lazy">
-                <h3>Premium Single-Page Realm</h3>
-                <p>A sleek, high-impact single-page universe designed to mesmerize and convert. With bold visuals, fluid animations, and a streamlined experience, this premium creation showcases the pinnacle of modern web sorcery, optimized for all devices.</p>
-                <a href="#" target="_blank">Enter the Realm</a>
-            </div>
-        </div>
-        <div id="project-website3" class="portfolio-modal">
-            <div class="modal-content">
-                <span class="modal-close" onclick="closeModal('website3')">&times;</span>
-                <img src="https://cdn.shopify.com/s/files/1/0675/9720/5546/files/Screenshot_2025-08-15_192822.png?v=1755266520" alt="Website 3" loading="lazy">
-                <h3>Website 3</h3>
-                <p>An innovative digital experience crafted with cutting-edge design and seamless functionality. This website combines stunning visuals with intuitive navigation, optimized for engagement across all devices.</p>
-                <a href="#" target="_blank">Explore the Site</a>
             </div>
         </div>
     </section>
     <section id="posters" class="reveal">
         <h2 class="section-title">Poster Designs</h2>
         <div class="portfolio-grid">
-            <div class="portfolio-item" data-project="poster1">
+            <div class="portfolio-item">
                 <img src="https://cdn.shopify.com/s/files/1/0675/9720/5546/files/Untitled-155.jpg?v=1754728066" alt="Poster 1" loading="lazy">
                 <div class="portfolio-overlay">View Poster 1</div>
             </div>
-            <div class="portfolio-item" data-project="poster2">
+            <div class="portfolio-item">
                 <img src="https://cdn.shopify.com/s/files/1/0675/9720/5546/files/88888.jpg?v=1754728220" alt="Poster 2" loading="lazy">
                 <div class="portfolio-overlay">View Poster 2</div>
-            </div>
-        </div>
-        <div id="project-poster1" class="portfolio-modal">
-            <div class="modal-content">
-                <span class="modal-close" onclick="closeModal('poster1')">&times;</span>
-                <img src="https://cdn.shopify.com/s/files/1/0675/9720/5546/files/Untitled-155.jpg?v=1754728066" alt="Poster 1" loading="lazy">
-                <h3>Poster Design 1</h3>
-                <p>A vibrant poster design crafted with bold colors and dynamic visuals, perfect for capturing attention in marketing campaigns.</p>
-            </div>
-        </div>
-        <div id="project-poster2" class="portfolio-modal">
-            <div class="modal-content">
-                <span class="modal-close" onclick="closeModal('poster2')">&times;</span>
-                <img src="https://cdn.shopify.com/s/files/1/0675/9720/5546/files/88888.jpg?v=1754728220" alt="Poster 2" loading="lazy">
-                <h3>Poster Design 2</h3>
-                <p>An eye-catching poster with a modern aesthetic, designed to elevate brand visibility through striking typography and imagery.</p>
             </div>
         </div>
     </section>
@@ -332,9 +311,9 @@
                 </div>
                 <h3 class="footer-title">Follow Our Magic</h3>
                 <div class="social-icons">
-                    <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.facebook.com/profile.php?id=61578605763989" target="_blank"><i class="fab fa-facebook-f"></i></a>
                     <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
-                    <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.instagram.com/wizualzofficial/" target="_blank"><i class="fab fa-instagram"></i></a>
                     <a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
                 </div>
             </div>
@@ -429,7 +408,7 @@
                 }
                 animateCursor();
 
-                document.querySelectorAll('a, button, .service-card, .portfolio-item, .faq-item, .modal-close, .contact-link').forEach(el => {
+                document.querySelectorAll('a, button, .service-card, .faq-item, .modal-close, .contact-link').forEach(el => {
                     el.addEventListener('mouseenter', () => cursor.classList.add('interactive'));
                     el.addEventListener('mouseleave', () => cursor.classList.remove('interactive'));
                 });
@@ -491,49 +470,6 @@
                 });
             });
 
-            function openModal(projectId) {
-                const modal = document.getElementById(`project-${projectId}`);
-                if (modal) {
-                    modal.classList.add('active');
-                    modal.querySelector('.modal-content').style.opacity = 0;
-                    modal.querySelector('.modal-content').style.transform = 'scale(0.8)';
-                    setTimeout(() => {
-                        modal.querySelector('.modal-content').style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-                        modal.querySelector('.modal-content').style.opacity = 1;
-                        modal.querySelector('.modal-content').style.transform = 'scale(1)';
-                    }, 10);
-                    document.body.style.overflow = 'hidden';
-                }
-            }
-
-            function closeModal(projectId) {
-                const modal = document.getElementById(`project-${projectId}`);
-                if (modal) {
-                    modal.querySelector('.modal-content').style.opacity = 0;
-                    modal.querySelector('.modal-content').style.transform = 'scale(0.8)';
-                    setTimeout(() => {
-                        modal.classList.remove('active');
-                        document.body.style.overflow = '';
-                    }, 400);
-                }
-            }
-
-            document.querySelectorAll('.portfolio-item[data-project]').forEach(item => {
-                item.addEventListener('click', () => {
-                    const projectId = item.getAttribute('data-project');
-                    if (projectId) openModal(projectId);
-                });
-            });
-
-            document.querySelectorAll('.modal-close').forEach(closeBtn => {
-                closeBtn.addEventListener('click', () => {
-                    const modal = closeBtn.closest('.portfolio-modal');
-                    const modalId = modal.id;
-                    const projectId = modalId.replace('project-', '');
-                    closeModal(projectId);
-                });
-            });
-
             const sendButton = document.getElementById('sendToWizualzBtn');
             if (sendButton) {
                 sendButton.addEventListener('click', () => {
@@ -556,4 +492,3 @@
     </script>
 </body>
 </html>
-
