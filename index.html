@@ -42,35 +42,28 @@
         .hero lottie-player { width: 300px; height: 300px; margin: 0 auto; z-index: 1; position: relative; filter: drop-shadow(0 0 15px #ff00ff); }
         .section-title { font-size: 32px; margin-bottom: 25px; font-family: 'Neon', 'Orbitron', monospace; color: #ffcc00; text-shadow: 0 0 10px #ffcc00, 0 0 20px #ff00ff; letter-spacing: 3px; text-transform: uppercase; text-align: center; opacity: 1; transform: translateY(0); animation: titlePulse 3s infinite alternate; }
         @keyframes titlePulse { to { text-shadow: 0 0 15px #ffcc00, 0 0 25px #00ffcc; } }
-        .services-grid { display: flex; flex-direction: column; gap: 20px; max-width: 1100px; margin: 0 auto; width: 100%; overflow: visible; }
-        .service-card { border: 2px solid #00ffcc; padding: 15px; border-radius: 15px; background: linear-gradient(135deg, #1a0033, #0a0020) !important; box-shadow: 0 0 20px #00ffcc33, 0 0 10px #ff00ff inset; transition: all 0.4s ease; cursor: pointer; width: 100%; box-sizing: border-box; position: relative; overflow: hidden; }
-        .service-card::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(255, 204, 0, 0.1), transparent); animation: rotateGlow 10s linear infinite; z-index: 0; }
+        .services-grid, .pricing-grid { display: flex; flex-direction: column; gap: 20px; max-width: 1100px; margin: 0 auto; width: 100%; overflow: visible; }
+        .service-card, .pricing-card { border: 2px solid #00ffcc; padding: 25px; border-radius: 20px; background: #000 !important; box-shadow: 0 0 30px #00ffcc55, 0 0 20px #ff00ff inset; transition: all 0.4s ease; cursor: pointer; width: 100%; box-sizing: border-box; position: relative; overflow: hidden; min-height: 350px; display: flex; flex-direction: column; align-items: center; justify-content: space-between; }
+        .service-card::before, .pricing-card::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(255, 204, 0, 0.3), transparent); animation: rotateGlow 8s linear infinite; z-index: 0; }
         @keyframes rotateGlow { 100% { transform: rotate(360deg); } }
-        .service-card:hover { transform: scale(1.05) rotate(2deg); box-shadow: 0 0 30px #00ffcc, 0 0 15px #ff00ff inset; }
-        .service-card i { font-size: 24px; color: #ffcc00; margin-bottom: 10px; text-shadow: 0 0 5px #ff00ff; }
-        .service-title { font-size: 18px; margin: 0 0 10px; color: #00ffcc; font-family: 'Orbitron', monospace; text-shadow: 0 0 3px #fff; }
-        .service-details { max-height: 0; overflow: hidden; transition: max-height 0.5s ease, opacity 0.3s ease, padding-top 0.3s ease; opacity: 0; color: #e0e0e0; font-size: 14px; line-height: 1.6; position: relative; z-index: 1; }
-        .service-card.active .service-details { max-height: 250px; opacity: 1; padding-top: 10px; }
+        .service-card:hover, .pricing-card:hover { transform: scale(1.08) rotate(1deg); box-shadow: 0 0 40px #00ffcc, 0 0 25px #ff00ff inset; border-color: #ffcc00; }
+        .service-card i { font-size: 48px; color: #ffcc00; margin-bottom: 20px; text-shadow: 0 0 12px #ff00ff; transition: transform 0.3s ease; }
+        .service-card:hover i { transform: scale(1.2); }
+        .service-title, .pricing-title { font-size: 24px; margin: 0 0 15px; color: #00ffcc; font-family: 'Neon', 'Orbitron', monospace; text-shadow: 0 0 6px #fff; position: relative; z-index: 1; text-align: center; }
+        .service-details, .pricing-details { color: #f0f0f0; font-size: 16px; line-height: 1.9; position: relative; z-index: 1; text-align: center; flex-grow: 1; opacity: 1; padding: 0 10px; }
+        .pricing-details { text-align: left; }
+        .pricing-details ul { list-style: none; padding: 0; }
+        .pricing-details ul li { margin-bottom: 12px; }
+        .pricing-details ul li::before { content: '✔'; color: #ffcc00; margin-right: 10px; }
+        .pricing-price { font-size: 28px; color: #ffcc00; font-family: 'Neon', 'Orbitron', monospace; margin-bottom: 20px; text-shadow: 0 0 10px #ff00ff; position: relative; z-index: 1; text-align: center; }
+        .service-card button, .pricing-card button { padding: 12px 30px; border: 2px solid #ffcc00; background: linear-gradient(45deg, #ff00ff, #00ffcc); color: #fff; border-radius: 30px; font-family: 'Orbitron', monospace; font-weight: 700; font-size: 14px; transition: all 0.4s ease; box-shadow: 0 0 15px #ffcc00, 0 0 30px #00ffcc inset; text-transform: uppercase; cursor: pointer; position: relative; overflow: hidden; margin-top: 20px; }
+        .service-card button:hover, .pricing-card button:hover { transform: translateY(-3px); box-shadow: 0 0 30px #ffcc00, 0 0 40px #00ffcc; }
+        .service-card button::after, .pricing-card button::after { content: ''; position: absolute; top: 50%; left: 50%; width: 0; height: 0; background: rgba(255, 255, 255, 0.3); border-radius: 50%; transform: translate(-50%, -50%); transition: width 0.6s ease, height 0.6s ease; }
+        .service-card button:hover::after, .pricing-card button:hover::after { width: 300px; height: 300px; }
         .faq-item { background: linear-gradient(135deg, #1a0033, #0a0020) !important; border-left: 3px solid #ffcc00; padding: 15px; border-radius: 10px; cursor: pointer; transition: all 0.4s ease; margin-bottom: 15px; width: 100%; box-sizing: border-box; box-shadow: 0 0 10px #00ffcc33; }
         .faq-item:hover, .faq-item.active { background: linear-gradient(135deg, #2a0050, #150030) !important; box-shadow: 0 0 20px #ffcc00; transform: translateY(-5px); }
         .faq-answer { display: none; color: #e0e0e0; font-size: 13px; padding-top: 10px; text-shadow: 0 0 1px #fff; }
         .faq-item.active .faq-answer { display: block; }
-        .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 350px)); gap: 25px; padding: 20px 0; max-width: 1100px; margin: 0 auto; width: 100%; justify-content: center; }
-        .portfolio-item { position: relative; overflow: hidden; border-radius: 15px; width: 100%; box-sizing: border-box; transition: transform 0.4s ease; }
-        .portfolio-item img { width: 100%; height: auto; display: block; border-radius: 10px; box-shadow: 0 0 15px #00ffcc33; transition: transform 0.4s ease, filter 0.4s ease; object-fit: contain; max-width: 100%; background: #000; filter: brightness(1.1); }
-        .portfolio-item:hover img { transform: scale(1.1); filter: brightness(1.3); }
-        .portfolio-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, rgba(0, 255, 204, 0.8), rgba(255, 0, 255, 0.6)); opacity: 0; display: flex; align-items: center; justify-content: left; color: #fff; font-family: 'Neon', 'Orbitron', monospace; font-size: 16px; text-shadow: 0 0 10px #ffcc00, 0 0 5px #000; transition: opacity 0.4s ease; border-radius: 10px; padding-left: 15px; }
-        .portfolio-item:hover .portfolio-overlay { opacity: 1; }
-        .portfolio-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle, rgba(0, 0, 0, 0.9), rgba(26, 0, 51, 0.95)) !important; z-index: 1002; justify-content: center; align-items: center; padding: 15px; box-sizing: border-box; overflow-y: auto; animation: modalFadeIn 0.5s ease-out; }
-        @keyframes modalFadeIn { from { opacity: 0; } to { opacity: 1; } }
-        .portfolio-modal.active { display: flex; }
-        .modal-content { background: linear-gradient(135deg, #1a0033, #0a0020) !important; border: 3px solid #ffcc00; border-radius: 15px; padding: 20px; max-width: 700px; width: 100%; max-height: 90vh; overflow-y: auto; position: relative; box-shadow: 0 0 20px #00ffcc, 0 0 10px #ff00ff inset; animation: contentPop 0.5s ease-out; }
-        @keyframes contentPop { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-        .modal-content img { width: 100%; height: auto; border-radius: 10px; margin-bottom: 15px; object-fit: contain; max-width: 100%; background: #000; border: 2px solid #ffcc00; box-shadow: 0 0 15px #00ffcc; }
-        .modal-content h3 { font-family: 'Neon', 'Orbitron', monospace; color: #ffcc00; font-size: 22px; margin-bottom: 10px; text-shadow: 0 0 10px #ff00ff; }
-        .modal-content p { color: #e0e0e0; font-size: 14px; line-height: 1.7; text-shadow: 0 0 1px #fff; }
-        .modal-content a { display: inline-block; margin-top: 10px; padding: 8px 20px; border: 2px solid #ff00ff; background: linear-gradient(45deg, #00ffcc, #ffcc00); color: #fff; text-decoration: none; border-radius: 30px; font-family: 'Orbitron', monospace; font-size: 14px; transition: all 0.4s ease; box-shadow: 0 0 10px #ffcc00; cursor: pointer; }
-        .modal-content a:hover { transform: translateY(-3px); box-shadow: 0 0 20px #00ffcc; }
         footer { background: linear-gradient(135deg, #0a0020, #1a0033) !important; padding: 40px 15px 25px; position: relative; width: 100%; box-sizing: border-box; overflow: hidden; }
         .footer-wave { position: absolute; top: 0; left: 0; width: 200%; height: 50px; background: url('data:image/svg+xml,%3Csvg viewBox="0 0 1440 320" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath d="M0,96L48,112C96,128,192,160,288,176C384,192,480,192,576,186.7C672,181,768,171,864,176C960,181,1056,203,1152,213.3C1248,224,1344,224,1392,224L1440,224V320H1392H1344H1248H1152H1056H960H864H768H672H576H480H384H288H192H96H48H0V96Z" fill="%23ff00ff33"%3E%3C/path%3E%3C/svg%3E'); background-size: cover; animation: waveMove 8s infinite linear; }
         @keyframes waveMove { 100% { transform: translateX(-50%); } }
@@ -108,15 +101,12 @@
             .hero lottie-player { width: 400px; height: 400px; }
             .hero button { padding: 12px 30px; font-size: 16px; }
             .section-title { font-size: 36px; }
-            .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; }
-            .service-card { padding: 20px; }
-            .service-title { font-size: 20px; }
-            .service-details { font-size: 15px; }
-            .service-card.active .service-details { max-height: 220px; }
-            .portfolio-overlay { font-size: 18px; }
-            .modal-content { padding: 25px; max-width: 800px; }
-            .modal-content h3 { font-size: 24px; }
-            .modal-content p { font-size: 15px; }
+            .services-grid, .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; }
+            .service-card, .pricing-card { padding: 30px; }
+            .service-title, .pricing-title { font-size: 26px; }
+            .service-details, .pricing-details { font-size: 16px; }
+            .pricing-price { font-size: 30px; }
+            .service-card button, .pricing-card button { padding: 14px 35px; font-size: 16px; }
             .faq-item { padding: 20px; max-width: 800px; margin: 0 auto 20px; }
             .faq-answer { font-size: 14px; }
             .footer-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 25px; }
@@ -132,18 +122,11 @@
             .hero img.hero-image { width: 150px; }
             .hero button { padding: 8px 20px; font-size: 12px; }
             .section-title { font-size: 24px; margin-bottom: 20px; }
-            .service-title { font-size: 16px; }
-            .service-details { font-size: 13px; }
-            .portfolio-grid { display: flex; flex-direction: column; gap: 15px; padding: 20px 15px; }
-            .portfolio-grid.posters { display: flex; flex-direction: row; overflow-x: auto; gap: 15px; padding: 20px 15px; scroll-snap-type: x mandatory; }
-            .portfolio-item { width: 100%; max-width: 350px; margin: 0 auto; }
-            .portfolio-grid.posters .portfolio-item { flex: 0 0 auto; width: 200px; scroll-snap-align: start; }
-            .portfolio-overlay { font-size: 14px; padding-left: 10px; }
-            .modal-content { padding: 15px; max-height: 85vh; }
-            .modal-content img { margin-bottom: 10px; }
-            .modal-content h3 { font-size: 18px; }
-            .modal-content p { font-size: 13px; }
-            .modal-content a { padding: 6px 15px; font-size: 12px; }
+            .service-title, .pricing-title { font-size: 20px; }
+            .service-details, .pricing-details { font-size: 14px; }
+            .pricing-price { font-size: 24px; }
+            .service-card button, .pricing-card button { padding: 10px 20px; font-size: 12px; }
+            .services-grid, .pricing-grid { display: flex; flex-direction: column; gap: 15px; }
             .faq-item { padding: 12px; }
             .faq-answer { font-size: 12px; }
             .footer-column img { max-width: 120px; }
@@ -164,8 +147,7 @@
         <i class="fas fa-bars mobile-menu-icon"></i>
         <nav id="navbar">
             <a href="#services">Services</a>
-            <a href="#portfolio">Portfolio</a>
-            <a href="#posters">Poster Designs</a>
+            <a href="#pricing">Pricing</a>
             <a href="#faqs">FAQs</a>
             <a href="#contact">Contact</a>
         </nav>
@@ -176,7 +158,7 @@
         <img class="hero-image" src="https://cdn.shopify.com/s/files/1/0675/9720/5546/files/hero-static.webp" alt="Wizualz Hero" loading="lazy">
         <h1>WE HAVE DIGITAL MAGIC</h1>
         <p>Wizualz transforms visions into stunning digital experiences with bold design and innovative tech.</p>
-        <button onclick="document.getElementById('portfolio').scrollIntoView({ behavior: 'smooth' })">Dive Into Our World</button>
+        <button onclick="document.getElementById('services').scrollIntoView({ behavior: 'smooth' })">Dive Into Our World</button>
     </section>
     <section id="services" class="reveal">
         <h2 class="section-title">Our Creative Services</h2>
@@ -185,71 +167,110 @@
                 <i class="fas fa-desktop"></i>
                 <h3 class="service-title">Website Design</h3>
                 <div class="service-details">We conjure stunning, responsive websites tailored to your brand, blending innovative design with seamless functionality to create magical digital experiences.</div>
+                <button onclick="document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })">Learn More</button>
             </div>
             <div class="service-card">
                 <i class="fas fa-camera"></i>
                 <h3 class="service-title">Product Photography & Editing</h3>
                 <div class="service-details">Our team captures high-quality product images and enhances them with professional editing, ensuring your products shine across all platforms.</div>
+                <button onclick="document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })">Learn More</button>
             </div>
             <div class="service-card">
                 <i class="fas fa-paint-brush"></i>
                 <h3 class="service-title">All Types of Graphic Design</h3>
                 <div class="service-details">From logos to marketing collateral, we craft visually striking graphics that elevate your brand’s identity with creativity and precision.</div>
+                <button onclick="document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })">Learn More</button>
             </div>
             <div class="service-card">
                 <i class="fas fa-pen-fancy"></i>
                 <h3 class="service-title">Content Writing</h3>
                 <div class="service-details">We weave compelling narratives and SEO-optimized content to engage your audience and boost your brand’s online presence.</div>
+                <button onclick="document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })">Learn More</button>
             </div>
             <div class="service-card">
                 <i class="fas fa-list-alt"></i>
                 <h3 class="service-title">Product Listing</h3>
                 <div class="service-details">Our expertly crafted product listings optimize visibility and conversions, tailored for platforms like Shopify, Amazon, and more.</div>
+                <button onclick="document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })">Learn More</button>
             </div>
             <div class="service-card">
                 <i class="fas fa-ad"></i>
                 <h3 class="service-title">Meta Marketing</h3>
                 <div class="service-details">We harness the power of Meta platforms to create targeted ad campaigns that drive engagement and maximize your brand’s reach.</div>
+                <button onclick="document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })">Learn More</button>
             </div>
             <div class="service-card">
                 <i class="fas fa-chart-line"></i>
                 <h3 class="service-title">Performance Marketing</h3>
                 <div class="service-details">Our data-driven strategies optimize ad spend, delivering measurable results through PPC, retargeting, and performance-focused campaigns.</div>
+                <button onclick="document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })">Learn More</button>
             </div>
             <div class="service-card">
                 <i class="fas fa-users"></i>
                 <h3 class="service-title">Social Media Management</h3>
                 <div class="service-details">We create and manage vibrant social media presences, crafting content that resonates and builds communities around your brand.</div>
+                <button onclick="document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })">Learn More</button>
             </div>
         </div>
     </section>
-    <section id="portfolio" class="reveal">
-        <h2 class="section-title">Our Masterpieces</h2>
-        <div class="portfolio-grid">
-            <a href="https://www.beingmuslims.com" target="_blank" class="portfolio-item">
-                <img src="https://cdn.shopify.com/s/files/1/0675/9720/5546/files/Screenshot_2025-07-26_190511.png?v=1753536939" alt="BeingMuslims.com Website" loading="lazy">
-                <div class="portfolio-overlay">Visit BeingMuslims.com</div>
-            </a>
-            <a href="https://www.wizualz.com" target="_blank" class="portfolio-item">
-                <img src="https://cdn.shopify.com/s/files/1/0675/9720/5546/files/Screenshot_2025-07-26_191220.png?v=1753537359" alt="Wizualz.com Website" loading="lazy">
-                <div class="portfolio-overlay">Visit Wizualz.com</div>
-            </a>
-            <a href="https://www.drwup.com" target="_blank" class="portfolio-item">
-                <img src="https://cdn.shopify.com/s/files/1/0675/9720/5546/files/Screenshot_2025-08-15_192822.png?v=1755266520" alt="DrWup.com Website" loading="lazy">
-                <div class="portfolio-overlay">Visit DrWup.com</div>
-            </a>
-        </div>
-    </section>
-    <section id="posters" class="reveal">
-        <h2 class="section-title">Poster Designs</h2>
-        <div class="portfolio-grid posters">
-            <div class="portfolio-item">
-                <img src="https://cdn.shopify.com/s/files/1/0675/9720/5546/files/Untitled-155.jpg?v=1754728066" alt="Poster 1" loading="lazy">
-                <div class="portfolio-overlay">View Poster 1</div>
+    <section id="pricing" class="reveal">
+        <h2 class="section-title">Our Pricing Packages</h2>
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <h3 class="pricing-title">Instagram Account Handling</h3>
+                <div class="pricing-price">₹9,999/- Per Month</div>
+                <div class="pricing-details">
+                    <ul>
+                        <li>1 Post Design Daily (Content provided by client)</li>
+                        <li>Instagram Posting as per Latest Algorithm</li>
+                        <li>Customer Interaction (Replies to comments and DMs)</li>
+                        <li>Strategic Planning (Monthly content strategy)</li>
+                        <li>Premium Look & Feel for Instagram Feed</li>
+                    </ul>
+                </div>
+                <button onclick="document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })">Get Started</button>
             </div>
-            <div class="portfolio-item">
-                <img src="https://cdn.shopify.com/s/files/1/0675/9720/5546/files/88888.jpg?v=1754728220" alt="Poster 2" loading="lazy">
-                <div class="portfolio-overlay">View Poster 2</div>
+            <div class="pricing-card">
+                <h3 class="pricing-title">Google My Business Handling</h3>
+                <div class="pricing-price">₹4,999/- Per Month</div>
+                <div class="pricing-details">
+                    <ul>
+                        <li>GMB Account Creation and Optimization</li>
+                        <li>Local Ranking Strategy for Higher Visibility</li>
+                        <li>Regular Updates & Post Designs</li>
+                        <li>Marketing Ideas & Engagement Strategies</li>
+                        <li>Continuous Optimization and Review Management</li>
+                    </ul>
+                </div>
+                <button onclick="document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })">Get Started</button>
+            </div>
+            <div class="pricing-card">
+                <h3 class="pricing-title">Website Development</h3>
+                <div class="pricing-price">₹14,999/- Per Month</div>
+                <div class="pricing-details">
+                    <ul>
+                        <li>Business & Product Analysis</li>
+                        <li>Custom Website Design & Development</li>
+                        <li>E-Commerce Setup & Onboarding</li>
+                        <li>Professional Product Shoot</li>
+                        <li>Full Assistance & Support</li>
+                    </ul>
+                </div>
+                <button onclick="document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })">Get Started</button>
+            </div>
+            <div class="pricing-card">
+                <h3 class="pricing-title">Designing Services</h3>
+                <div class="pricing-price">₹4,999/- Per Month</div>
+                <div class="pricing-details">
+                    <ul>
+                        <li>Creative Post Designing for Instagram & Facebook</li>
+                        <li>Platform-Optimized Designs</li>
+                        <li>Client-Led Posting Option</li>
+                        <li>Consistent Branding</li>
+                        <li>30 Creative Social Media Posts</li>
+                    </ul>
+                </div>
+                <button onclick="document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })">Get Started</button>
             </div>
         </div>
     </section>
@@ -292,8 +313,7 @@
                 <h3 class="footer-title">Quick Portals</h3>
                 <ul>
                     <li><a href="#services">Services</a></li>
-                    <li><a href="#portfolio">Portfolio</a></li>
-                    <li><a href="#posters">Poster Designs</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
                     <li><a href="#faqs">FAQs</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
@@ -351,7 +371,7 @@
             }
 
             if (typeof VanillaTilt === 'function') {
-                VanillaTilt.init(document.querySelectorAll('.service-card'), { max: 15, speed: 400, glare: true, 'max-glare': 0.4 });
+                VanillaTilt.init(document.querySelectorAll('.service-card, .pricing-card'), { max: 15, speed: 400, glare: true, 'max-glare': 0.4 });
             }
 
             const lottiePlayer = document.querySelector('lottie-player');
@@ -411,7 +431,7 @@
                 }
                 animateCursor();
 
-                document.querySelectorAll('a, button, .service-card, .faq-item, .modal-close, .contact-link').forEach(el => {
+                document.querySelectorAll('a, button, .service-card, .pricing-card, .faq-item, .contact-link').forEach(el => {
                     el.addEventListener('mouseenter', () => cursor.classList.add('interactive'));
                     el.addEventListener('mouseleave', () => cursor.classList.remove('interactive'));
                 });
@@ -435,26 +455,6 @@
                     if (targetSection) {
                         targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
                         window.scrollBy(0, -headerHeight - 20);
-                    }
-                });
-            });
-
-            document.querySelectorAll('.service-card').forEach(card => {
-                card.addEventListener('click', (e) => {
-                    if (e.target.tagName === 'A') return;
-                    const details = card.querySelector('.service-details');
-                    const isActive = card.classList.contains('active');
-                    document.querySelectorAll('.service-card').forEach(c => {
-                        c.classList.remove('active');
-                        c.querySelector('.service-details').style.maxHeight = '0';
-                        c.querySelector('.service-details').style.opacity = '0';
-                        c.querySelector('.service-details').style.paddingTop = '0';
-                    });
-                    if (!isActive) {
-                        card.classList.add('active');
-                        details.style.maxHeight = details.scrollHeight + 'px';
-                        details.style.opacity = '1';
-                        details.style.paddingTop = '10px';
                     }
                 });
             });
