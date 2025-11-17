@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wizualz - Digital Magic (v3 Corrected)</title>
+    <title>Wizualz - The Matrix Morph (v2)</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Orbitron:wght@400;700;900&display=swap" media="all">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" media="all">
     <style>
@@ -18,10 +18,6 @@
             --text-light: #FFFFFF;
             --text-color: #e0e0e0;
             --header-height: 70px;
-            
-            /* --- Mouse Position for Aurora --- */
-            --mouse-x: 50vw;
-            --mouse-y: 50vh;
         }
 
         /* --- 1. Global Setup --- */
@@ -30,10 +26,21 @@
             margin: 0;
             padding: 0;
         }
-
+        
+        /* --- Hide default cursor --- */
         html {
+            cursor: none;
             scroll-behavior: smooth;
             scroll-padding-top: var(--header-height);
+        }
+        /* --- Hide custom cursor on touch devices --- */
+        @media (pointer: coarse) {
+            html {
+                cursor: auto;
+            }
+            .cursor-dot, .cursor-outline {
+                display: none !important;
+            }
         }
 
         body {
@@ -45,10 +52,7 @@
             position: relative;
         }
 
-        /* * --- THE "AURORA" WOW EFFECT --- 
-         * Uses your logo's colors for a subtle, interactive background
-         * that follows the mouse. This is the high-end creative element.
-        */
+        /* * --- THE "AURORA" BACKGROUND --- */
         body::before {
             content: '';
             position: fixed;
@@ -64,7 +68,7 @@
                 rgba(255, 0, 255, 0.05),  /* Magenta */
                 transparent 40%
             );
-            transition: background 0.2s linear; /* Smooths out the movement */
+            transition: background 0.2s linear;
         }
 
         /* --- 2. Re-usable Components --- */
@@ -79,9 +83,11 @@
 
         .section-padding {
             padding: 100px 0;
+            position: relative; 
+            z-index: 2;
         }
 
-        /* --- Professional "Fade-in on Scroll" Animation --- */
+        /* --- "Fade-in on Scroll" Animation --- */
         .reveal {
             opacity: 0;
             transform: translateY(30px);
@@ -112,6 +118,11 @@
             color: var(--text-light);
             line-height: 1.2;
         }
+        
+        /* --- Links & Buttons --- */
+        a, button, .faq-item {
+            cursor: none; /* Use custom cursor */
+        }
 
         /* --- 3. Header --- */
         .header {
@@ -125,8 +136,6 @@
             padding: 0 40px;
             height: var(--header-height);
             z-index: 100;
-            
-            /* Premium Frosted Glass Header */
             background: rgba(10, 0, 32, 0.7); 
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
@@ -151,7 +160,7 @@
         }
 
         .header-nav nav {
-            display: flex; /* Default for desktop */
+            display: flex;
         }
 
         .header-nav nav a {
@@ -165,7 +174,6 @@
             position: relative;
             padding-bottom: 5px;
         }
-        /* Clean underline effect */
         .header-nav nav a::after {
             content: '';
             position: absolute;
@@ -194,8 +202,6 @@
             border-radius: 8px;
             transition: all 0.3s ease;
             margin-left: 30px;
-            
-            /* High-end Button Style */
             background: var(--primary);
             color: #000 !important;
             border: 2px solid var(--primary);
@@ -207,7 +213,6 @@
             box-shadow: 0 0 25px rgba(0, 255, 204, 0.5);
             transform: translateY(-2px);
         }
-        /* Secondary button style for forms/cards */
         .cta-button.secondary {
              background: transparent;
              color: var(--primary) !important;
@@ -226,15 +231,24 @@
             cursor: pointer;
         }
 
-        /* --- 4. Hero Section --- */
+        /* ===================================
+        --- 4. "MATRIX MORPH" HERO --- 
+        ===================================
+        */
         .hero {
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            text-align: center;
-            min-height: 90vh;
-            padding-top: 100px;
+            text-align: center; /* This centers the button */
+            height: 100vh; 
+            position: relative;
+            overflow: hidden; 
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 3;
         }
 
         .hero h1 {
@@ -244,8 +258,10 @@
             letter-spacing: 1px;
             margin-bottom: 20px;
             color: var(--text-light);
+            min-height: 1.2em; /* Prevent layout jump */
         }
-        .hero h1 span {
+        
+        .hero h1 .morph-span {
             color: var(--primary);
             text-shadow: 0 0 25px var(--primary);
         }
@@ -253,13 +269,27 @@
         .hero p {
             font-size: 20px;
             max-width: 600px;
-            margin-bottom: 30px;
+            /* --- THIS IS THE FIX --- */
+            margin: 0 auto 30px; /* Centers the block */
             text-shadow: 0 0 5px #fff;
+            
+            /* Fade in after title */
+            opacity: 0;
+            animation: fadeIn 1s ease-out 2s forwards;
         }
         .hero-cta {
             padding: 14px 30px;
             font-size: 16px;
+            
+            /* Fade in after title */
+            opacity: 0;
+            animation: fadeIn 1s ease-out 2.2s forwards;
         }
+        
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
         .hero-cta:hover {
             border-color: var(--tertiary);
             background: var(--tertiary);
@@ -278,13 +308,20 @@
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             transition: all 0.3s ease;
+            transform-style: preserve-3d;
+            transform: perspective(1000px);
         }
         
         .glass-card:hover {
-            transform: translateY(-8px);
-            border-color: var(--primary);
-            box-shadow: 0 10px 40px rgba(0, 255, 204, 0.1);
+            transform: translateY(-8px) perspective(1000px) scale(1.02); 
+            border-color: var(--secondary); 
+            box-shadow: 0 10px 40px rgba(255, 0, 255, 0.15);
         }
+        .faq-item.glass-card:hover {
+            border-color: var(--tertiary); 
+            box-shadow: 0 0 20px rgba(255, 204, 0, 0.15);
+        }
+
 
         /* --- 6. Services (Bento Grid) --- */
         .service-grid {
@@ -301,14 +338,14 @@
         }
         .service-card i {
             font-size: 36px;
-            color: var(--tertiary); /* Gold icons */
+            color: var(--tertiary);
             text-shadow: 0 0 10px var(--tertiary);
             margin-bottom: 15px;
         }
         .service-card h3 {
             font-size: 20px;
             margin-bottom: 10px;
-            color: var(--primary); /* Cyan titles */
+            color: var(--primary);
         }
 
         /* --- 7. Pricing Section --- */
@@ -331,7 +368,7 @@
         .pricing-price {
             font-size: 36px;
             font-weight: 900;
-            color: var(--tertiary); /* Gold price */
+            color: var(--tertiary);
             margin-bottom: 25px;
             text-shadow: 0 0 10px var(--tertiary);
         }
@@ -374,10 +411,6 @@
             margin-bottom: 15px;
             cursor: pointer;
             border-color: var(--glass-border);
-        }
-        .faq-item:hover {
-            border-color: var(--secondary); /* Magenta highlight */
-            box-shadow: 0 0 20px rgba(255, 0, 255, 0.1);
         }
         .faq-question {
             display: flex;
@@ -437,9 +470,8 @@
         }
         .contact-form button {
             border: none;
-            /* width: 100%; */ /* <-- Removed this */
-            margin-left: 0;     /* <-- Fix 1 */
-            align-self: center; /* <-- Fix 2 */
+            margin-left: 0;     
+            align-self: center; 
         }
 
         /* --- 10. Footer --- */
@@ -447,7 +479,6 @@
             padding: 80px 0 40px;
             background: var(--glass-bg);
             border-top: 1px solid var(--glass-border);
-            margin-top: 100px;
             position: relative;
             z-index: 10;
         }
@@ -520,16 +551,10 @@
             color: var(--tertiary);
         }
 
-        /* ========================================
-        --- 11. FULLY RESPONSIVE (MOBILE) FIX --- 
-        ========================================
-        */
-
-        /* --- Tablet & Small Desktops --- */
+        /* --- 11. Fully Responsive --- */
         @media (max-width: 1024px) {
             .header { padding: 0 20px; }
             
-            /* --- Mobile Menu Logic --- */
             .header-nav nav {
                 display: none;
                 flex-direction: column;
@@ -548,7 +573,7 @@
                 margin: 10px 20px;
             }
             .cta-button {
-                display: none; /* Hide main CTA, show in menu */
+                display: none; 
             }
             .header-nav nav .cta-button {
                 display: block;
@@ -558,12 +583,10 @@
             .mobile-menu-icon {
                 display: block;
             }
-            /* --- End Mobile Menu --- */
             
-            .hero h1 { font-size: 56px; }
+            .hero h1 { font-size: 56px; min-height: 0; }
             .hero p { font-size: 18px; }
             
-            /* --- 2-Column Grids --- */
             .service-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
@@ -575,14 +598,12 @@
             }
         }
 
-        /* --- Mobile Phones --- */
         @media (max-width: 767px) {
             .hero h1 { font-size: 42px; }
             .hero p { font-size: 16px; }
 
             .section-title { font-size: 32px; }
             
-            /* --- 1-Column Grids --- */
             .service-grid {
                 grid-template-columns: 1fr;
             }
@@ -593,9 +614,53 @@
                 grid-template-columns: 1fr;
             }
         }
+        
+        /* --- 12. Creative Cursor --- */
+        .cursor-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.2s ease-out;
+        }
+
+        .cursor-outline {
+            width: 30px;
+            height: 30px;
+            border: 2px solid var(--secondary);
+            border-radius: 50%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 9998;
+            transition: transform 0.3s ease-out, width 0.3s ease-out, height 0.3s ease-out, opacity 0.3s ease-out;
+        }
+        
+        /* Interactive State */
+        .cursor-dot.interactive {
+            transform: translate(-50%, -50%) scale(0.5);
+        }
+        .cursor-outline.interactive {
+            width: 50px;
+            height: 50px;
+            opacity: 0.5;
+            border-color: var(--primary);
+        }
+
     </style>
 </head>
 <body>
+
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
 
     <header class="header">
         <a href="#hero" class="logo">
@@ -615,13 +680,15 @@
 
     <main>
 
-        <section id="hero" class="hero container reveal">
-            <h1>WE BUILD <span>DIGITAL MAGIC.</span></h1>
-            <p>
-                Wizualz transforms visions into stunning digital experiences 
-                with bold design and innovative tech.
-            </p>
-            <a href="#services" class="cta-button hero-cta">Explore Our World</a>
+        <section id="hero" class="hero container">
+            <div class="hero-content">
+                <h1 id="hero-title">WE BUILD <span class="morph-span">DIGITAL MAGIC.</span></h1>
+                <p>
+                    Wizualz transforms visions into stunning digital experiences 
+                    with bold design and innovative tech.
+                </p>
+                <a href="#services" class="cta-button hero-cta">Explore Our World</a>
+            </div>
         </section>
 
         <section id="services" class="container section-padding">
@@ -832,48 +899,141 @@
         </div>
     </footer>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
 
-            // --- Aurora Mouse Effect ---
-            document.addEventListener('mousemove', (e) => {
-                // Use requestAnimationFrame for smooth performance
-                window.requestAnimationFrame(() => {
-                    document.documentElement.style.setProperty('--mouse-x', `${e.clientX}px`);
-                    document.documentElement.style.setProperty('--mouse-y', `${e.clientY + window.scrollY}px`);
+            // --- 1. CREATIVE CURSOR LOGIC ---
+            const cursorDot = document.querySelector('.cursor-dot');
+            const cursorOutline = document.querySelector('.cursor-outline');
+            const interactiveElements = 'a, button, .glass-card, .faq-item, .contact-link';
+
+            let mouseX = 0, mouseY = 0;
+            let dotX = 0, dotY = 0;
+            let outlineX = 0, outlineY = 0;
+
+            window.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+            });
+            
+            function animateCursor() {
+                dotX = mouseX;
+                dotY = mouseY;
+                cursorDot.style.transform = `translate(${dotX}px, ${dotY}px)`;
+                
+                outlineX += (mouseX - outlineX) * 0.1;
+                outlineY += (mouseY - outlineY) * 0.1;
+                cursorOutline.style.transform = `translate(${outlineX}px, ${outlineY}px)`;
+                
+                requestAnimationFrame(animateCursor);
+            }
+            animateCursor();
+            
+            document.querySelectorAll(interactiveElements).forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    cursorDot.classList.add('interactive');
+                    cursorOutline.classList.add('interactive');
+                });
+                el.addEventListener('mouseleave', () => {
+                    cursorDot.classList.remove('interactive');
+                    cursorOutline.classList.remove('interactive');
                 });
             });
 
-            // --- Intersection Observer for "Fade-in on Scroll" ---
+            // --- 2. "MATRIX MORPH" HERO ANIMATION ---
+            class TextMorph {
+                constructor(el) {
+                    this.el = el;
+                    this.originalHTML = el.innerHTML;
+                    this.originalText = el.textContent.trim();
+                    this.chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!?#@%&<>[]';
+                    this.init();
+                }
+
+                init() {
+                    this.el.textContent = ''; // Clear text
+                    this.frames = [];
+                    for (let i = 0; i < this.originalText.length; i++) {
+                        // Create a frame for each character's animation
+                        this.frames.push({
+                            char: this.originalText[i],
+                            isSpace: this.originalText[i] === ' ',
+                            scrambled: '',
+                            frame: 0,
+                            maxFrames: Math.floor(Math.random() * 20) + 10 // Random duration
+                        });
+                    }
+                    this.animate();
+                }
+
+                animate() {
+                    let allDone = true;
+                    let newText = '';
+
+                    this.frames.forEach(frame => {
+                        if (frame.frame < frame.maxFrames) {
+                            allDone = false; // Not finished yet
+                            if (frame.frame % 2 === 0 || frame.isSpace) { // Update every 2 frames
+                                frame.scrambled = frame.isSpace ? ' ' : this.chars[Math.floor(Math.random() * this.chars.length)];
+                            }
+                            newText += frame.scrambled;
+                            frame.frame++;
+                        } else {
+                            newText += frame.char; // Set final character
+                        }
+                    });
+
+                    this.el.textContent = newText;
+
+                    if (!allDone) {
+                        requestAnimationFrame(() => this.animate());
+                    } else {
+                        // Animation finished, restore original HTML to get span color
+                        this.el.innerHTML = this.originalHTML;
+                    }
+                }
+            }
+            
+            const heroTitle = document.getElementById('hero-title');
+            if(heroTitle) {
+                // Start morph after a short delay
+                setTimeout(() => {
+                    new TextMorph(heroTitle);
+                }, 500);
+            }
+
+
+            // --- 3. Intersection Observer for "Fade-in on Scroll" ---
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('visible');
-                        observer.unobserve(entry.target); // Animate only once
+                        observer.unobserve(entry.target); 
                     }
                 });
             }, {
-                threshold: 0.1 // Trigger when 10% is visible
+                threshold: 0.1 
             });
 
             document.querySelectorAll('.reveal').forEach(el => {
                 observer.observe(el);
             });
 
-            // --- Mobile Menu Toggle ---
+            // --- 4. Mobile Menu Toggle ---
             const menuIcon = document.getElementById('mobile-menu-toggle');
             const navbar = document.getElementById('navbar');
             menuIcon.addEventListener('click', () => {
                 navbar.classList.toggle('active');
             });
-            // Close menu when a link is clicked
             navbar.querySelectorAll('a').forEach(link => {
                 link.addEventListener('click', () => {
                     navbar.classList.remove('active');
                 });
             });
 
-            // --- FAQ Accordion ---
+            // --- 5. FAQ Accordion ---
             document.querySelectorAll('.faq-item').forEach(item => {
                 const question = item.querySelector('.faq-question');
                 const answer = item.querySelector('.faq-answer');
@@ -882,14 +1042,12 @@
                 question.addEventListener('click', () => {
                     const isActive = item.classList.contains('active');
                     
-                    // Close all others
                     document.querySelectorAll('.faq-item').forEach(i => {
                         i.classList.remove('active');
                         i.querySelector('.faq-answer').style.display = 'none';
                         i.querySelector('.icon').textContent = '+';
                     });
                     
-                    // Open this one if it was closed
                     if (!isActive) {
                         item.classList.add('active');
                         answer.style.display = 'block';
@@ -898,7 +1056,7 @@
                 });
             });
 
-            // --- WhatsApp Form Button ---
+            // --- 6. WhatsApp Form Button ---
             const sendButton = document.getElementById('sendToWizualzBtn');
             if (sendButton) {
                 sendButton.addEventListener('click', () => {
@@ -912,12 +1070,11 @@
                     const query = queryInput.value.trim();
                     
                     if (name && number && query) {
-                        const whatsappMessage = encodeURIComponent(`Hello Team Wizualz,\nName: ${name}\nNumber: ${number}\nQuery: ${query}\nSent at: ${new Date().toLocaleString('en-IN', { timeZone: 'Asia/KKolkata' })}`);
+                        const whatsappMessage = encodeURIComponent(`Hello Team Wizualz,\nName: ${name}\nNumber: ${number}\nQuery: ${query}\nSent at: ${new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })}`);
                         const whatsappUrl = `https://wa.me/919321234524?text=${whatsappMessage}`;
                         
                         window.open(whatsappUrl, '_blank');
                         
-                        // Clear fields
                         nameInput.value = '';
                         numberInput.value = '';
                         queryInput.value = '';
@@ -925,6 +1082,16 @@
                     } else {
                         alert('Please fill in all fields before submitting.');
                     }
+                });
+            }
+
+            // --- 7. 3D TILT EFFECT INITIALIZATION ---
+            if (!('ontouchstart' in window)) {
+                VanillaTilt.init(document.querySelectorAll(".glass-card"), {
+                    max: 15,         
+                    speed: 400,      
+                    glare: true,     
+                    "max-glare": 0.2 
                 });
             }
 
