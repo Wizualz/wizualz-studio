@@ -2,496 +2,934 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Wizualz Studio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wizualz - Digital Magic (v3 Corrected)</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Orbitron:wght@400;700;900&display=swap" media="all">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" media="all">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Orbitron:wght@400;700&display=swap" media="all">
     <style>
-        /* CSS Reset to prevent inherited white backgrounds */
-        * { margin: 0; padding: 0; box-sizing: border-box; background: none !important; }
-        @font-face { font-family: 'LED Dot-Matrix'; src: url('https://cdn.shopify.com/s/files/1/0675/9720/5546/files/NothingDot-Regular.ttf?v=1753448201') format('truetype'); font-display: swap; }
-        @font-face { font-family: 'Neon'; src: url('https://fonts.cdnfonts.com/s/288970/Neon.ttf') format('truetype'); font-display: swap; }
-        html, body { margin: 0; padding: 0; font-family: 'Poppins', sans-serif; color: #fff; overflow-x: hidden; height: 100%; background: linear-gradient(135deg, #1a0033, #0a0020, #000) !important; width: 100%; box-sizing: border-box; }
-        @media (pointer: coarse) { html, body { cursor: auto; } .custom-cursor, .custom-cursor.trail { display: none !important; } }
-        .custom-cursor { width: 20px; height: 20px; background: radial-gradient(circle, #00ffcc, #ff00ff); border: 2px solid #ffcc00; border-radius: 50%; position: fixed; top: 0; left: 0; pointer-events: none; z-index: 10000; box-shadow: 0 0 10px #00ffcc, 0 0 20px #ff00ff; transform: translate(-50%, -50%); will-change: transform; transition: transform 0.1s ease-out, scale 0.2s ease, box-shadow 0.3s ease; }
-        .custom-cursor.trail { width: 12px; height: 12px; opacity: 0.7; animation: fadePulse 0.5s infinite alternate; z-index: 9999; }
-        @keyframes fadePulse { to { opacity: 0.3; transform: scale(1.2); } }
-        .custom-cursor.interactive { transform: translate(-50%, -50%) scale(1.8); box-shadow: 0 0 15px #ffcc00, 0 0 30px #00ffcc; }
-        header { position: sticky; top: 0; z-index: 998; background: linear-gradient(90deg, rgba(26, 0, 51, 0.9), rgba(10, 0, 32, 0.9)) !important; display: flex; justify-content: space-between; align-items: center; padding: 10px 30px; box-shadow: 0 0 15px #00ffcc66; backdrop-filter: blur(10px); border-bottom: 2px solid #ff00ff; width: 100%; box-sizing: border-box; height: 60px; animation: headerGlow 4s infinite alternate; }
-        @keyframes headerGlow { to { box-shadow: 0 0 20px #ffcc00; } }
-        header a.logo-link img { width: 120px; height: auto; transition: transform 0.3s ease, filter 0.3s ease; filter: drop-shadow(0 0 5px #00ffcc); }
-        header a.logo-link img:hover { transform: rotate(10deg) scale(1.15); filter: drop-shadow(0 0 10px #ff00ff); }
-        nav { display: flex; align-items: center; }
-        nav a { color: #00ffcc; margin: 0 15px; text-decoration: none; font-family: 'Orbitron', monospace; font-weight: 600; position: relative; text-transform: uppercase; letter-spacing: 1px; font-size: 14px; text-shadow: 0 0 3px #ff00ff; cursor: pointer; }
-        nav a::after { content: ''; display: block; height: 2px; background: linear-gradient(90deg, #ff00ff, #00ffcc); width: 0; transition: width 0.4s ease; position: absolute; bottom: -5px; left: 0; }
-        nav a:hover::after { width: 100%; }
-        .mobile-menu-icon { display: none; color: #00ffcc; font-size: 24px; cursor: pointer; text-shadow: 0 0 5px #ff00ff; transition: transform 0.3s ease; }
-        .mobile-menu-icon:hover { transform: scale(1.2); }
-        section { padding: 30px 15px; position: relative; width: 100%; box-sizing: border-box; background: linear-gradient(135deg, #1a0033, #0a0020) !important; animation: fadeInUp 1s ease-out; }
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        .hero { text-align: center; padding-top: 50px; position: relative; overflow: hidden; width: 100%; min-height: 100vh; background: radial-gradient(circle, #1a0033, #000) !important; }
-        #hero-particles { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
-        .hero h1 { font-family: 'Neon', 'LED Dot-Matrix', sans-serif; font-size: 60px; color: #00ffcc; text-shadow: 0 0 15px #00ffcc, 0 0 30px #ff00ff, 0 0 5px #ffcc00; margin: 0; position: relative; z-index: 2; animation: neonBlink 2s infinite alternate; }
-        @keyframes neonBlink { 50% { text-shadow: 0 0 10px #00ffcc, 0 0 20px #ff00ff; } }
-        .hero p { font-size: 16px; color: #e0e0e0; max-width: 600px; margin: 20px auto; font-family: 'Poppins', sans-serif; position: relative; z-index: 2; text-shadow: 0 0 2px #fff; }
-        .hero button { margin-top: 20px; padding: 10px 25px; border: 2px solid #ffcc00; background: linear-gradient(45deg, #ff00ff, #00ffcc); color: #fff; border-radius: 30px; font-family: 'Orbitron', monospace; font-weight: 700; font-size: 14px; transition: all 0.4s ease; box-shadow: 0 0 10px #ffcc00, 0 0 20px #00ffcc inset; text-transform: uppercase; cursor: pointer; z-index: 2; position: relative; overflow: hidden; }
-        .hero button:hover { transform: translateY(-3px); box-shadow: 0 0 20px #ffcc00, 0 0 30px #00ffcc; }
-        .hero button::after { content: ''; position: absolute; top: 50%; left: 50%; width: 0; height: 0; background: rgba(255, 255, 255, 0.2); border-radius: 50%; transform: translate(-50%, -50%); transition: width 0.6s ease, height 0.6s ease; }
-        .hero button:hover::after { width: 300px; height: 300px; }
-        .hero img.hero-image { width: 200px; height: auto; margin: 0 auto; display: none; z-index: 1; position: relative; filter: drop-shadow(0 0 10px #00ffcc); }
-        .hero lottie-player { width: 300px; height: 300px; margin: 0 auto; z-index: 1; position: relative; filter: drop-shadow(0 0 15px #ff00ff); }
-        .section-title { font-size: 32px; margin-bottom: 25px; font-family: 'Neon', 'Orbitron', monospace; color: #ffcc00; text-shadow: 0 0 10px #ffcc00, 0 0 20px #ff00ff; letter-spacing: 3px; text-transform: uppercase; text-align: center; opacity: 1; transform: translateY(0); animation: titlePulse 3s infinite alternate; }
-        @keyframes titlePulse { to { text-shadow: 0 0 15px #ffcc00, 0 0 25px #00ffcc; } }
-        .services-grid, .pricing-grid { display: flex; flex-direction: column; gap: 20px; max-width: 1100px; margin: 0 auto; width: 100%; overflow: visible; }
-        .service-card, .pricing-card { border: 2px solid #00ffcc; padding: 25px; border-radius: 20px; background: #000 !important; box-shadow: 0 0 30px #00ffcc55, 0 0 20px #ff00ff inset; transition: all 0.4s ease; cursor: pointer; width: 100%; box-sizing: border-box; position: relative; overflow: hidden; min-height: 350px; display: flex; flex-direction: column; align-items: center; justify-content: space-between; }
-        .service-card::before, .pricing-card::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(255, 204, 0, 0.3), transparent); animation: rotateGlow 8s linear infinite; z-index: 0; }
-        @keyframes rotateGlow { 100% { transform: rotate(360deg); } }
-        .service-card:hover, .pricing-card:hover { transform: scale(1.08) rotate(1deg); box-shadow: 0 0 40px #00ffcc, 0 0 25px #ff00ff inset; border-color: #ffcc00; }
-        .service-card i { font-size: 48px; color: #ffcc00; margin-bottom: 20px; text-shadow: 0 0 12px #ff00ff; transition: transform 0.3s ease; }
-        .service-card:hover i { transform: scale(1.2); }
-        .service-title, .pricing-title { font-size: 24px; margin: 0 0 15px; color: #00ffcc; font-family: 'Neon', 'Orbitron', monospace; text-shadow: 0 0 6px #fff; position: relative; z-index: 1; text-align: center; }
-        .service-details, .pricing-details { color: #f0f0f0; font-size: 16px; line-height: 1.9; position: relative; z-index: 1; text-align: center; flex-grow: 1; opacity: 1; padding: 0 10px; }
-        .pricing-details { text-align: left; }
-        .pricing-details ul { list-style: none; padding: 0; }
-        .pricing-details ul li { margin-bottom: 12px; }
-        .pricing-details ul li::before { content: '✔'; color: #ffcc00; margin-right: 10px; }
-        .pricing-price { font-size: 28px; color: #ffcc00; font-family: 'Neon', 'Orbitron', monospace; margin-bottom: 20px; text-shadow: 0 0 10px #ff00ff; position: relative; z-index: 1; text-align: center; }
-        .service-card button, .pricing-card button { padding: 12px 30px; border: 2px solid #ffcc00; background: linear-gradient(45deg, #ff00ff, #00ffcc); color: #fff; border-radius: 30px; font-family: 'Orbitron', monospace; font-weight: 700; font-size: 14px; transition: all 0.4s ease; box-shadow: 0 0 15px #ffcc00, 0 0 30px #00ffcc inset; text-transform: uppercase; cursor: pointer; position: relative; overflow: hidden; margin-top: 20px; }
-        .service-card button:hover, .pricing-card button:hover { transform: translateY(-3px); box-shadow: 0 0 30px #ffcc00, 0 0 40px #00ffcc; }
-        .service-card button::after, .pricing-card button::after { content: ''; position: absolute; top: 50%; left: 50%; width: 0; height: 0; background: rgba(255, 255, 255, 0.3); border-radius: 50%; transform: translate(-50%, -50%); transition: width 0.6s ease, height 0.6s ease; }
-        .service-card button:hover::after, .pricing-card button:hover::after { width: 300px; height: 300px; }
-        .faq-item { background: linear-gradient(135deg, #1a0033, #0a0020) !important; border-left: 3px solid #ffcc00; padding: 15px; border-radius: 10px; cursor: pointer; transition: all 0.4s ease; margin-bottom: 15px; width: 100%; box-sizing: border-box; box-shadow: 0 0 10px #00ffcc33; }
-        .faq-item:hover, .faq-item.active { background: linear-gradient(135deg, #2a0050, #150030) !important; box-shadow: 0 0 20px #ffcc00; transform: translateY(-5px); }
-        .faq-answer { display: none; color: #e0e0e0; font-size: 13px; padding-top: 10px; text-shadow: 0 0 1px #fff; }
-        .faq-item.active .faq-answer { display: block; }
-        footer { background: linear-gradient(135deg, #0a0020, #1a0033) !important; padding: 40px 15px 25px; position: relative; width: 100%; box-sizing: border-box; overflow: hidden; }
-        .footer-wave { position: absolute; top: 0; left: 0; width: 200%; height: 50px; background: url('data:image/svg+xml,%3Csvg viewBox="0 0 1440 320" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath d="M0,96L48,112C96,128,192,160,288,176C384,192,480,192,576,186.7C672,181,768,171,864,176C960,181,1056,203,1152,213.3C1248,224,1344,224,1392,224L1440,224V320H1392H1344H1248H1152H1056H960H864H768H672H576H480H384H288H192H96H48H0V96Z" fill="%23ff00ff33"%3E%3C/path%3E%3C/svg%3E'); background-size: cover; animation: waveMove 8s infinite linear; }
-        @keyframes waveMove { 100% { transform: translateX(-50%); } }
-        .footer-grid { display: flex; flex-direction: column; gap: 20px; max-width: 1100px; margin: 0 auto; width: 100%; position: relative; z-index: 1; }
-        .footer-column { padding: 10px 0; text-align: left; }
-        .footer-column img { max-width: 150px; height: auto; margin-bottom: 15px; display: block; filter: drop-shadow(0 0 10px #00ffcc); transition: transform 0.3s ease; }
-        .footer-column img:hover { transform: scale(1.15) rotate(5deg); }
-        .footer-column p { font-size: 13px; line-height: 1.7; color: #e0e0e0; margin: 0; text-shadow: 0 0 1px #fff; }
-        .footer-title { font-size: 16px; color: #ffcc00; font-family: 'Neon', 'Orbitron', monospace; margin-bottom: 10px; border-bottom: 2px solid #ff00ff33; padding-bottom: 5px; text-shadow: 0 0 5px #00ccff; }
-        .footer-links ul { list-style: none; padding: 0; margin: 0; }
-        .footer-links ul li { margin-bottom: 8px; }
-        .footer-links ul li a, .contact-link { color: #00ffcc; font-size: 13px; text-decoration: none; transition: color 0.3s ease, text-shadow 0.3s ease; display: inline-flex; align-items: center; gap: 8px; padding: 8px; min-height: 40px; min-width: 40px; border-radius: 5px; text-shadow: 0 0 2px #ff00ff; cursor: pointer; }
-        .footer-links ul li a:hover, .contact-link:hover { color: #ffcc00; text-shadow: 0 0 10px #ffcc00; }
-        .contact-item { display: flex; align-items: center; justify-content: left; gap: 10px; margin-bottom: 10px; }
-        .contact-item i { font-size: 14px; color: #ff00ff; text-shadow: 0 0 5px #00ffcc; }
-        .social-icons { display: flex; gap: 12px; justify-content: left; margin-top: 12px; }
-        .social-icons a { color: #ffcc00; font-size: 18px; transition: all 0.3s ease; padding: 8px; min-height: 40px; min-width: 40px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid #00ffcc; border-radius: 50%; box-shadow: 0 0 5px #ff00ff; cursor: pointer; }
-        .social-icons a:hover { color: #00ffcc; transform: rotate(360deg); box-shadow: 0 0 15px #ffcc00; }
-        .footer-bottom { text-align: center; margin-top: 20px; padding-top: 10px; border-top: 1px solid #ff00ff22; color: #999; font-size: 12px; text-shadow: 0 0 1px #fff; }
-        .footer-bottom a { color: #ffcc00; text-decoration: none; margin: 0 6px; transition: color 0.3s ease, text-shadow 0.3s ease; cursor: pointer; }
-        .footer-bottom a:hover { color: #00ffcc; text-shadow: 0 0 10px #ff00ff; }
-        .contact-section { padding: 30px 15px; background: linear-gradient(135deg, #1a0033, #0a0020) !important; text-align: center; }
-        .contact-form { max-width: 500px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
-        .contact-form input, .contact-form textarea { width: 100%; padding: 10px 12px; border: none; border-bottom: 2px solid #00ffcc; background: rgba(26, 0, 51, 0.8); color: #fff; font-family: 'Orbitron', monospace; font-size: 14px; transition: border-color 0.3s ease, box-shadow 0.3s ease; border-radius: 0; outline: none; }
-        .contact-form textarea { min-height: 70px; resize: vertical; }
-        .contact-form input:focus, .contact-form textarea:focus { border-bottom-color: #ffcc00; box-shadow: 0 2px 10px #00ffcc; }
-        .contact-form button { width: 100%; padding: 10px; margin-top: 12px; border: 2px solid #ffcc00; background: linear-gradient(45deg, #ff00ff, #00ffcc); color: #fff; border-radius: 30px; font-family: 'Orbitron', monospace; font-weight: 700; font-size: 14px; transition: all 0.4s ease; box-shadow: 0 0 10px #ffcc00; cursor: pointer; }
-        .contact-form button:hover { transform: translateY(-3px); box-shadow: 0 0 20px #00ffcc; }
-        @media (min-width: 768px) {
-            header { padding: 15px 50px; }
-            header a.logo-link img { width: 150px; }
-            nav a { margin: 0 20px; font-size: 16px; }
-            .hero h1 { font-size: 70px; }
-            .hero p { font-size: 18px; max-width: 700px; }
-            .hero lottie-player { width: 400px; height: 400px; }
-            .hero button { padding: 12px 30px; font-size: 16px; }
-            .section-title { font-size: 36px; }
-            .services-grid, .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; }
-            .service-card, .pricing-card { padding: 30px; }
-            .service-title, .pricing-title { font-size: 26px; }
-            .service-details, .pricing-details { font-size: 16px; }
-            .pricing-price { font-size: 30px; }
-            .service-card button, .pricing-card button { padding: 14px 35px; font-size: 16px; }
-            .faq-item { padding: 20px; max-width: 800px; margin: 0 auto 20px; }
-            .faq-answer { font-size: 14px; }
-            .footer-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 25px; }
+        :root {
+            /* --- YOUR LOGO'S COLOR PALETTE --- */
+            --bg-color: #0a0020;         /* Dark Purple/Black */
+            --glass-bg: rgba(26, 0, 51, 0.4); /* Purple Glass */
+            --glass-border: rgba(0, 255, 204, 0.2);
+            --primary: #00ffcc;          /* Neon Cyan */
+            --secondary: #ff00ff;        /* Neon Pink/Magenta */
+            --tertiary: #ffcc00;         /* Neon Gold */
+            --text-light: #FFFFFF;
+            --text-color: #e0e0e0;
+            --header-height: 70px;
+            
+            /* --- Mouse Position for Aurora --- */
+            --mouse-x: 50vw;
+            --mouse-y: 50vh;
         }
+
+        /* --- 1. Global Setup --- */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: var(--header-height);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* * --- THE "AURORA" WOW EFFECT --- 
+         * Uses your logo's colors for a subtle, interactive background
+         * that follows the mouse. This is the high-end creative element.
+        */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            background: radial-gradient(
+                800px circle at var(--mouse-x) var(--mouse-y), 
+                rgba(0, 255, 204, 0.08),  /* Cyan */
+                rgba(255, 0, 255, 0.05),  /* Magenta */
+                transparent 40%
+            );
+            transition: background 0.2s linear; /* Smooths out the movement */
+        }
+
+        /* --- 2. Re-usable Components --- */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .section-padding {
+            padding: 100px 0;
+        }
+
+        /* --- Professional "Fade-in on Scroll" Animation --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            font-size: 42px;
+            text-align: center;
+            margin-bottom: 50px;
+            letter-spacing: 1px;
+            color: var(--text-light);
+        }
+        .section-title span {
+            color: var(--primary);
+            text-shadow: 0 0 15px var(--primary);
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            color: var(--text-light);
+            line-height: 1.2;
+        }
+
+        /* --- 3. Header --- */
+        .header {
+            position: sticky;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 40px;
+            height: var(--header-height);
+            z-index: 100;
+            
+            /* Premium Frosted Glass Header */
+            background: rgba(10, 0, 32, 0.7); 
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--glass-border);
+            box-shadow: 0 0 20px rgba(0, 255, 204, 0.1);
+        }
+
+        .header .logo img {
+            max-height: 35px;
+            width: auto;
+            transition: all 0.3s ease;
+            filter: drop-shadow(0 0 10px var(--primary));
+        }
+        .header .logo img:hover {
+            transform: scale(1.05);
+            filter: drop-shadow(0 0 15px var(--tertiary));
+        }
+
+        .header-nav {
+            display: flex;
+            align-items: center;
+        }
+
+        .header-nav nav {
+            display: flex; /* Default for desktop */
+        }
+
+        .header-nav nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            margin-left: 30px;
+            font-family: 'Orbitron', monospace;
+            font-weight: 500;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            position: relative;
+            padding-bottom: 5px;
+        }
+        /* Clean underline effect */
+        .header-nav nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+        .header-nav nav a:hover {
+            color: var(--primary);
+            text-shadow: 0 0 10px var(--primary);
+        }
+        .header-nav nav a:hover::after {
+            width: 100%;
+        }
+
+        .cta-button {
+            font-family: 'Orbitron', monospace;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            margin-left: 30px;
+            
+            /* High-end Button Style */
+            background: var(--primary);
+            color: #000 !important;
+            border: 2px solid var(--primary);
+            box-shadow: 0 0 20px rgba(0, 255, 204, 0.3);
+        }
+        .cta-button:hover {
+            background: transparent;
+            color: var(--primary) !important;
+            box-shadow: 0 0 25px rgba(0, 255, 204, 0.5);
+            transform: translateY(-2px);
+        }
+        /* Secondary button style for forms/cards */
+        .cta-button.secondary {
+             background: transparent;
+             color: var(--primary) !important;
+             box-shadow: 0 0 15px rgba(0, 255, 204, 0.2);
+        }
+        .cta-button.secondary:hover {
+            background: var(--primary);
+            color: #000 !important;
+            box-shadow: 0 0 25px rgba(0, 255, 204, 0.5);
+        }
+
+        .mobile-menu-icon {
+            display: none;
+            font-size: 24px;
+            color: var(--primary);
+            cursor: pointer;
+        }
+
+        /* --- 4. Hero Section --- */
+        .hero {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            min-height: 90vh;
+            padding-top: 100px;
+        }
+
+        .hero h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            font-size: 72px;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            color: var(--text-light);
+        }
+        .hero h1 span {
+            color: var(--primary);
+            text-shadow: 0 0 25px var(--primary);
+        }
+
+        .hero p {
+            font-size: 20px;
+            max-width: 600px;
+            margin-bottom: 30px;
+            text-shadow: 0 0 5px #fff;
+        }
+        .hero-cta {
+            padding: 14px 30px;
+            font-size: 16px;
+        }
+        .hero-cta:hover {
+            border-color: var(--tertiary);
+            background: var(--tertiary);
+            box-shadow: 0 0 25px rgba(255, 204, 0, 0.5);
+            color: #000 !important;
+        }
+
+        /* --- 5. Glass Card Component (Used Everywhere) --- */
+        .glass-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 30px;
+            overflow: hidden;
+            position: relative;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            transition: all 0.3s ease;
+        }
+        
+        .glass-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 40px rgba(0, 255, 204, 0.1);
+        }
+
+        /* --- 6. Services (Bento Grid) --- */
+        .service-grid {
+            display: grid;
+            gap: 20px;
+            grid-template-columns: repeat(4, 1fr);
+        }
+        .service-card {
+            min-height: 220px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .service-card i {
+            font-size: 36px;
+            color: var(--tertiary); /* Gold icons */
+            text-shadow: 0 0 10px var(--tertiary);
+            margin-bottom: 15px;
+        }
+        .service-card h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: var(--primary); /* Cyan titles */
+        }
+
+        /* --- 7. Pricing Section --- */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+        .pricing-card {
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+        }
+        .pricing-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        .pricing-price {
+            font-size: 36px;
+            font-weight: 900;
+            color: var(--tertiary); /* Gold price */
+            margin-bottom: 25px;
+            text-shadow: 0 0 10px var(--tertiary);
+        }
+        .pricing-price span {
+            font-size: 14px;
+            font-weight: 400;
+            color: var(--text-color);
+        }
+        .pricing-details {
+            text-align: left;
+            margin-bottom: 30px;
+            flex-grow: 1;
+        }
+        .pricing-details ul {
+            list-style: none;
+            padding: 0;
+        }
+        .pricing-details ul li {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+        }
+        .pricing-details ul li::before {
+            content: '✔';
+            color: var(--tertiary);
+            margin-right: 10px;
+            font-size: 14px;
+        }
+        .pricing-card .cta-button {
+            width: 100%;
+            margin-left: 0;
+        }
+
+        /* --- 8. FAQ Section --- */
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .faq-item {
+            margin-bottom: 15px;
+            cursor: pointer;
+            border-color: var(--glass-border);
+        }
+        .faq-item:hover {
+            border-color: var(--secondary); /* Magenta highlight */
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.1);
+        }
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .faq-question h3 {
+            font-size: 18px;
+            font-weight: 500;
+        }
+        .faq-question .icon {
+            color: var(--tertiary);
+            font-size: 24px;
+            transition: transform 0.3s ease;
+        }
+        .faq-item.active .icon {
+            transform: rotate(45deg);
+        }
+        .faq-answer {
+            display: none;
+            padding-top: 15px;
+            margin-top: 15px;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        /* --- 9. Contact Section --- */
+        .contact-card {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid var(--glass-border);
+            background: rgba(0, 0, 0, 0.2);
+            color: #fff;
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            border-radius: 8px;
+            outline: none;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-color: var(--tertiary);
+            box-shadow: 0 0 10px rgba(255, 204, 0, 0.3);
+        }
+        .contact-form textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        .contact-form button {
+            border: none;
+            /* width: 100%; */ /* <-- Removed this */
+            margin-left: 0;     /* <-- Fix 1 */
+            align-self: center; /* <-- Fix 2 */
+        }
+
+        /* --- 10. Footer --- */
+        .footer {
+            padding: 80px 0 40px;
+            background: var(--glass-bg);
+            border-top: 1px solid var(--glass-border);
+            margin-top: 100px;
+            position: relative;
+            z-index: 10;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+        .footer-column img {
+            max-width: 130px;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 0 10px var(--primary));
+        }
+        .footer-title {
+            font-size: 18px;
+            font-weight: 500;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        .footer-links a, .contact-link {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .footer-links a:hover, .contact-link:hover {
+            color: var(--tertiary);
+        }
+        .contact-link i {
+            width: 15px;
+            text-align: center;
+            color: var(--secondary);
+        }
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .social-icons a {
+            color: var(--text-color);
+            font-size: 20px;
+            transition: all 0.3s ease;
+        }
+        .social-icons a:hover {
+            color: var(--primary);
+            transform: scale(1.2);
+        }
+        .footer-bottom {
+            text-align: center;
+            border-top: 1px solid var(--glass-border);
+            padding-top: 30px;
+            font-size: 14px;
+        }
+        .footer-bottom a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        .footer-bottom a:hover {
+            text-decoration: underline;
+            color: var(--tertiary);
+        }
+
+        /* ========================================
+        --- 11. FULLY RESPONSIVE (MOBILE) FIX --- 
+        ========================================
+        */
+
+        /* --- Tablet & Small Desktops --- */
+        @media (max-width: 1024px) {
+            .header { padding: 0 20px; }
+            
+            /* --- Mobile Menu Logic --- */
+            .header-nav nav {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: var(--header-height);
+                left: 0;
+                width: 100%;
+                background: var(--bg-color);
+                border-bottom: 1px solid var(--glass-border);
+                padding: 10px 0;
+            }
+            .header-nav nav.active {
+                display: flex;
+            }
+            .header-nav nav a {
+                margin: 10px 20px;
+            }
+            .cta-button {
+                display: none; /* Hide main CTA, show in menu */
+            }
+            .header-nav nav .cta-button {
+                display: block;
+                margin: 10px 20px;
+                text-align: center;
+            }
+            .mobile-menu-icon {
+                display: block;
+            }
+            /* --- End Mobile Menu --- */
+            
+            .hero h1 { font-size: 56px; }
+            .hero p { font-size: 18px; }
+            
+            /* --- 2-Column Grids --- */
+            .service-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .pricing-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* --- Mobile Phones --- */
         @media (max-width: 767px) {
-            nav { display: none; position: absolute; top: 60px; right: 15px; background: linear-gradient(135deg, rgba(26, 0, 51, 0.95), rgba(10, 0, 32, 0.95)) !important; border: 2px solid #ff00ff; padding: 10px; border-radius: 10px; box-shadow: 0 0 10px #00ffcc66; flex-direction: column; z-index: 1001; }
-            nav.active { display: flex; }
-            nav a { margin: 8px 0; font-size: 13px; }
-            .mobile-menu-icon { display: block; }
-            .hero h1 { font-size: 40px; }
-            .hero p { font-size: 14px; max-width: 90%; }
-            .hero lottie-player { width: 200px; height: 200px; }
-            .hero img.hero-image { width: 150px; }
-            .hero button { padding: 8px 20px; font-size: 12px; }
-            .section-title { font-size: 24px; margin-bottom: 20px; }
-            .service-title, .pricing-title { font-size: 20px; }
-            .service-details, .pricing-details { font-size: 14px; }
-            .pricing-price { font-size: 24px; }
-            .service-card button, .pricing-card button { padding: 10px 20px; font-size: 12px; }
-            .services-grid, .pricing-grid { display: flex; flex-direction: column; gap: 15px; }
-            .faq-item { padding: 12px; }
-            .faq-answer { font-size: 12px; }
-            .footer-column img { max-width: 120px; }
-            .footer-title { font-size: 14px; }
-            .footer-column p, .footer-links ul li a, .contact-link { font-size: 12px; }
-            .contact-item i { font-size: 13px; }
-            .social-icons { justify-content: center; }
-            .social-icons a { font-size: 16px; }
+            .hero h1 { font-size: 42px; }
+            .hero p { font-size: 16px; }
+
+            .section-title { font-size: 32px; }
+            
+            /* --- 1-Column Grids --- */
+            .service-grid {
+                grid-template-columns: 1fr;
+            }
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="custom-cursor"></div>
-    <header>
-        <a href="#hero" class="logo-link">
-            <img src="https://cdn.shopify.com/s/files/1/0675/9720/5546/files/wizualz_logoTT.png?v=1753530834" alt="Wizualz Logo" loading="lazy" style="width: 120px; height: auto;">
+
+    <header class="header">
+        <a href="#hero" class="logo">
+            <img src="https://cdn.shopify.com/s/files/1/0675/9720/5546/files/wizualz_logoTT.png?v=1753530834" alt="Wizualz Logo">
         </a>
-        <i class="fas fa-bars mobile-menu-icon"></i>
-        <nav id="navbar">
-            <a href="#services">Services</a>
-            <a href="#pricing">Pricing</a>
-            <a href="#faqs">FAQs</a>
-            <a href="#contact">Contact</a>
-        </nav>
+        <div class="header-nav" id="header-nav">
+            <nav id="navbar">
+                <a href="#services">Services</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#faqs">FAQs</a>
+                <a href="#contact">Contact</a>
+                <a href="#contact" class="cta-button secondary">Get Started</a>
+            </nav>
+            <i class="fas fa-bars mobile-menu-icon" id="mobile-menu-toggle"></i>
+        </div>
     </header>
-    <section id="hero" class="hero reveal">
-        <div id="hero-particles"></div>
-        <lottie-player src="https://assets5.lottiefiles.com/packages/lf20_qp1q7mct.json" background="transparent" speed="1" loop autoplay loading="lazy"></lottie-player>
-        <img class="hero-image" src="https://cdn.shopify.com/s/files/1/0675/9720/5546/files/hero-static.webp" alt="Wizualz Hero" loading="lazy">
-        <h1>WE HAVE DIGITAL MAGIC</h1>
-        <p>Wizualz transforms visions into stunning digital experiences with bold design and innovative tech.</p>
-        <button onclick="document.getElementById('services').scrollIntoView({ behavior: 'smooth' })">Dive Into Our World</button>
-    </section>
-    <section id="services" class="reveal">
-        <h2 class="section-title">Our Creative Services</h2>
-        <div class="services-grid">
-            <div class="service-card">
-                <i class="fas fa-desktop"></i>
-                <h3 class="service-title">Website Design</h3>
-                <div class="service-details">We conjure stunning, responsive websites tailored to your brand, blending innovative design with seamless functionality to create magical digital experiences.</div>
-                <button onclick="document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })">Learn More</button>
+
+    <main>
+
+        <section id="hero" class="hero container reveal">
+            <h1>WE BUILD <span>DIGITAL MAGIC.</span></h1>
+            <p>
+                Wizualz transforms visions into stunning digital experiences 
+                with bold design and innovative tech.
+            </p>
+            <a href="#services" class="cta-button hero-cta">Explore Our World</a>
+        </section>
+
+        <section id="services" class="container section-padding">
+            <h2 class="section-title reveal">Our Creative <span>Services</span></h2>
+            <div class="service-grid">
+                <div class="service-card glass-card reveal">
+                    <i class="fas fa-desktop"></i>
+                    <h3>Website Design</h3>
+                    <p>Stunning, responsive websites with seamless functionality.</p>
+                </div>
+                <div class="service-card glass-card reveal" style="transition-delay: 0.1s;">
+                    <i class="fas fa-camera"></i>
+                    <h3>Product Photography</h3>
+                    <p>High-quality images, enhanced with professional editing.</p>
+                </div>
+                <div class="service-card glass-card reveal" style="transition-delay: 0.2s;">
+                    <i class="fas fa-paint-brush"></i>
+                    <h3>Graphic Design</h3>
+                    <p>From logos to marketing collateral, we craft visuals that elevate your brand.</p>
+                </div>
+                <div class="service-card glass-card reveal" style="transition-delay: 0.3s;">
+                    <i class="fas fa-pen-fancy"></i>
+                    <h3>Content Writing</h3>
+                    <p>Compelling narratives and SEO-optimized content to engage your audience.</p>
+                </div>
+                <div class="service-card glass-card reveal">
+                    <i class="fas fa-list-alt"></i>
+                    <h3>Product Listing</h3>
+                    <p>Expertly crafted listings for Shopify, Amazon, and more to optimize visibility.</p>
+                </div>
+                <div class="service-card glass-card reveal" style="transition-delay: 0.1s;">
+                    <i class="fas fa-ad"></i>
+                    <h3>Meta Marketing</h3>
+                    <p>Harnessing the power of Meta platforms for targeted, high-reach ad campaigns.</p>
+                </div>
+                <div class="service-card glass-card reveal" style="transition-delay: 0.2s;">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Performance Marketing</h3>
+                    <p>Data-driven strategies (PPC, retargeting) that deliver measurable results.</p>
+                </div>
+                <div class="service-card glass-card reveal" style="transition-delay: 0.3s;">
+                    <i class="fas fa-users"></i>
+                    <h3>Social Media Management</h3>
+                    <p>Creating vibrant social presences that build communities around your brand.</p>
+                </div>
             </div>
-            <div class="service-card">
-                <i class="fas fa-camera"></i>
-                <h3 class="service-title">Product Photography & Editing</h3>
-                <div class="service-details">Our team captures high-quality product images and enhances them with professional editing, ensuring your products shine across all platforms.</div>
-                <button onclick="document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })">Learn More</button>
+        </section>
+
+        <section id="pricing" class="container section-padding">
+            <h2 class="section-title reveal">Packages For <span>Growth</span></h2>
+            <div class="pricing-grid">
+                <div class="pricing-card glass-card reveal">
+                    <h3 class="pricing-title">Instagram Handling</h3>
+                    <div class="pricing-price">₹9,999<span>/month</span></div>
+                    <div class="pricing-details">
+                        <ul>
+                            <li>1 Post Design Daily</li>
+                            <li>Posting as per Algorithm</li>
+                            <li>Customer Interaction</li>
+                            <li>Strategic Planning</li>
+                            <li>Premium Feed Look</li>
+                        </ul>
+                    </div>
+                    <a href="#contact" class="cta-button secondary">Get Started</a>
+                </div>
+                <div class="pricing-card glass-card reveal" style="transition-delay: 0.1s;">
+                    <h3 class="pricing-title">Google My Business</h3>
+                    <div class="pricing-price">₹4,999<span>/month</span></div>
+                    <div class="pricing-details">
+                        <ul>
+                            <li>GMB Optimization</li>
+                            <li>Local Ranking Strategy</li>
+                            <li>Regular Updates & Posts</li>
+                            <li>Engagement Strategies</li>
+                            <li>Review Management</li>
+                        </ul>
+                    </div>
+                    <a href="#contact" class="cta-button secondary">Get Started</a>
+                </div>
+                <div class="pricing-card glass-card reveal" style="transition-delay: 0.2s;">
+                    <h3 class="pricing-title">Website Development</h3>
+                    <div class="pricing-price">₹14,999<span>/onwards</span></div>
+                    <div class="pricing-details">
+                        <ul>
+                            <li>Business Analysis</li>
+                            <li>Custom Design & Dev</li>
+                            <li>E-Commerce Setup</li>
+                            <li>Professional Product Shoot</li>
+                            <li>Full Assistance & Support</li>
+                        </ul>
+                    </div>
+                    <a href="#contact" class="cta-button secondary">Get Started</a>
+                </div>
+                <div class="pricing-card glass-card reveal" style="transition-delay: 0.3s;">
+                    <h3 class="pricing-title">Designing Services</h3>
+                    <div class="pricing-price">₹4,999<span>/month</span></div>
+                    <div class="pricing-details">
+                        <ul>
+                            <li>30 Creative Social Posts</li>
+                            <li>Platform-Optimized</li>
+                            <li>Client-Led Posting</li>
+                            <li>Consistent Branding</li>
+                            <li>For Instagram & Facebook</li>
+                        </ul>
+                    </div>
+                    <a href="#contact" class="cta-button secondary">Get Started</a>
+                </div>
             </div>
-            <div class="service-card">
-                <i class="fas fa-paint-brush"></i>
-                <h3 class="service-title">All Types of Graphic Design</h3>
-                <div class="service-details">From logos to marketing collateral, we craft visually striking graphics that elevate your brand’s identity with creativity and precision.</div>
-                <button onclick="document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })">Learn More</button>
+        </section>
+
+        <section id="faqs" class="container section-padding">
+            <h2 class="section-title reveal">Mystic <span>FAQs</span></h2>
+            <div class="faq-container reveal">
+                <div class="faq-item glass-card">
+                    <div class="faq-question">
+                        <h3>How long does a project take?</h3>
+                        <span class="icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Typically 3–10 days, depending on the spell's complexity.</p>
+                    </div>
+                </div>
+                <div class="faq-item glass-card">
+                    <div class="faq-question">
+                        <h3>What platforms do you work on?</h3>
+                        <span class="icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Shopify, WordPress, and bespoke digital realms.</p>
+                    </div>
+                </div>
+                <div class="faq-item glass-card">
+                    <div class="faq-question">
+                        <h3>Do you offer content writing services?</h3>
+                        <span class="icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes! We wield the pen for listings and enchanting content.</p>
+                    </div>
+                </div>
             </div>
-            <div class="service-card">
-                <i class="fas fa-pen-fancy"></i>
-                <h3 class="service-title">Content Writing</h3>
-                <div class="service-details">We weave compelling narratives and SEO-optimized content to engage your audience and boost your brand’s online presence.</div>
-                <button onclick="document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })">Learn More</button>
+        </section>
+
+        <section id="contact" class="container section-padding">
+            <h2 class="section-title reveal">Get in <span>Touch</span></h2>
+            <div class="contact-card glass-card reveal">
+                <form class="contact-form">
+                    <input type="text" placeholder="Your Name" required aria-label="Your Name">
+                    <input type="tel" placeholder="Your Number" required aria-label="Your Number">
+                    <textarea placeholder="Your Query" rows="4" required aria-label="Your Query"></textarea>
+                    <button type="button" class="cta-button" id="sendToWizualzBtn">Send to Team Wizualz</button>
+                </form>
             </div>
-            <div class="service-card">
-                <i class="fas fa-list-alt"></i>
-                <h3 class="service-title">Product Listing</h3>
-                <div class="service-details">Our expertly crafted product listings optimize visibility and conversions, tailored for platforms like Shopify, Amazon, and more.</div>
-                <button onclick="document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })">Learn More</button>
-            </div>
-            <div class="service-card">
-                <i class="fas fa-ad"></i>
-                <h3 class="service-title">Meta Marketing</h3>
-                <div class="service-details">We harness the power of Meta platforms to create targeted ad campaigns that drive engagement and maximize your brand’s reach.</div>
-                <button onclick="document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })">Learn More</button>
-            </div>
-            <div class="service-card">
-                <i class="fas fa-chart-line"></i>
-                <h3 class="service-title">Performance Marketing</h3>
-                <div class="service-details">Our data-driven strategies optimize ad spend, delivering measurable results through PPC, retargeting, and performance-focused campaigns.</div>
-                <button onclick="document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })">Learn More</button>
-            </div>
-            <div class="service-card">
-                <i class="fas fa-users"></i>
-                <h3 class="service-title">Social Media Management</h3>
-                <div class="service-details">We create and manage vibrant social media presences, crafting content that resonates and builds communities around your brand.</div>
-                <button onclick="document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })">Learn More</button>
-            </div>
-        </div>
-    </section>
-    <section id="pricing" class="reveal">
-        <h2 class="section-title">Our Pricing Packages</h2>
-        <div class="pricing-grid">
-            <div class="pricing-card">
-                <h3 class="pricing-title">Instagram Account Handling</h3>
-                <div class="pricing-price">₹9,999/- Per Month</div>
-                <div class="pricing-details">
-                    <ul>
-                        <li>1 Post Design Daily (Content provided by client)</li>
-                        <li>Instagram Posting as per Latest Algorithm</li>
-                        <li>Customer Interaction (Replies to comments and DMs)</li>
-                        <li>Strategic Planning (Monthly content strategy)</li>
-                        <li>Premium Look & Feel for Instagram Feed</li>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <img src="https://cdn.shopify.com/s/files/1/0675/9720/5546/files/wizualz_logoTT.png?v=1753530834" alt="Wizualz Logo">
+                    <p>Wizualz is a mystical studio weaving impactful designs, clean code, and bold narratives into digital magic.</p>
+                </div>
+                <div class="footer-column">
+                    <h4 class="footer-title">About Craft</h4>
+                    <p>We are a coven of creators dedicated to conjuring digital experiences that elevate brands with innovation and artistry.</p>
+                </div>
+                <div class="footer-column">
+                    <h4 class="footer-title">Quick Portals</h4>
+                    <ul class="footer-links">
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#pricing">Pricing</a></li>
+                        <li><a href="#faqs">FAQs</a></li>
+                        <li><a href="#contact">Contact</a></li>
                     </ul>
                 </div>
-                <button onclick="document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })">Get Started</button>
-            </div>
-            <div class="pricing-card">
-                <h3 class="pricing-title">Google My Business Handling</h3>
-                <div class="pricing-price">₹4,999/- Per Month</div>
-                <div class="pricing-details">
-                    <ul>
-                        <li>GMB Account Creation and Optimization</li>
-                        <li>Local Ranking Strategy for Higher Visibility</li>
-                        <li>Regular Updates & Post Designs</li>
-                        <li>Marketing Ideas & Engagement Strategies</li>
-                        <li>Continuous Optimization and Review Management</li>
+                <div class="footer-column">
+                    <h4 class="footer-title">Contact Us</h4>
+                    <ul class="footer-links">
+                        <li>
+                            <a href="tel:+919321234524" class="contact-link">
+                                <i class="fas fa-phone"></i> +91 932 12345 24
+                            </a>
+                        </li>
+                        <li>
+                            <a href="mailto:info@wizualz.com" class="contact-link">
+                                <i class="fas fa-envelope"></i> info@wizualz.com
+                            </a>
+                        </li>
+                        <li>
+                            <span class="contact-link">
+                                <i class="fas fa-map-marker-alt"></i> Chembur Vashinaka
+                            </span>
+                        </li>
                     </ul>
-                </div>
-                <button onclick="document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })">Get Started</button>
-            </div>
-            <div class="pricing-card">
-                <h3 class="pricing-title">Website Development</h3>
-                <div class="pricing-price">₹14,999/- Per Month</div>
-                <div class="pricing-details">
-                    <ul>
-                        <li>Business & Product Analysis</li>
-                        <li>Custom Website Design & Development</li>
-                        <li>E-Commerce Setup & Onboarding</li>
-                        <li>Professional Product Shoot</li>
-                        <li>Full Assistance & Support</li>
-                    </ul>
-                </div>
-                <button onclick="document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })">Get Started</button>
-            </div>
-            <div class="pricing-card">
-                <h3 class="pricing-title">Designing Services</h3>
-                <div class="pricing-price">₹4,999/- Per Month</div>
-                <div class="pricing-details">
-                    <ul>
-                        <li>Creative Post Designing for Instagram & Facebook</li>
-                        <li>Platform-Optimized Designs</li>
-                        <li>Client-Led Posting Option</li>
-                        <li>Consistent Branding</li>
-                        <li>30 Creative Social Media Posts</li>
-                    </ul>
-                </div>
-                <button onclick="document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })">Get Started</button>
-            </div>
-        </div>
-    </section>
-    <section id="faqs" class="reveal">
-        <h2 class="section-title">Mystic FAQs</h2>
-        <div class="faq-item">
-            <h3>How long does a project take?</h3>
-            <div class="faq-answer">Typically 3–10 days, depending on the spell's complexity.</div>
-        </div>
-        <div class="faq-item">
-            <h3>What platforms do you work on?</h3>
-            <div class="faq-answer">Shopify, WordPress, and bespoke digital realms.</div>
-        </div>
-        <div class="faq-item">
-            <h3>Do you offer content writing services?</h3>
-            <div class="faq-answer">Yes! We wield the pen for listings and enchanting content.</div>
-        </div>
-    </section>
-    <section id="contact" class="contact-section reveal">
-        <h2 class="section-title">Get in Touch</h2>
-        <div class="contact-form">
-            <input type="text" placeholder="Your Name" required>
-            <input type="tel" placeholder="Your Number" required>
-            <textarea placeholder="Your Query" rows="4" required></textarea>
-            <button id="sendToWizualzBtn">Send to Team Wizualz</button>
-        </div>
-    </section>
-    <footer>
-        <div class="footer-wave"></div>
-        <div class="footer-grid">
-            <div class="footer-column">
-                <img src="https://cdn.shopify.com/s/files/1/0675/9720/5546/files/wizualz_logoTT.png?v=1753530834" alt="Wizualz Logo" loading="lazy">
-                <p>Wizualz is a mystical studio weaving impactful designs, clean code, and bold narratives into digital magic.</p>
-            </div>
-            <div class="footer-column">
-                <h3 class="footer-title">About Our Craft</h3>
-                <p>We are a coven of creators dedicated to conjuring digital experiences that elevate brands with innovation and artistry.</p>
-            </div>
-            <div class="footer-column footer-links">
-                <h3 class="footer-title">Quick Portals</h3>
-                <ul>
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#pricing">Pricing</a></li>
-                    <li><a href="#faqs">FAQs</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </div>
-            <div class="footer-column">
-                <h3 class="footer-title">Contact Us</h3>
-                <div class="contact-item">
-                    <i class="fas fa-phone"></i>
-                    <a href="tel:+919321234524" class="contact-link">+91 932 12345 24</a>
-                </div>
-                <div class="contact-item">
-                    <i class="fas fa-envelope"></i>
-                    <a href="mailto:info@wizualz.com" class="contact-link">info@wizualz.com</a>
-                </div>
-                <div class="contact-item">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <span class="contact-link">Chembur Vashinaka, Mahada Colony</span>
-                </div>
-                <h3 class="footer-title">Follow Our Magic</h3>
-                <div class="social-icons">
-                    <a href="https://www.facebook.com/profile.php?id=61578605763989" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
-                    <a href="https://www.instagram.com/wizualzofficial/" target="_blank"><i class="fab fa-instagram"></i></a>
-                    <a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                    <div class="social-icons">
+                        <a href="https://www.facebook.com/profile.php?id=61578605763989" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/wizualzofficial/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="footer-bottom">
-            <p>© 2025 Wizualz. All rights reserved. | <a href="#">Privacy Scroll</a> | <a href="#">Terms of Magic</a> | Website design by Team Wizualz - <a href="https://www.wizualz.com">WWW.WIZUALZ.COM</a></p>
+            <div class="footer-bottom">
+                <p>© 2025 Wizualz. All rights reserved. | <a href="#">Privacy Scroll</a> | <a href="#">Terms of Magic</a> | Website by <a href="https://www.wizualz.com">Team Wizualz</a></p>
+            </div>
         </div>
     </footer>
-    <script defer src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const isMobile = window.matchMedia('(max-width: 767px)').matches;
-            const isCoarse = window.matchMedia('(pointer: coarse)').matches;
-            const headerHeight = document.querySelector('header')?.offsetHeight || 60;
 
-            if (typeof particlesJS === 'function') {
-                particlesJS('hero-particles', {
-                    particles: {
-                        number: { value: 50, density: { enable: true, value_area: 800 } },
-                        color: { value: ['#00ffcc', '#ff00ff', '#ffcc00'] },
-                        shape: { type: 'circle' },
-                        opacity: { value: 0.5, random: true },
-                        size: { value: 4, random: true },
-                        line_linked: { enable: true, distance: 150, color: '#00ffcc', opacity: 0.4, width: 1 },
-                        move: { enable: true, speed: 2, direction: 'none', random: true, out_mode: 'out', attract: { enable: true, rotateX: 600, rotateY: 1200 } }
-                    },
-                    interactivity: { detect_on: 'canvas', events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' } }, modes: { repulse: { distance: 150 }, push: { particles_nb: 4 } } },
-                    retina_detect: true
+            // --- Aurora Mouse Effect ---
+            document.addEventListener('mousemove', (e) => {
+                // Use requestAnimationFrame for smooth performance
+                window.requestAnimationFrame(() => {
+                    document.documentElement.style.setProperty('--mouse-x', `${e.clientX}px`);
+                    document.documentElement.style.setProperty('--mouse-y', `${e.clientY + window.scrollY}px`);
                 });
-            }
+            });
 
-            if (typeof VanillaTilt === 'function') {
-                VanillaTilt.init(document.querySelectorAll('.service-card, .pricing-card'), { max: 15, speed: 400, glare: true, 'max-glare': 0.4 });
-            }
-
-            const lottiePlayer = document.querySelector('lottie-player');
-            if (isMobile) {
-                lottiePlayer.addEventListener('error', () => {
-                    document.querySelector('.hero img.hero-image').style.display = 'block';
-                    lottiePlayer.style.display = 'none';
-                });
-            }
-
+            // --- Intersection Observer for "Fade-in on Scroll" ---
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        entry.target.style.opacity = 1;
-                        entry.target.style.transform = 'translateY(0)';
-                        observer.unobserve(entry.target);
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target); // Animate only once
                     }
                 });
-            }, { threshold: 0.1 });
+            }, {
+                threshold: 0.1 // Trigger when 10% is visible
+            });
 
             document.querySelectorAll('.reveal').forEach(el => {
-                el.style.opacity = 0;
-                el.style.transform = 'translateY(50px)';
-                el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
                 observer.observe(el);
             });
 
-            const cursor = document.querySelector('.custom-cursor');
-            let mouseX = 0, mouseY = 0;
-            const trails = [];
-
-            if (!isCoarse) {
-                document.addEventListener('mousemove', (e) => {
-                    mouseX = e.clientX;
-                    mouseY = e.clientY;
-                    cursor.style.display = 'block';
-                    const trail = document.createElement('div');
-                    trail.className = 'custom-cursor trail';
-                    trail.style.left = `${mouseX}px`;
-                    trail.style.top = `${mouseY}px`;
-                    document.body.appendChild(trail);
-                    trails.push(trail);
-                    if (trails.length > 6) {
-                        const oldTrail = trails.shift();
-                        oldTrail.remove();
-                    }
-                    setTimeout(() => {
-                        trail.remove();
-                        const index = trails.indexOf(trail);
-                        if (index > -1) trails.splice(index, 1);
-                    }, 500);
-                });
-
-                function animateCursor() {
-                    cursor.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
-                    requestAnimationFrame(animateCursor);
-                }
-                animateCursor();
-
-                document.querySelectorAll('a, button, .service-card, .pricing-card, .faq-item, .contact-link').forEach(el => {
-                    el.addEventListener('mouseenter', () => cursor.classList.add('interactive'));
-                    el.addEventListener('mouseleave', () => cursor.classList.remove('interactive'));
-                });
-            }
-
-            function toggleMenu() {
-                const nav = document.getElementById('navbar');
-                nav.classList.toggle('active');
-            }
-
-            document.querySelector('.mobile-menu-icon').addEventListener('click', toggleMenu);
-
-            document.querySelectorAll('#navbar a').forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    if (isMobile) {
-                        document.getElementById('navbar').classList.remove('active');
-                    }
-                    const targetId = link.getAttribute('href').substring(1);
-                    const targetSection = document.getElementById(targetId);
-                    if (targetSection) {
-                        targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                        window.scrollBy(0, -headerHeight - 20);
-                    }
+            // --- Mobile Menu Toggle ---
+            const menuIcon = document.getElementById('mobile-menu-toggle');
+            const navbar = document.getElementById('navbar');
+            menuIcon.addEventListener('click', () => {
+                navbar.classList.toggle('active');
+            });
+            // Close menu when a link is clicked
+            navbar.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navbar.classList.remove('active');
                 });
             });
 
+            // --- FAQ Accordion ---
             document.querySelectorAll('.faq-item').forEach(item => {
-                item.addEventListener('click', () => {
+                const question = item.querySelector('.faq-question');
+                const answer = item.querySelector('.faq-answer');
+                const icon = item.querySelector('.icon');
+
+                question.addEventListener('click', () => {
                     const isActive = item.classList.contains('active');
+                    
+                    // Close all others
                     document.querySelectorAll('.faq-item').forEach(i => {
                         i.classList.remove('active');
                         i.querySelector('.faq-answer').style.display = 'none';
+                        i.querySelector('.icon').textContent = '+';
                     });
+                    
+                    // Open this one if it was closed
                     if (!isActive) {
                         item.classList.add('active');
-                        item.querySelector('.faq-answer').style.display = 'block';
+                        answer.style.display = 'block';
+                        icon.textContent = '–';
                     }
                 });
             });
 
+            // --- WhatsApp Form Button ---
             const sendButton = document.getElementById('sendToWizualzBtn');
             if (sendButton) {
                 sendButton.addEventListener('click', () => {
-                    const name = document.querySelector('.contact-form input[placeholder="Your Name"]').value.trim();
-                    const number = document.querySelector('.contact-form input[placeholder="Your Number"]').value.trim();
-                    const query = document.querySelector('.contact-form textarea[placeholder="Your Query"]').value.trim();
+                    const form = sendButton.closest('.contact-form');
+                    const nameInput = form.querySelector('input[placeholder="Your Name"]');
+                    const numberInput = form.querySelector('input[placeholder="Your Number"]');
+                    const queryInput = form.querySelector('textarea[placeholder="Your Query"]');
+                    
+                    const name = nameInput.value.trim();
+                    const number = numberInput.value.trim();
+                    const query = queryInput.value.trim();
+                    
                     if (name && number && query) {
-                        const whatsappMessage = encodeURIComponent(`Hello Team Wizualz,\nName: ${name}\nNumber: ${number}\nQuery: ${query}\nSent at: ${new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })}`);
+                        const whatsappMessage = encodeURIComponent(`Hello Team Wizualz,\nName: ${name}\nNumber: ${number}\nQuery: ${query}\nSent at: ${new Date().toLocaleString('en-IN', { timeZone: 'Asia/KKolkata' })}`);
                         const whatsappUrl = `https://wa.me/919321234524?text=${whatsappMessage}`;
-                        console.log('Attempting redirect to:', whatsappUrl);
-                        window.location.href = whatsappUrl;
+                        
+                        window.open(whatsappUrl, '_blank');
+                        
+                        // Clear fields
+                        nameInput.value = '';
+                        numberInput.value = '';
+                        queryInput.value = '';
+                        
                     } else {
                         alert('Please fill in all fields before submitting.');
                     }
                 });
-            } else {
-                console.error('Send button not found!');
             }
+
         });
     </script>
+
 </body>
 </html>
